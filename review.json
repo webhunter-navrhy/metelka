@@ -1,0 +1,17 @@
+{
+  "znamka": 8,
+  "slabiny": [
+    "Střed stránky (PC buňky 5–10, mobil 4–12: Lokalita → Praha, nebo Hradec → Aktivní život → Pro rodiny) tvoří pět béžových sekcí za sebou. Všechny jsou postavené ze stejného seznamu „místo … X min“, takže to čte jako jízdní řád a mezi katedrálou a interiérem není jediná velká fotka. To je stejná vada jako u odmítnuté v1 („hodně textu, béžové plochy za sebou“). Oprava: seznamy Po Hradci, Sport a Školy/S dětmi/Všední den sloučit do jednoho bloku s přepínačem kategorií (každá nejvýš 5 položek). Mezi srovnání s Prahou a sekci Pro rodiny vložit jednu fotku Labe nebo Aquacentra přes celou šířku. Sekci Pro rodiny dát bílé pozadí místo béžového.",
+    "Kontakt (PC 17, mobil 20) a vzorový byt (PC 12–13, mobil 13–15): v bloku kontaktu je vidět rámeček „Telefon a e-mail doplníme“. V textu je jmenované studio VDEKOR Interiors, přestože brief má souhlas s jeho uvedením v poli „chybí“. Oprava: telefon a e-mail od Krčmové doplnit, nebo rámeček skrýt a dát formulář jako jedinou akci. Do hlavičky přidat CTA „Domluvit prohlídku“ (teď je tam jen tlačítko Ceník). Studio VDEKOR do jeho souhlasu nahradit textem „podle návrhu interiérového studia“.",
+    "Mobil: první snímek (m_00, na PC stejně p_00) začíná až úvodní sekcí bez hlavičky. Hero s nápisem REZIDENCE METELKA, vizualizací a cenou se na mobilu v koláži vůbec neobjevil. Oprava: ověřit history.scrollRestoration a kotvy/focus při načtení a zajistit, aby první obrazovka na 390 px ukázala název, velkou vizualizaci a cenu „od 4 990 000 Kč“. Ve výběru bytu (mobil 18) je na 390 px schéma uříznuté u 5. bytu bez náznaku posunu. Přeskládat ho do mřížky 2 × 4 nebo přidat viditelnou šipku/fade pro posun."
+  ],
+  "zavazne": [],
+  "silne": [
+    "Silný obsahový koncept „Praha, nebo Hradec?“: srovnání ceny za m² s pražskou, posuvník rozpočtu se srovnáním metrů a výpočet výnosu z pronájmu. Všechna čísla mají na stránce zdroj a datum a odpovídají zadání Rafaela.",
+    "Hero podle inspirace klientky (Karlovina): velké verzálky REZIDENCE METELKA, vizualizace interiéru přes celou šířku a karta s cenou a dvěma CTA. Je to obraz-first, což bylo hlavní poučení z v1.",
+    "Paleta přesně podle klientky (zlatá, béžová, tenké černé písmo). Gilda Display s lehkým groteskem má čisté háčky. Vizualizace jsou poctivě označené jako ilustrační a fotky Hradce mají uvedenou licenci.",
+    "Prodejní část je funkční a konkrétní: interaktivní schéma 16 bytů podle domu a podlaží, karta bytu s výměrami a cenou, půdorys s místnostmi, materiály vzorového bytu a řez domem jako náhrada chybějícího exteriéru."
+  ],
+  "verdikt": "Výrazně lepší než odmítnutá v1: hero stojí na velkém obrazu, koncept srovnání s Prahou je chytrý a doložený a výběr bytu prodává. Před odesláním je potřeba rozbít textový střed jednou velkou fotkou a sloučením seznamů, vyřešit placeholder kontaktu a ověřit mobilní hero.",
+  "_hash": "a066c83dc12e019d3905156d83442f67bab2f371"
+}

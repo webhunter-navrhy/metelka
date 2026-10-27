@@ -1,0 +1,42 @@
+{
+  "slug": "metelka",
+  "nazev": "Rezidence Metelka",
+  "url": "https://webhunter-navrhy.github.io/metelka/",
+  "base": "/metelka/",
+  "lang": "cs",
+  "popis": "Rezidence Metelka: 32 nových bytů 2+kk v Hradci Králové, ulice K Metelce. Se zahrádkou nebo balkonem, sklepem a parkováním, od 4 990 000 Kč.",
+  "navrh": true,
+  "domena": "rezidencemetelka.cz",
+  "og_image": "viz-hero-obyvak.jpg",
+  "logo": "",
+  "theme_color": "#F8F4EE",
+  "typ": "ApartmentComplex",
+  "ico": "",
+  "kontakt": {
+    "jmeno": "Mgr. Anna Krčmová",
+    "email": "",
+    "telefon": "",
+    "adresa": {
+      "ulice": "K Metelce",
+      "psc": "503 11",
+      "mesto": "Hradec Králové",
+      "zeme": "CZ"
+    }
+  },
+  "oteviraci_doba": [],
+  "sameas": [],
+  "cenove_rozpeti": "4 990 000 – 5 490 000 Kč",
+  "formular": {
+    "endpoint": "",
+    "demo": true,
+    "predmet": "Zájem o byt – Rezidence Metelka"
+  },
+  "nav": [
+    {"text": "Lokalita", "href": "#hradec"},
+    {"text": "Praha, nebo Hradec", "href": "#praha"},
+    {"text": "Byt", "href": "#byt"},
+    {"text": "Dům", "href": "#dum"},
+    {"text": "Ceník", "href": "#cenik"},
+    {"text": "Kontakt", "href": "#kontakt"}
+  ]
+}

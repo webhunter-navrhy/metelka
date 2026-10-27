@@ -1,0 +1,109 @@
+{
+ "_zdroj": "_research/okoli.md (27. 10. 2026) – každé číslo má zdroj tam",
+ "uvod": {
+  "veta": "Hradec Králové. Město, kde máte <em>všechno blízko</em> – centrum, sport i dálnici.",
+  "text": [
+   "Rezidence Metelka jsou dva nízké bytové domy v ulici K Metelce ve Svobodných Dvorech. V každém je šestnáct bytů 2+kk o 47 m², průchozích od okna k oknu. V přízemí se zahrádkou, v patře s balkonem.",
+   "Ke každému bytu patří sklep a parkovací stání."
+  ]
+ },
+ "tri_casy": [
+  {"min": "5", "text": "autem na hlavní nádraží"},
+  {"min": "5,5", "text": "na dálnici D11 směr Praha"},
+  {"min": "62", "text": "po dálnici na pražský Černý Most"}
+ ],
+ "hradec": {
+  "nadpis": "Salon republiky. A vy deset minut od jeho centra.",
+  "text": [
+   "Hradci se říká Salon republiky. Starosta František Ulrich sem na začátku 20. století pozval architekty Jana Kotěru a Josefa Gočára. Gočárův regulační plán z let 1926–1928 dává městu řád dodnes: široké třídy, okruhy a krátké vzdálenosti.",
+   "Ulice K Metelce leží ve Svobodných Dvorech, klidné části města na jeho severozápadní straně. Na Velké náměstí to máte 9 minut autem, na hlavní nádraží 5. Autobus č. 16 jede ze zastávky Svobodné Dvory na nádraží za 8 minut a do centra za 14.",
+   "Fakultní nemocnice, univerzita i obchodní centra jsou do deseti minut. Na D11 najedete za necelých šest minut, takže Praha, Pardubice i hory jsou po ruce."
+  ]
+ },
+ "jizdni_rad": [
+  {"skupina": "Po Hradci", "polozky": [
+   {"nazev": "Hlavní nádraží", "min": "5"},
+   {"nazev": "OC Aupark", "min": "7"},
+   {"nazev": "Velké náměstí", "min": "9", "pozn": "historické centrum"},
+   {"nazev": "Univerzita Hradec Králové", "min": "9"},
+   {"nazev": "Fakultní nemocnice", "min": "10"}
+  ]},
+  {"skupina": "Dálnice", "polozky": [
+   {"nazev": "D11 směr Jaroměř a Polsko", "min": "4", "pozn": "exit 95 Plotiště"},
+   {"nazev": "D11 směr Praha", "min": "5,5", "pozn": "exit 90 Kukleny"},
+   {"nazev": "D35 směr Olomouc", "min": "12", "pozn": "křižovatka Sedlice"},
+   {"nazev": "Pardubice", "min": "29", "pozn": "Pernštýnské náměstí"}
+  ]},
+  {"skupina": "Do Prahy", "polozky": [
+   {"nazev": "Autem na Černý Most", "min": "62"},
+   {"nazev": "Autobusem na Černý Most", "min": "69", "pozn": "15 přímých spojů ve všední den, z Terminálu HD"},
+   {"nazev": "Autem na Václavské náměstí", "min": "80"},
+   {"nazev": "Vlakem na Praha hl. n.", "min": "92", "pozn": "přímý rychlík každou hodinu, 16 spojů denně"}
+  ]}
+ ],
+ "jizdni_rad_pozn": "Časy autem z ulice K Metelce bez provozu (OSRM, 27. 10. 2026), ve špičce počítejte s rezervou. Vlak a autobus podle jízdních řádů IDOS pro všední den 29. 10. 2026. Na hlavní nádraží je to z K Metelce 5 minut autem nebo 8 minut autobusem č. 16.",
+ "praha": {
+  "nadpis": "Za 27 pražských metrů celý byt.",
+  "text": [
+   "Nové byty v Praze se ve 3. čtvrtletí 2026 prodávaly v průměru za 186 408 Kč za metr čtvereční. Byt o 47 m² by tam stál asi 8,8 milionu korun. Za 4,99 milionu byste v Praze koupili zhruba 27 m².",
+   "V Rezidenci Metelka stojí 47 m² právě 4,99 milionu, i se sklepem a parkovacím stáním. Rozdíl 3,8 milionu nemusíte brát z hypotéky.",
+   "A Praha nezmizí. Na Černý Most dojedete autem za hodinu, přímý rychlík jezdí každou hodinu a do centra Prahy jede hodinu a půl."
+  ],
+  "radky": [
+   {"co": "Cena za m²", "praha": "186 408 Kč", "metelka": "105 698 Kč"},
+   {"co": "Byt 47 m²", "praha": "≈ 8,8 mil. Kč", "metelka": "4,99 mil. Kč"},
+   {"co": "Nájem za m² měsíčně", "praha": "462 Kč", "metelka": "318 Kč"},
+   {"co": "Hrubý výnos z pronájmu", "praha": "≈ 3,0 %", "metelka": "≈ 3,6 %"}
+  ],
+  "cena_m2_praha": 186408,
+  "cena_m2_metelka": 105698,
+  "cena_m2_praha_text": "186 408 Kč",
+  "cena_m2_metelka_text": "105 698 Kč",
+  "zdroje": "Praha: průměrná prodejní cena nových bytů ve 3. čtvrtletí 2026 podle analýzy Central Group, Trigema a Skanska (ČTK, 21. 10. 2026). Nájemné: Deloitte Rent Index, 2. čtvrtletí 2026, průměr všech bytů v Praze a v Hradci Králové. Hrubý výnos = roční nájem ÷ cena bytu, bez fondu oprav, daní a neobsazenosti; u Metelky při ceně 4 990 000 Kč, u Prahy při 8,8 mil. Kč."
+ },
+ "sport": {
+  "nadpis": "Bazén, led i stadion do deseti minut.",
+  "text": "Hradec žije sportem a od K Metelce je ke všemu kousek. Padesátimetrový bazén, hokej, fotbal, tenis i lezecká stěna jsou do čtvrthodiny autem. Na kolo stačí sjet k Labi: Labská stezka vede po rovině do Smiřic, Josefova a Kuksu.",
+  "mista": [
+   {"nazev": "Aquacentrum a 50m bazén", "min": "7", "popis": "Bazén s vlnobitím, 82m tobogán, dětský bazén s říčkou a sauna. Hned vedle padesátimetrový plavecký bazén."},
+   {"nazev": "Labská stezka", "min": "7,5", "popis": "Rovinatá cyklotrasa podél Labe od Kamenného mostu až do Kuksu, vhodná i pro děti."},
+   {"nazev": "Zimní stadion", "min": "8", "popis": "Domácí led Mountfield HK, veřejné bruslení a hokejové kurzy pro děti."},
+   {"nazev": "FINEP Arena", "min": "9", "popis": "Stadion FC Hradec Králové s 9 300 krytými místy, akademie mládeže i Školička pro nejmenší."},
+   {"nazev": "Flošna", "min": "9", "popis": "V létě 50m bazén a divoká řeka, celý rok wellness, squash, fitness a bowling."},
+   {"nazev": "SPORTPARK HIT", "min": "10", "popis": "Tenis v hale i na antuce, badminton, beach volejbal a fitness."},
+   {"nazev": "Lezecká stěna", "min": "11", "popis": "Asi 600 m² lanových cest a přes 200 m² boulderu, kroužky a tábory pro děti."},
+   {"nazev": "Park Golf Club", "min": "13", "popis": "Devět jamek v Roudničce, dětská golfová akademie a junioři."}
+  ]
+ },
+ "rodiny": {
+  "nadpis": "Škola za rohem. Víkendy plné programu.",
+  "text": [
+   "Ulice K Metelce patří podle městské vyhlášky č. 5/2025 pod ZŠ a MŠ Svobodné Dvory. Úplná základní škola s družinou je 3,5 minuty autem, mateřská škola K Dolíkám ještě blíž.",
+   "Na víkend je tu Muzeum východních Čech s volným vstupem do 19 let, loutkové Divadlo DRAK, planetárium nebo krytý zábavní park. A za půl hodiny jste s dětmi na safari ve Dvoře Králové."
+  ],
+  "skupiny": [
+   {"nazev": "Školy a školky", "polozky": [
+    {"nazev": "ZŠ a MŠ Svobodné Dvory, spádová škola", "min": "3,5"},
+    {"nazev": "MŠ K Dolíkám", "min": "3"},
+    {"nazev": "MŠ K Meteoru", "min": "3"},
+    {"nazev": "Masarykova ZŠ Plotiště, fakultní škola UHK", "min": "5"}
+   ]},
+   {"nazev": "S dětmi o víkendu", "polozky": [
+    {"nazev": "Muzeum východních Čech, do 19 let zdarma", "min": "6"},
+    {"nazev": "TOBOGA Tongo, krytý zábavní park", "min": "7"},
+    {"nazev": "Divadlo DRAK", "min": "8"},
+    {"nazev": "Trampolíny TOBOGA JUMP!", "min": "10"},
+    {"nazev": "Hvězdárna a planetárium", "min": "15"},
+    {"nazev": "Safari Park Dvůr Králové", "min": "31"}
+   ]},
+   {"nazev": "Všední den", "polozky": [
+    {"nazev": "Dětské hřiště v ulici Třešňová, pěšky 3 min"},
+    {"nazev": "Lidl Na Okrouhlíku", "min": "5"},
+    {"nazev": "Železniční poliklinika u nádraží", "min": "5"},
+    {"nazev": "OC Aupark", "min": "7"},
+    {"nazev": "Fakultní nemocnice", "min": "10"}
+   ]}
+  ],
+  "pozn": "Časy autem bez provozu (OSRM, 27. 10. 2026). Spádovost podle obecně závazné vyhlášky statutárního města Hradec Králové č. 5/2025."
+ }
+}

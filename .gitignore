@@ -1,0 +1,11 @@
+dist/
+.cache/
+qa/
+__pycache__/
+_research/
+podklady/
+sh/
+qa.json
+kolaz_*.png
+_snimky/
+deploy.sh.bak-*
