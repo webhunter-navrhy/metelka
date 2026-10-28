@@ -198,6 +198,11 @@ def obohat_byty(data):
         podobne.sort(key=lambda x: (x["dum_slug"] != b["dum_slug"], abs(x["cislo"] - b["cislo"])))
         b["podobne"] = [{k: x[k] for k in ("cesta", "kod", "cislo", "dum_nazev", "plocha", "venku", "venku_typ", "cena_text", "patro_text")} for x in podobne[:3]]
     data["byty"]["vsechny"] = vsechny
+    data["byty"]["js"] = {"domy": [{"nazev": d["nazev"], "byty": [
+        {"c": b["cislo"], "kod": b["kod"], "podlazi": b["podlazi"], "patro": b["patro_text"], "plocha": m2(b["plocha"]) + " m²",
+         "venku": m2(b["venku"]) + " m²", "venku_typ": b["venku_typ"].capitalize(), "kobka": m2(b["kobka"]) + " m²",
+         "cena": b["cena_text"], "cena_m2": b["cena_m2_text"], "cesta": b["cesta"], "pozice": b["pozice"]} for b in d["byty"]]}
+        for d in data["byty"]["domy"]]}
 
 
 def main():

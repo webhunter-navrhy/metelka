@@ -20,14 +20,17 @@
   {'m': 15, 't': 'Hvězdárna a planetárium', 'k': 'Rodina'}
 ] %}
 {% block obsah %}
-<section class="obraz-hlava" aria-labelledby="h1">
-  <div class="oh-foto">{{ img('hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='100vw') }}</div>
-  <div class="oh-text wrap">
-    <nav class="drobky svetle" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Lokalita</span></nav>
-    <h1 id="h1">Lokalita</h1>
-    <p>Hradec Králové. Všechno blízko: centrum, sport i&nbsp;dálnice.</p>
+<section class="stranka-hlava" aria-labelledby="h1">
+  <div class="wrap sh-mrizka">
+    <div>
+      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Lokalita</span></nav>
+      <h1 id="h1">Lokalita</h1>
+    </div>
+    <p class="perex">Hradec Králové. Všechno blízko: centrum, sport i&nbsp;dálnice.</p>
   </div>
-  <p class="hero-pozn">Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0</p>
+</section>
+<section class="pas-panorama" aria-label="Hradec Králové z výšky">
+  <figure>{{ img('hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='100vw') }}<figcaption>Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
 </section>
 
 <section class="salon sekce" aria-labelledby="h-salon">
@@ -43,10 +46,10 @@
   </div>
 </section>
 
-<section class="minuty tmava sekce" aria-labelledby="h-minuty">
+<section class="minuty sekce" aria-labelledby="h-minuty">
   <div class="wrap minuty-mrizka">
     <div class="minuty-hlava odhal">
-      <p class="nadtitul svetly">Minuty od dveří</p>
+      <p class="nadtitul">Minuty od dveří</p>
       <h2 id="h-minuty">Čtvrthodina, a&nbsp;máte celý Hradec</h2>
       <p>Časy autem z&nbsp;ulice K&nbsp;Metelce bez provozu. Ve špičce počítejte s&nbsp;rezervou.</p>
       <ul class="minuty-legenda" aria-label="Legenda">
@@ -69,7 +72,7 @@
       <div><dt>Praha hl. n.</dt><dd>92 <small>min přímým vlakem</small></dd></div>
     </dl>
   </div>
-  <p class="wrap pozn svetla">{{ o.jizdni_rad_pozn }}</p>
+  <p class="wrap pozn">{{ o.jizdni_rad_pozn }}</p>
 </section>
 
 <section class="sport sekce" aria-labelledby="h-sport">

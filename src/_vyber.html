@@ -1,0 +1,73 @@
+{# Signature: výběr bytu v živém modelu domu (three.js). Bez WebGL funguje plán 2 × 8 a panel. #}
+{% macro vyber(nadpis_id='h-vyber', uroven='h2') %}
+{% set domy = data.byty.domy %}
+<div class="vb" data-vyber data-model-src="{{ asset('js/model.js') }}" data-base="{{ base }}">
+  <div class="vb-lista">
+    <div class="vb-skupina" role="group" aria-label="Dům">
+      {% for d in domy %}<button type="button" class="prep" data-dum="{{ loop.index0 }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ d.nazev }}</button>{% endfor %}
+    </div>
+    <div class="vb-skupina" role="group" aria-label="Pohled na model">
+      <button type="button" class="prep" data-rezim="dum" aria-pressed="true">Celý dům</button>
+      <button type="button" class="prep" data-rezim="prizemi" aria-pressed="false">Přízemí</button>
+      <button type="button" class="prep" data-rezim="patro" aria-pressed="false">Patro</button>
+    </div>
+    <div class="vb-skupina vb-filtr" role="group" aria-label="Zvýraznit byty">
+      <button type="button" class="prep" data-filtr="zahradka" aria-pressed="false">Se zahrádkou <small>5,49 mil.</small></button>
+      <button type="button" class="prep" data-filtr="balkon" aria-pressed="false">S balkonem <small>4,99 mil.</small></button>
+      <button type="button" class="prep" data-filtr="krajni" aria-pressed="false">Krajní</button>
+    </div>
+  </div>
+
+  <div class="vb-scena">
+    <div class="vb-platno">
+      <picture class="vb-poster">
+        <source media="(max-width: 47.99rem)" srcset="{{ img_url('model-vyber-mobil.png', 1080) }}">
+        <img src="{{ img_url('model-vyber.png', 1920) }}" alt="Model domu K Metelce ze strany zahrádek: dvě podlaží, osm bytů v každém" loading="lazy" decoding="async" width="1920" height="960">
+      </picture>
+      <canvas aria-hidden="true"></canvas>
+      <div class="vb-stitek" aria-hidden="true" hidden><b></b><span></span></div>
+      <div class="vb-otoc" hidden>
+        <button type="button" data-otoc="1" aria-label="Otočit model doleva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6"/></svg></button>
+        <button type="button" data-otoc="-1" aria-label="Otočit model doprava"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg></button>
+      </div>
+      <p class="vb-napoveda" hidden>Táhnutím model otočíte, kliknutím vyberete byt</p>
+    </div>
+
+    <aside class="vb-panel" aria-live="polite">
+      <div class="vbp-prazdny">
+        <p class="vbp-nad"><span data-p="dum">{{ domy[0].nazev }}</span> · 16 bytů 2+kk</p>
+        <p class="vbp-velky">Vyberte byt</p>
+        <p class="vbp-text">V přízemí byty se zahrádkou, v&nbsp;patře s&nbsp;balkonem. Každý má 47,21&nbsp;m², sklep a&nbsp;parkovací stání.</p>
+      </div>
+      <div class="vbp-byt" hidden>
+        <p class="vbp-nad"><span data-p="dum"></span> · <span data-p="patro"></span></p>
+        <p class="vbp-velky">Byt <span data-p="kod"></span></p>
+        <dl class="vbp-cisla">
+          <div><dt>Plocha bytu</dt><dd data-p="plocha"></dd></div>
+          <div><dt data-p="venku_typ"></dt><dd data-p="venku"></dd></div>
+          <div><dt>Sklep</dt><dd data-p="kobka"></dd></div>
+          <div><dt>Parkování</dt><dd>1 stání</dd></div>
+        </dl>
+        <p class="vbp-cena"><span data-p="cena"></span><small><span data-p="cena_m2"></span> za m²</small></p>
+        <div class="vbp-akce">
+          <a class="btn" data-p-href="url" href="{{ url('byty') }}">Karta bytu</a>
+          <a class="btn btn-obrys" data-p-href="zajem" href="{{ url('kontakt') }}">Mám zájem</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="vb-plan" aria-label="Byty v domě podle polohy">
+    {% for radek in [('patro', range(9, 17)), ('prizemi', range(1, 9))] %}
+    <div class="vb-radek" data-radek="{{ radek[0] }}">
+      <span class="vb-radek-n">{{ 'Patro' if radek[0] == 'patro' else 'Přízemí' }}</span>
+      {% for c in radek[1] %}{% set b = domy[0].byty[c - 1] %}
+      <button type="button" class="vb-b" data-c="{{ c }}" aria-pressed="false" aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}"><b>{{ '%02d' % c }}</b><span>{{ b.venku_typ }} {{ m2(b.venku) }} m²</span></button>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <p class="vb-pozn">Model podle projektové dokumentace, pohled ze strany zahrádek. Fasáda a&nbsp;materiály budou upřesněny. Oba domy mají stejné uspořádání bytů. Dostupnost bytu vám potvrdíme.</p>
+  <script type="application/json" class="vb-data">{{ data.byty.js|tojson }}</script>
+</div>
+{% endmacro %}

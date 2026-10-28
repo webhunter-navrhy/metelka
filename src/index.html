@@ -1,126 +1,166 @@
 {% extends "_base.html" %}
-{% from "_fasada.html" import fasada %}
+{% from "_vyber.html" import vyber %}
+{% from "_pudorys.html" import pudorys %}
 {% set titulek = 'Rezidence Metelka – nové byty 2+kk v Hradci Králové' %}
-{% set prekryv = true %}
 {% set bez_cta = true %}
-{% set domy = data.byty.domy %}
+{% set k = data.model['model-hero-otevreny'].kotvy %}
+{% set km = data.model['model-hero-mobil-otevreny'].kotvy %}
+{% set b12 = data.byty.domy[0].byty[11] %}
+{% set m = data.byty.domy[0].byty[0].mistnosti %}
 {% block obsah %}
 
-<section class="hero" aria-labelledby="titul">
-  <div class="hero-foto">{{ img('int-obyvak.jpg', 'Světlý obývací pokoj s kuchyní, béžovou sedačkou a jídelním stolem', sizes='100vw') }}</div>
-  <div class="hero-obsah">
-    <p class="hero-nad">Nové byty 2+kk · Hradec Králové</p>
-    <h1 id="titul"><span>Rezidence</span> <span>Metelka</span></h1>
-    <p class="hero-pod">Dva nízké domy v klidné části Hradce. Byty se zahrádkou nebo balkonem, sklepem a&nbsp;vlastním parkovacím stáním.</p>
-    <div class="tlacitka"><a class="btn" href="{{ url('byty') }}">Vybrat byt</a><a class="btn btn-obrys svetly" href="{{ url('kontakt') }}">Domluvit prohlídku</a></div>
+<section class="uvodni" aria-labelledby="titul">
+  <div class="wrap uvodni-text">
+    <p class="uvodni-nad">K Metelce I a II · Svobodné Dvory · Hradec Králové</p>
+    <h1 id="titul"><span class="t-1">Rezidence</span> <span class="t-2">Metelka</span></h1>
+    <div class="uvodni-pod">
+      <p>Dva nízké domy v&nbsp;klidné části Hradce Králové. 32 bytů 2+kk, každý s&nbsp;okny na obě strany, se zahrádkou nebo balkonem, sklepem a&nbsp;vlastním stáním.</p>
+      <div class="tlacitka"><a class="btn" href="#vyber">Vybrat byt v&nbsp;modelu</a><a class="btn btn-obrys" href="{{ url('kontakt') }}">Domluvit prohlídku</a></div>
+    </div>
   </div>
-  <dl class="hero-fakta">
-    <div><dt>Bytů</dt><dd>32 × 2+kk</dd></div>
-    <div><dt>Plocha bytu</dt><dd>47 m²</dd></div>
+  <figure class="uvodni-model" data-maketa>
+    <div class="um-scena">
+      <picture>
+        <source media="(max-width: 47.99rem)" srcset="{{ img_url('model-hero-mobil-otevreny.png', 640) }} 640w, {{ img_url('model-hero-mobil-otevreny.png', 1080) }} 1080w" sizes="100vw" width="1080" height="1150">
+        {{ img('model-hero-otevreny.png', 'Model domu K Metelce ze strany zahrádek. Při posunu stránky se zvedne střecha a ukáže patro s osmi byty; zlatě je byt 12.', sizes='100vw', eager=true) }}
+      </picture>
+      <picture class="um-viko" aria-hidden="true">
+        <source media="(max-width: 47.99rem)" srcset="{{ img_url('model-hero-mobil-vika.png', 640) }} 640w, {{ img_url('model-hero-mobil-vika.png', 1080) }} 1080w" sizes="100vw" width="1080" height="1150">
+        {{ img('model-hero-vika.png', '', sizes='100vw', eager=true) }}
+      </picture>
+      <div class="kotvy kotvy-zavreno">
+        <span class="kota kota-balkon" style="--x:{{ k.balkon[0] }};--y:{{ k.balkon[1] }};--mx:{{ km.balkon[0] }};--my:{{ km.balkon[1] }}">
+          <span class="kota-text"><b>Balkon</b> přes celou šířku bytu</span>
+        </span>
+        <span class="kota kota-zahrada" style="--x:{{ k.zahradka[0] }};--y:{{ k.zahradka[1] }};--mx:{{ km.zahradka[0] }};--my:{{ km.zahradka[1] }}">
+          <span class="kota-text"><b>Zahrádka</b> 52–55 m² u&nbsp;každého bytu v&nbsp;přízemí</span>
+        </span>
+      </div>
+      <div class="kotvy kotvy-otevreno">
+        <a class="kota kota-byt" href="{{ url(b12.cesta) }}" style="--x:{{ k.bytVnitr[0] }};--y:{{ k.bytVnitr[1] }};--mx:{{ km.bytVnitr[0] }};--my:{{ km.bytVnitr[1] }}">
+          <span class="kota-text"><b>Byt {{ b12.kod }}</b> patro s&nbsp;balkonem<br>{{ m2(b12.plocha) }} m² · {{ b12.cena_text }}</span>
+        </a>
+      </div>
+    </div>
+    <figcaption>Model podle projektové dokumentace, bez střechy. Fasáda a&nbsp;materiály budou upřesněny.</figcaption>
+  </figure>
+  <dl class="wrap fakta">
+    <div><dt>Byty</dt><dd>32 × 2+kk</dd></div>
+    <div><dt>Plocha bytu</dt><dd>47,21 m²</dd></div>
     <div><dt>Cena od</dt><dd>4 990 000 Kč</dd></div>
-    <div><dt>Na dálnici D11</dt><dd>5,5 min</dd></div>
+    <div><dt>Dálnice D11</dt><dd>5,5 min</dd></div>
   </dl>
-  <p class="hero-pozn">Ilustrační vizualizace interiéru</p>
 </section>
 
-<section class="uvod sekce" aria-labelledby="h-uvod">
+<section class="sekce uvod" aria-labelledby="h-uvod">
   <div class="wrap uvod-mrizka">
+    <h2 id="h-uvod" class="velky odhal">Každý byt prochází celým domem. Okna na obě strany, světlo i&nbsp;průvan, když potřebujete vyvětrat.</h2>
     <div class="uvod-text odhal">
-      <p class="nadtitul">K Metelce, Svobodné Dvory</p>
-      <h2 id="h-uvod">Bydlení blízko všeho, v&nbsp;klidu nízkého domu</h2>
-      <p class="perex">Rezidence Metelka jsou dva dvoupodlažní domy, v&nbsp;každém šestnáct bytů. Každý byt prochází celou hloubkou domu, takže má okna na obě strany.</p>
-      <p>V přízemí patří k bytu vlastní zahrádka až 55&nbsp;m², v&nbsp;patře balkon. Ke každému bytu je sklep a&nbsp;parkovací stání. Na hlavní nádraží to máte 5&nbsp;minut, do historického centra 9.</p>
+      <p>Rezidence Metelka jsou dva dvoupodlažní domy v&nbsp;ulici K&nbsp;Metelce ve Svobodných Dvorech. V&nbsp;každém je šestnáct bytů: osm v&nbsp;přízemí se zahrádkou, osm v&nbsp;patře s&nbsp;balkonem a&nbsp;vstupem z&nbsp;pavlače.</p>
+      <p>Žádné dlouhé chodby ani anonymní patra. Na hlavní nádraží to máte 5&nbsp;minut, do historického centra 9.</p>
       <a class="odkaz" href="{{ url('standardy') }}">Jak jsou byty postavené</a>
     </div>
-    <figure class="uvod-foto odhal">
-      {{ img('int-jidelna-okno.jpg', 'Jídelní kout u velkého okna s výhledem do zeleně', sizes='(min-width: 64rem) 52vw, 100vw') }}
-      <figcaption>Ilustrační vizualizace</figcaption>
-    </figure>
   </div>
 </section>
 
-<section class="vyber tmava sekce" aria-labelledby="h-vyber">
+<section class="sekce vyber-sekce" id="vyber" aria-labelledby="h-vyber">
   <div class="wrap">
-    <div class="vyber-hlava odhal">
-      <div>
-        <p class="nadtitul svetly">Výběr bytu</p>
-        <h2 id="h-vyber">Vyberte si okno</h2>
-      </div>
-      <p>Vyberte byt v&nbsp;domě. V&nbsp;přízemí jsou byty se zahrádkou, v&nbsp;patře s&nbsp;balkonem. Kliknutím otevřete kartu bytu s&nbsp;půdorysem a&nbsp;cenou.</p>
+    <div class="sekce-hlava odhal">
+      <h2 id="h-vyber">Vyberte si byt přímo v&nbsp;modelu</h2>
+      <p>Otočte domem, sundejte střechu a&nbsp;podívejte se do přízemí nebo do patra. Kliknutím na byt uvidíte jeho plochy a&nbsp;cenu.</p>
     </div>
-    <div class="domy-prepinac" role="tablist" aria-label="Dům">
-      {% for d in domy %}<button type="button" role="tab" class="chip" data-dum-tab="{{ d.slug }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ d.nazev }}</button>{% endfor %}
-    </div>
-    {% for d in domy %}
-    <div class="fasada-obal" data-dum-panel="{{ d.slug }}"{% if not loop.first %} data-skryt{% endif %}>
-      <div class="fasada-svitek">{{ fasada(d) }}</div>
-    </div>
-    {% endfor %}
-    <div class="fasada-info" aria-live="polite">
-      <p><b class="fi-kod">K Metelce I</b> <span class="fi-text">Vyberte byt ve schématu</span></p>
-      <a class="odkaz svetly" href="{{ url('byty') }}">Všechny byty a ceník</a>
-    </div>
-    <p class="pozn svetla">Schéma domu ze strany zahrádek, nejde o vizualizaci. Dostupnost bytů vám potvrdíme.</p>
+    {{ vyber() }}
   </div>
 </section>
 
-<section class="kapitoly sekce" aria-label="Byt, Hradec a Praha">
-  <article class="kapitola wrap">
-    <figure class="kap-foto odhal">{{ img('int-obyvak-kuchyne.jpg', 'Obývací pokoj se sedačkou a kuchyní v pozadí', sizes='(min-width: 64rem) 58vw, 100vw') }}<figcaption>Ilustrační vizualizace</figcaption></figure>
-    <div class="kap-text odhal">
-      <p class="nadtitul">Byt</p>
-      <h2>47 m², světlo z&nbsp;obou stran</h2>
-      <p>Obývací pokoj s&nbsp;kuchyní má 24&nbsp;m², ložnice 10,4&nbsp;m². Trojskla, teplá koupelna a&nbsp;kuchyňská linka se spotřebiči.</p>
+<section class="sekce jeden-byt" aria-labelledby="h-byt">
+  <div class="wrap">
+    <div class="sekce-hlava odhal">
+      <h2 id="h-byt">47,21&nbsp;m², od okna k&nbsp;oknu</h2>
+      <p>Všech 32 bytů má stejnou dispozici. Ložnice a&nbsp;koupelna na jedné straně, obývací pokoj s&nbsp;kuchyní přes celou šířku bytu na&nbsp;druhé.</p>
+    </div>
+    <div class="jb-mrizka">
+      <figure class="jb-model odhal">
+        {{ img('model-byt-detail.png', 'Model přízemí bez stropu: zlatě vyznačený byt s ložnicí, koupelnou a obývacím pokojem', sizes='(min-width: 64rem) 55vw, 100vw') }}
+        <figcaption>Byt v&nbsp;přízemí v&nbsp;modelu, bez stropu</figcaption>
+      </figure>
+      <div class="jb-pudorys odhal">
+        {{ pudorys(m, 47.21, sizes='(min-width: 64rem) 40vw, 100vw') }}
+        <p class="pozn">Půdorys vzorového bytu se zařízením.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sekce dve-patra" aria-labelledby="h-patra">
+  <div class="wrap">
+    <div class="sekce-hlava odhal">
+      <h2 id="h-patra">Zahrádka, nebo balkon?</h2>
+      <p>Dispozice je stejná. Liší se podlaží, venkovní prostor a&nbsp;cena.</p>
+    </div>
+    <div class="patra">
+      <a class="patro-karta odhal" href="{{ url('byty') }}?filtr=prizemi#cenik">
+        {{ img('model-rez-prizemi.png', 'Model přízemí: osm bytů se zahrádkami, zlatě byt číslo 3', sizes='(min-width: 52rem) 46vw, 100vw') }}
+        <span class="pk-nad">Přízemí · 16 bytů</span>
+        <span class="pk-nazev">Se zahrádkou</span>
+        <span class="pk-radky"><span>Zahrádka</span><b>52–55 m²</b><span>Světlá výška</span><b>2,5 m</b><span>Cena</span><b>5 490 000 Kč</b></span>
+      </a>
+      <a class="patro-karta odhal" href="{{ url('byty') }}?filtr=patro#cenik">
+        {{ img('model-rez-patro.png', 'Model patra: osm bytů s balkony a pavlačí, zlatě byt číslo 12', sizes='(min-width: 52rem) 46vw, 100vw') }}
+        <span class="pk-nad">Patro · 16 bytů</span>
+        <span class="pk-nazev">S balkonem</span>
+        <span class="pk-radky"><span>Balkon</span><b>7,8–8,25 m²</b><span>Šikmé stropy</span><b>2,11–3,22 m</b><span>Cena</span><b>4 990 000 Kč</b></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="sekce interier" aria-labelledby="h-int">
+  <div class="wrap int-mrizka">
+    <figure class="int-1 odhal">{{ img('int-obyvak-kuchyne.jpg', 'Obývací pokoj se sedačkou a kuchyní v pozadí', sizes='(min-width: 64rem) 50vw, 100vw') }}</figure>
+    <div class="int-text odhal">
+      <h2 id="h-int">Teplé dřevo, krémová, černá</h2>
+      <p>Takhle může byt vypadat. Dub v&nbsp;rybí kosti, kuchyň v&nbsp;dekoru Kašmír a&nbsp;velkoformátová dlažba v&nbsp;koupelně. Vizualizace jsou ze sesterského projektu stejné skupiny.</p>
+      <ul class="v-cene">
+        <li><b>Trojskla</b><span>U<sub>w</sub> = 0,84 W/m²K</span></li>
+        <li><b>Teplá koupelna</b><span>otopný žebřík, 24 °C</span></li>
+        <li><b>Kuchyňská linka</b><span>myčka, sporák, lednice</span></li>
+        <li><b>Sklep a stání</b><span>kóje 3 m², 1 stání</span></li>
+      </ul>
       <a class="odkaz" href="{{ url('standardy') }}">Standardy bytu</a>
     </div>
-  </article>
-  <article class="kapitola kapitola-obracena wrap">
-    <figure class="kap-foto odhal">{{ img('hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='(min-width: 64rem) 58vw, 100vw') }}<figcaption>Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
-    <div class="kap-text odhal">
-      <p class="nadtitul">Hradec Králové</p>
-      <h2>Salon republiky, devět minut od dveří</h2>
-      <p>Gočárův Hradec má široké třídy, nábřeží Labe a&nbsp;krátké vzdálenosti. Bazén, stadion i&nbsp;spádová škola jsou do deseti minut.</p>
-      <a class="odkaz" href="{{ url('lokalita') }}">Lokalita</a>
-    </div>
-  </article>
-  <article class="kapitola kapitola-praha wrap">
-    <a class="praha-teaser odhal" href="{{ url('praha-nebo-hradec') }}" aria-label="Praha, nebo Hradec: srovnání">
-      <span class="pt-q pt-praha"><span>27 m²</span><small>Praha</small></span>
-      <span class="pt-q pt-hradec"><span>47 m²</span><small>Hradec</small></span>
-    </a>
-    <div class="kap-text odhal">
-      <p class="nadtitul">Praha, nebo Hradec</p>
-      <h2>Za cenu 27&nbsp;m² v&nbsp;Praze celý byt</h2>
-      <p>Za 4,99 milionu koupíte v&nbsp;Praze zhruba 27&nbsp;m² nového bytu. Tady 47&nbsp;m² se sklepem a&nbsp;parkováním. Na Černý Most je to autem hodinu.</p>
-      <a class="odkaz" href="{{ url('praha-nebo-hradec') }}">Spočítat srovnání</a>
-    </div>
-  </article>
-</section>
-
-<section class="detaily sekce bez-horni" aria-labelledby="h-detaily">
-  <div class="wrap detaily-mrizka">
-    <div class="odhal">
-      <p class="nadtitul">Rezidence Metelka</p>
-      <h2 id="h-detaily">Promyšleno do detailu</h2>
-      <div class="akordeon">
-        <details open><summary>Zahrádka nebo balkon</summary><p>Osm bytů v&nbsp;přízemí má vlastní zahrádku 52 nebo 55&nbsp;m². Byty v&nbsp;patře mají balkon přes celou šířku bytu a&nbsp;vstup z&nbsp;pavlače.</p></details>
-        <details><summary>Parkování</summary><p>Ke každému bytu patří vlastní parkovací stání.</p></details>
-        <details><summary>Sklepní kóje</summary><p>Každý byt má sklep o&nbsp;ploše 3&nbsp;m² na kola, kočárek nebo zimní věci.</p></details>
-        <details><summary>Okna a teplo</summary><p>Trojskla s&nbsp;U<sub>w</sub> = 0,84 W/m²K, zdivo Porotherm se zateplením 240&nbsp;mm a&nbsp;koupelna navržená na 24&nbsp;°C.</p></details>
-        <details><summary>Lokalita</summary><p>Klidné Svobodné Dvory. Na D11 směr Praha za 5,5&nbsp;minuty, autobus č. 16 do centra za 14&nbsp;minut.</p></details>
-      </div>
-    </div>
-    <figure class="detaily-foto odhal">{{ img('int-kuchyne-stul.jpg', 'Kuchyň s dřevěnými skříňkami a stůl s kyticí růží', sizes='(min-width: 64rem) 46vw, 100vw') }}<figcaption>Ilustrační vizualizace</figcaption></figure>
+    <figure class="int-2 odhal">{{ img('int-koupelna.jpg', 'Koupelna se sprchovým koutem a pračkou ve skříni', sizes='(min-width: 64rem) 24vw, 50vw') }}</figure>
+    <figure class="int-3 odhal">{{ img('int-kuchyne-stul.jpg', 'Kuchyň s dřevěnými skříňkami a stůl s kyticí', sizes='(min-width: 64rem) 24vw, 50vw') }}</figure>
+    <p class="int-pozn">Ilustrační vizualizace interiéru</p>
   </div>
 </section>
 
-<section class="kontakt-pas tmava sekce" aria-labelledby="h-kontakt">
-  <div class="wrap">
-    <div class="karta-formular odhal">
-      <h2 id="h-kontakt">Domluvit prohlídku</h2>
-      <p class="nadtitul">Rezidence Metelka vás zaujala? Napište nám.</p>
-      {% include "_formular.html" %}
+<section class="sekce hradec" aria-labelledby="h-hradec">
+  <div class="wrap hradec-mrizka">
+    <figure class="hradec-foto odhal">{{ img('hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='(min-width: 64rem) 50vw, 100vw') }}<figcaption>Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
+    <div class="hradec-text odhal">
+      <h2 id="h-hradec">Salon republiky, devět minut od dveří</h2>
+      <p>Gočárův Hradec má široké třídy, nábřeží Labe a&nbsp;krátké vzdálenosti. Svobodné Dvory jsou jeho klidná severozápadní část.</p>
+      <ol class="minuty-kratke">
+        <li><b>5</b><span>min autem na hlavní nádraží</span></li>
+        <li><b>5,5</b><span>min na dálnici D11 směr Praha</span></li>
+        <li><b>9</b><span>min na Velké náměstí</span></li>
+        <li><b>62</b><span>min na pražský Černý Most</span></li>
+      </ol>
+      <div class="tlacitka"><a class="odkaz" href="{{ url('lokalita') }}">Lokalita</a><a class="odkaz" href="{{ url('praha-nebo-hradec') }}">Praha, nebo Hradec?</a></div>
     </div>
+  </div>
+</section>
+
+<section class="sekce kontakt-uvod" aria-labelledby="h-kontakt">
+  <div class="wrap kontakt-mrizka">
+    <div class="odhal">
+      <h2 id="h-kontakt">Domluvit prohlídku</h2>
+      <p>Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Prodej bytů má na starosti {{ site.kontakt.jmeno }}.</p>
+      {% if not site.kontakt.telefon %}<p class="doplnime">Telefon a e-mail prodeje doplníme.</p>{% endif %}
+    </div>
+    <div class="odhal">{% include "_formular.html" %}</div>
   </div>
 </section>
 {% endblock %}
+{% block skripty %}<script type="module" src="{{ asset('js/vyber.js') }}"></script>{% endblock %}

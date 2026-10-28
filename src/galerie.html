@@ -15,6 +15,18 @@
   </div>
 </section>
 
+<section class="galerie-sekce" aria-labelledby="h-model">
+  <div class="wrap">
+    <h2 id="h-model" class="mensi">Model domu</h2>
+    <div class="galerie-mrizka">
+      {% for x in [('model-hero.png', 'Dům ze strany zahrádek', 'Model domu ze strany zahrádek s balkony'), ('model-sever.png', 'Severní strana s pavlačí', 'Model domu ze severu s pavlačí a vstupy do bytů'), ('model-rez-prizemi.png', 'Přízemí bez stropu', 'Model přízemí bez stropu s dispozicí bytů'), ('model-rez-patro.png', 'Patro bez střechy', 'Model patra bez střechy s dispozicí bytů')] %}
+      <a class="g-polozka{% if loop.first %} g-siroka{% endif %}" href="{{ img_url(x[0], 1920) }}" data-popis="{{ x[1] }} · model podle projektové dokumentace">{{ img(x[0], x[2], sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x[1] }}</span></a>
+      {% endfor %}
+    </div>
+    <p class="pozn">Model podle projektové dokumentace. Fasáda a&nbsp;materiály budou upřesněny.</p>
+  </div>
+</section>
+
 <section class="galerie-sekce" aria-labelledby="h-int">
   <div class="wrap">
     <h2 id="h-int" class="mensi">Interiéry</h2>

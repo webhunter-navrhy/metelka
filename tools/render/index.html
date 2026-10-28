@@ -1,0 +1,74 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#eee7dc}canvas{display:block}</style></head><body>
+<canvas id="c"></canvas><canvas id="out"></canvas>
+<script type="importmap">{"imports":{"three":"/static/js/vendor/three.module.min.js"}}</script>
+<script type="module">
+import { vytvorMaketu } from '../../static/js/model.js';
+import * as THREE from 'three';
+import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './jsm/postprocessing/RenderPass.js';
+import { GTAOPass } from './jsm/postprocessing/GTAOPass.js';
+import { OutputPass } from './jsm/postprocessing/OutputPass.js';
+import { BokehPass } from './jsm/postprocessing/BokehPass.js';
+const q = new URLSearchParams(location.search);
+const W = +q.get('w') || 1600, H = +q.get('h') || 900, S = +q.get('s') || 24;
+const c = document.getElementById('c'); c.style.width = W + 'px'; c.style.height = H + 'px';
+window.devicePixelRatio = 1;
+const m = vytvorMaketu(c, { kvalita: 'offline', preserve: true, bezAnimace: true, pevnaVelikost: true, maxDpr: 1, fov: +q.get('fov') || 30,
+  pruhledne: q.get('alpha') === '1', pozadi: q.get('bg') ? parseInt(q.get('bg'), 16) : undefined, mlhaOd: +q.get('fo') || 70, mlhaDo: +q.get('ft') || 150, expozice: +q.get('ex') || 1.05 });
+m.setSize(W, H);
+m.nastavRezim(q.get('rezim') || 'dum');
+if (q.get('vyber')) m.vyber(+q.get('vyber'));
+if (q.get('bezstrechy')) m.strechaG.visible = false;
+const MASKA = q.get('maska');
+if (MASKA) {
+  // bílá = to, co se při otevření modelu zvedne: střecha + horní část patra nad řezem
+  const cut = 2.85 + 1.25;
+  const mk = (vzdy) => new THREE.ShaderMaterial({ uniforms: { cut: { value: vzdy ? -1e9 : cut } }, side: THREE.DoubleSide,
+    vertexShader: 'varying float vy; void main(){ vec4 w = vec4(position,1.0);\n#ifdef USE_INSTANCING\n w = instanceMatrix * w;\n#endif\n w = modelMatrix * w; vy = w.y; gl_Position = projectionMatrix * viewMatrix * w; }',
+    fragmentShader: 'uniform float cut; varying float vy; void main(){ gl_FragColor = vec4(vec3(vy > cut ? 1.0 : 0.0), 1.0); }' });
+  const cerna = new THREE.MeshBasicMaterial({ color: 0x000000, fog: false, side: THREE.DoubleSide });
+  const strecha = mk(true), patro = mk(false);
+  const vStrese = new Set(); m.strechaG.traverse(o => vStrese.add(o));
+  m.scene.traverse(o => { if (o.isMesh || o.isLine || o.isLineSegments) {
+    const mat = Array.isArray(o.material) ? o.material[0] : o.material;
+    const horni = mat && mat.clippingPlanes && mat.clippingPlanes.length && m.patroG && (() => { let x = o; while (x) { if (x === m.patroG) return true; x = x.parent; } return false; })();
+    o.material = vStrese.has(o) ? strecha : (horni ? patro : cerna);
+  } });
+  m.scene.background = new THREE.Color(0x000000); m.scene.fog = null; m.renderer.toneMapping = THREE.NoToneMapping;
+}
+const pos = (q.get('pos') || '-34,26,58').split(',').map(Number), tgt = (q.get('t') || '0,2.2,1.5').split(',').map(Number);
+m.kamera(pos, tgt);
+if (q.get('sun')) m.slunce.position.set(...q.get('sun').split(',').map(Number));
+const base = m.slunce.position.clone();
+let comp = null;
+if (q.get('ao') !== '0' && !MASKA) {
+  comp = new EffectComposer(m.renderer); comp.setSize(W, H);
+  comp.addPass(new RenderPass(m.scene, m.camera));
+  const ao = new GTAOPass(m.scene, m.camera, W, H);
+  ao.updateGtaoMaterial({ radius: +q.get('aor') || 1.2, distanceExponent: 1.5, thickness: 2, scale: 1, samples: 16 });
+  ao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
+  ao.blendIntensity = +q.get('aoi') || 1.0;
+  comp.addPass(ao);
+  if (q.get('dof')) { const [f, ap] = q.get('dof').split(',').map(Number); comp.addPass(new BokehPass(m.scene, m.camera, { focus: f, aperture: ap, maxblur: 0.008 })); }
+  comp.addPass(new OutputPass());
+}
+const out = document.getElementById('out'); out.width = W; out.height = H; const ctx = out.getContext('2d');
+const tmp = document.createElement('canvas'); tmp.width = W; tmp.height = H; const tctx = tmp.getContext('2d');
+const BG = MASKA ? '#000000' : '#' + (q.get('page') || 'efe9df');
+if (q.get('alpha') === '1' && !MASKA) m.renderer.setClearColor(0x000000, 0);
+await new Promise(r => setTimeout(r, 50));
+for (let i = 0; i < S; i++) {
+  const a = i * 2.39996, r = Math.sqrt((i + 0.5) / S) * (+q.get('soft') || 2.2);
+  m.slunce.position.set(base.x + Math.cos(a) * r, base.y + Math.sin(a) * r * 0.6, base.z + Math.sin(a) * r);
+  m.slunce.shadow.needsUpdate = true;
+  if (comp) comp.render(); else m.render();
+  tctx.globalAlpha = 1; tctx.fillStyle = BG; tctx.fillRect(0, 0, W, H); tctx.drawImage(c, 0, 0);
+  ctx.globalAlpha = 1 / (i + 1); ctx.drawImage(tmp, 0, 0);
+}
+c.style.display = 'none';
+const L = 42.856, Wd = L / 8;
+const K = { byt: [-L/2 + 3.5*Wd, 4.4, 5.6], zahradka: [-L/2 + 1.5*Wd, -0.3, 11.5], pavlac: [-L/2 - 0.6, 2.9, -6.6], balkon: [-L/2 + 6.5*Wd, 3.4, 6.6], strecha: [6, 6.2, 0.3], sklep: [0, 0, 0], bytVnitr: [-L/2 + 3.5*Wd, 3.4, -0.5], prizemiByt: [-L/2 + 2.5*Wd, 0.6, 6.4] };
+window.__kotvy = {};
+for (const [k, v] of Object.entries(K)) { const t = new THREE.Vector3(...v).project(m.camera); window.__kotvy[k] = [ (t.x + 1) / 2, (1 - t.y) / 2 ]; }
+document.title = 'hotovo';
+</script></body></html>

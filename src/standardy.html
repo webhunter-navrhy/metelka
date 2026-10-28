@@ -6,14 +6,14 @@
 {% set aktivni = 'standardy' %}
 {% set m = data.byty.domy[0].byty[0].mistnosti %}
 {% block obsah %}
-<section class="obraz-hlava" aria-labelledby="h1">
-  <div class="oh-foto">{{ img('int-obyvak-kuchyne.jpg', 'Obývací pokoj s kuchyní, sedačkou a jídelním stolem', sizes='100vw') }}</div>
-  <div class="oh-text wrap">
-    <nav class="drobky svetle" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Standardy</span></nav>
-    <h1 id="h1">Standardy</h1>
-    <p>Jeden dobře vyřešený byt, postavený poctivě.</p>
+<section class="stranka-hlava" aria-labelledby="h1">
+  <div class="wrap sh-mrizka">
+    <div>
+      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Standardy</span></nav>
+      <h1 id="h1">Standardy</h1>
+    </div>
+    <p class="perex">Jeden dobře vyřešený byt, postavený poctivě. Okna na obě strany, trojskla, teplá koupelna a&nbsp;zdivo se silnou izolací.</p>
   </div>
-  <p class="hero-pozn">Ilustrační vizualizace</p>
 </section>
 
 <section class="sekce" aria-labelledby="h-byt">
@@ -52,15 +52,19 @@
   <figure class="odhal">{{ img('int-koupelna-2.jpg', 'Koupelna se sprchou, závěsným WC a podsvíceným zrcadlem', sizes='(min-width: 52rem) 40vw, 100vw') }}<figcaption>Koupelna · ilustrační vizualizace</figcaption></figure>
 </section>
 
-<section class="dum tmava sekce" aria-labelledby="h-dum">
+<section class="dum pas-papir sekce" aria-labelledby="h-dum">
   <div class="wrap">
     <div class="dvoj-hlava odhal">
       <div>
-        <p class="nadtitul svetly">Dům</p>
+        <p class="nadtitul">Dům</p>
         <h2 id="h-dum">Dva nízké domy, nic navíc</h2>
       </div>
       <p>K Metelce I a&nbsp;II jsou dvoupodlažní domy dlouhé necelých 43&nbsp;metrů. Žádné dlouhé chodby ani anonymní patra: osm bytů v&nbsp;přízemí, osm v&nbsp;patře.</p>
     </div>
+    <figure class="model-sirsi odhal">
+      {{ img('model-sever.png', 'Model domu ze severní strany: pavlač se zábradlím a vstupy do bytů v patře', sizes='100vw') }}
+      <figcaption>Severní strana s&nbsp;pavlačí a&nbsp;vstupy. Model podle projektové dokumentace, fasáda a&nbsp;materiály budou upřesněny.</figcaption>
+    </figure>
     <div class="rez-obal odhal">
       <svg class="rez" viewBox="0 0 1000 500" role="img" aria-labelledby="rez-t">
         <title id="rez-t">Řez domem: přízemí se světlou výškou 2,5 m, patro se šikmými stropy do 3,22 m, dům široký 11 m</title>
@@ -93,7 +97,7 @@
         </g>
       </svg>
     </div>
-    <p class="pozn svetla">Zjednodušeno podle projektového řezu. Výšky od podlahy přízemí.</p>
+    <p class="pozn">Zjednodušeno podle projektového řezu. Výšky od podlahy přízemí.</p>
     <ul class="konstrukce">
       <li class="odhal"><b>Trojskla</b><p>Okna s&nbsp;U<sub>w</sub> = 0,84 W/m²K, střešní 0,86. Rám bílý nebo zlatý dub.</p></li>
       <li class="odhal"><b>Teplá koupelna</b><p>Otopný žebřík, koupelna navržená na 24&nbsp;°C, pokoje na 20&nbsp;°C.</p></li>

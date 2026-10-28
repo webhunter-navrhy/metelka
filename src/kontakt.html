@@ -5,15 +5,15 @@
 {% set aktivni = 'kontakt' %}
 {% set bez_cta = true %}
 {% block obsah %}
-<section class="kontakt-stranka tmava" aria-labelledby="h1">
-  <div class="ks-foto">{{ img('int-jidelna-okno.jpg', 'Jídelní kout u velkého okna', sizes='(min-width: 64rem) 50vw, 100vw') }}</div>
-  <div class="ks-obsah">
-    <nav class="drobky svetle" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
-    <h1 id="h1">Domluvit prohlídku</h1>
-    <p class="perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;pošleme kartu bytu.</p>
-    <div class="karta-formular">
-      {% include "_formular.html" %}
+<section class="kontakt-stranka" aria-labelledby="h1">
+  <div class="wrap ks-mrizka">
+    <div>
+      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
+      <h1 id="h1">Domluvit prohlídku</h1>
+      <p class="perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;pošleme kartu bytu.</p>
+      <figure class="ks-foto">{{ img('int-jidelna-okno.jpg', 'Jídelní kout u velkého okna s výhledem do zeleně', sizes='(min-width: 52rem) 40vw, 100vw') }}<figcaption>Ilustrační vizualizace interiéru</figcaption></figure>
     </div>
+    <div>{% include "_formular.html" %}</div>
   </div>
 </section>
 

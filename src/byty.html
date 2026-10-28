@@ -1,64 +1,32 @@
 {% extends "_base.html" %}
-{% from "_fasada.html" import fasada %}
+{% from "_vyber.html" import vyber %}
 {% set titulek = 'Byty a ceník – Rezidence Metelka' %}
 {% set popis = 'Ceník 32 bytů 2+kk v Rezidenci Metelka v Hradci Králové: byty se zahrádkou za 5 490 000 Kč a s balkonem za 4 990 000 Kč, každý se sklepem a parkovacím stáním.' %}
 {% set cesta = 'byty/' %}
 {% set aktivni = 'byty' %}
-{% set domy = data.byty.domy %}
 {% block obsah %}
 <section class="stranka-hlava" aria-labelledby="h1">
   <div class="wrap sh-mrizka">
     <div>
       <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Byty</span></nav>
-      <h1 id="h1">Byty a ceník</h1>
+      <h1 id="h1">Byty a&nbsp;ceník</h1>
     </div>
     <p class="perex">Všech 32 bytů má dispozici 2+kk a&nbsp;47,21&nbsp;m². Liší se domem, podlažím a&nbsp;tím, jestli k&nbsp;nim patří zahrádka, nebo balkon.</p>
   </div>
 </section>
 
-<section class="dva-typy wrap" aria-label="Dva typy bytů">
-  <a class="typ odhal" href="#seznam" data-filtr-odkaz="prizemi">
-    <span class="typ-nad">Přízemí · 16 bytů</span>
-    <span class="typ-nazev">Se zahrádkou</span>
-    <span class="typ-cena">5 490 000 Kč</span>
-    <span class="typ-pod">zahrádka 52–55 m² · sklep · parkovací stání</span>
-  </a>
-  <a class="typ odhal" href="#seznam" data-filtr-odkaz="patro">
-    <span class="typ-nad">Patro · 16 bytů</span>
-    <span class="typ-nazev">S balkonem</span>
-    <span class="typ-cena">4 990 000 Kč</span>
-    <span class="typ-pod">balkon 7,8–8,25 m² · sklep · parkovací stání</span>
-  </a>
+<section class="vyber-sekce" id="vyber" aria-label="Výběr bytu v modelu">
+  <div class="wrap">{{ vyber() }}</div>
 </section>
 
-<section class="vyber tmava sekce" aria-labelledby="h-fasada">
+<section class="sekce" id="cenik" aria-labelledby="h-cenik">
   <div class="wrap">
-    <div class="vyber-hlava">
-      <h2 id="h-fasada">Byty v domě</h2>
-      <div class="domy-prepinac" role="tablist" aria-label="Dům">
-        {% for d in domy %}<button type="button" role="tab" class="chip" data-dum-tab="{{ d.slug }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ d.nazev }}</button>{% endfor %}
-      </div>
-    </div>
-    {% for d in domy %}
-    <div class="fasada-obal" data-dum-panel="{{ d.slug }}"{% if not loop.first %} data-skryt{% endif %}>
-      <div class="fasada-svitek">{{ fasada(d) }}</div>
-    </div>
-    {% endfor %}
-    <div class="fasada-info" aria-live="polite">
-      <p><b class="fi-kod">K Metelce I</b> <span class="fi-text">Vyberte byt ve schématu</span></p>
-    </div>
-    <p class="pozn svetla">Schéma domu ze strany zahrádek, nejde o vizualizaci.</p>
-  </div>
-</section>
-
-<section class="seznam sekce" id="seznam" aria-labelledby="h-seznam">
-  <div class="wrap">
-    <div class="seznam-hlava">
-      <h2 id="h-seznam">Ceník bytů</h2>
-      <div class="filtry" role="group" aria-label="Filtrovat byty">
-        <button type="button" class="chip" data-filtr="vse" aria-pressed="true">Všechny</button>
-        <button type="button" class="chip" data-filtr="prizemi" aria-pressed="false">Se zahrádkou</button>
-        <button type="button" class="chip" data-filtr="patro" aria-pressed="false">S balkonem</button>
+    <div class="cenik-hlava">
+      <h2 id="h-cenik">Ceník</h2>
+      <div class="vb-skupina" role="group" aria-label="Filtrovat byty">
+        <button type="button" class="prep" data-cenik-filtr="vse" aria-pressed="true">Všechny</button>
+        <button type="button" class="prep" data-cenik-filtr="prizemi" aria-pressed="false">Se zahrádkou</button>
+        <button type="button" class="prep" data-cenik-filtr="patro" aria-pressed="false">S balkonem</button>
       </div>
     </div>
     <div class="radky" role="list">
@@ -71,7 +39,7 @@
         <span class="r-plocha">{{ m2(b.plocha) }} m²</span>
         <span class="r-venku">{{ b.venku_typ|capitalize }} {{ m2(b.venku) }} m²</span>
         <span class="r-cena">{{ b.cena_text }}</span>
-        <span class="r-sipka" aria-hidden="true">Detail</span>
+        <span class="r-sipka" aria-hidden="true">Karta bytu</span>
       </a>
       {% endfor %}
     </div>
@@ -79,3 +47,4 @@
   </div>
 </section>
 {% endblock %}
+{% block skripty %}<script type="module" src="{{ asset('js/vyber.js') }}"></script>{% endblock %}

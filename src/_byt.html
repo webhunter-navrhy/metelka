@@ -1,5 +1,4 @@
 {% extends "_base.html" %}
-{% from "_fasada.html" import fasada %}
 {% from "_pudorys.html" import pudorys %}
 {% set dole = byt.podlazi == 'prizemi' %}
 {% set titulek = 'Byt ' ~ byt.kod ~ ' – ' ~ byt.dispozice ~ ', ' ~ byt.venku_typ ~ ' – Rezidence Metelka' %}
@@ -10,12 +9,16 @@
   <header class="kb-hlava">
     <div class="wrap">
       <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><a href="{{ url('byty') }}">Byty</a><span>{{ dum.nazev }}</span><span>Byt {{ byt.kod }}</span></nav>
-      <div class="kb-titul">
-        <div>
-          <p class="kb-stitek">Číslo bytu</p>
+      <div class="kb-hlava-mrizka">
+        <div class="kb-titul">
+          <p class="kb-stitek">{{ dum.nazev }} · {{ byt.patro_text }}</p>
           <h1><span class="sr">Byt </span>{{ byt.kod }}</h1>
+          <p class="kb-pod">{{ byt.dispozice }}, {{ 'přízemí se zahrádkou' if dole else 'patro s balkonem' }}<br>{{ byt.pozice }}. byt zleva ze strany zahrádek{% if byt.krajni %}, krajní{% endif %}</p>
         </div>
-        <p class="kb-pod">{{ byt.dispozice }} · {{ 'přízemí se zahrádkou' if dole else 'patro s balkonem' }}<br>{{ dum.nazev }}, Hradec Králové</p>
+        <figure class="kb-poloha">
+          {{ img('model-poloha-%02d.png' % byt.cislo, 'Model domu ' ~ dum.nazev ~ ' ze strany zahrádek, zlatě vyznačený byt ' ~ byt.kod, sizes='(min-width: 52rem) 58vw, 100vw', eager=true) }}
+          <figcaption>Poloha bytu v&nbsp;domě. Model podle projektové dokumentace, fasáda bude upřesněna.</figcaption>
+        </figure>
       </div>
       <dl class="kb-cisla">
         <div><dt>Plocha bytu</dt><dd>{{ m2(byt.plocha) }} m²</dd></div>
@@ -34,10 +37,10 @@
         <p class="pozn">Půdorys vzorového bytu se zařízením. {% if dole %}Světlá výška v přízemí 2,5&nbsp;m.{% else %}Byty v patře mají šikmé stropy se světlou výškou 2,11–3,22&nbsp;m a&nbsp;vstup z&nbsp;pavlače.{% endif %}</p>
       </section>
 
-      <section class="kb-poloha" aria-labelledby="h-poloha">
-        <h2 id="h-poloha" class="mensi">Kde byt je</h2>
-        <div class="fasada-svetla">{{ fasada(dum, vybrany=byt) }}</div>
-        <p class="pozn">{{ dum.nazev }} ze strany zahrádek, {{ byt.pozice }}. byt zleva {{ 'v přízemí' if dole else 'v patře' }}{% if byt.krajni %}, krajní{% endif %}. Schéma, nejde o vizualizaci.</p>
+      <section class="kb-model" aria-labelledby="h-model">
+        <h2 id="h-model" class="mensi">Byt {{ byt.kod }} v&nbsp;modelu</h2>
+        {{ img('model-byt-%02d.png' % byt.cislo, 'Model ' ~ ('přízemí' if dole else 'patra') ~ ' bez stropu, zlatě byt ' ~ byt.kod ~ ' s ložnicí, koupelnou a obývacím pokojem', sizes='(min-width: 64rem) 55vw, 100vw') }}
+        <p class="pozn">{{ 'Přízemí' if dole else 'Patro' }} bez stropu, pohled ze strany {{ 'zahrádek' if dole else 'balkonů' }}. Model podle projektové dokumentace, zařízení je orientační.</p>
       </section>
     </div>
 
@@ -55,7 +58,7 @@
           <div class="soucet"><dt>Celkem s {{ 'zahrádkou' if dole else 'balkonem' }} a sklepem</dt><dd>{{ cz(byt.celkem) }} m²</dd></div>
         </dl>
         <p class="kb-cena"><span>Cena bytu</span><b>{{ byt.cena_text }}</b><small>{{ byt.cena_m2_text }} za m² bytu</small></p>
-        <a class="btn btn-plny" href="{{ url('kontakt') }}?byt={{ byt.kod }}">Mám zájem o tento byt</a>
+        <a class="btn" href="{{ url('kontakt') }}?byt={{ byt.kod }}">Mám zájem o tento byt</a>
         <button type="button" class="btn btn-obrys tisk">Vytisknout kartu bytu</button>
         <p class="pozn">Ceník k&nbsp;16. 9. 2026. Aktuální dostupnost vám potvrdíme.</p>
       </div>

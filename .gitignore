@@ -9,3 +9,4 @@ qa.json
 kolaz_*.png
 _snimky/
 deploy.sh.bak-*
+tools/render/jsm

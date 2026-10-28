@@ -7,7 +7,7 @@ document.documentElement.classList.add('js');
   if (!h) return;
   var burger = h.querySelector('.burger');
   var panel = document.getElementById('panel');
-  function stav() { h.classList.toggle('plna', window.scrollY > 60); }
+  function stav() { h.classList.toggle('plna', window.scrollY > 10); }
   stav(); window.addEventListener('scroll', stav, { passive: true });
   if (!burger || !panel) return;
   function nastav(o) {
@@ -20,7 +20,7 @@ document.documentElement.classList.add('js');
   burger.addEventListener('click', function () { nastav(burger.getAttribute('aria-expanded') !== 'true'); });
   panel.addEventListener('click', function (e) { if (e.target.closest('a')) nastav(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { nastav(false); burger.focus(); } });
-  window.matchMedia('(min-width: 68.01rem)').addEventListener('change', function (m) { if (m.matches) nastav(false); });
+  window.matchMedia('(min-width: 64.01rem)').addEventListener('change', function (m) { if (m.matches) nastav(false); });
 })();
 
 // Postupné odhalení při scrollu.
@@ -44,44 +44,53 @@ document.querySelectorAll('.pudorys').forEach(function (p) {
   p.addEventListener('mouseleave', function () { zapni(null); });
 });
 
-// Fasáda: přepínání domů a popis bytu pod schématem.
-document.querySelectorAll('.vyber').forEach(function (s) {
-  var taby = s.querySelectorAll('[data-dum-tab]');
-  var panely = s.querySelectorAll('[data-dum-panel]');
-  var kod = s.querySelector('.fi-kod'), text = s.querySelector('.fi-text');
-  var vychozi = text ? text.textContent : '';
-  function dum(slug) {
-    taby.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.dumTab === slug)); });
-    panely.forEach(function (p) { if (p.dataset.dumPanel === slug) p.removeAttribute('data-skryt'); else p.setAttribute('data-skryt', ''); });
-    var t = s.querySelector('[data-dum-tab="' + slug + '"]');
-    if (kod && t) kod.textContent = t.textContent;
-    if (text) text.textContent = vychozi;
-  }
-  taby.forEach(function (t) { t.addEventListener('click', function () { dum(t.dataset.dumTab); }); });
-  s.querySelectorAll('.f-byt').forEach(function (b) {
-    function ukaz() {
-      s.querySelectorAll('.f-byt.aktivni').forEach(function (x) { x.classList.remove('aktivni'); });
-      b.classList.add('aktivni');
-      if (kod) kod.textContent = 'Byt ' + b.dataset.kod;
-      if (text) text.textContent = b.dataset.info;
-    }
-    b.addEventListener('mouseenter', ukaz); b.addEventListener('focus', ukaz);
-  });
+// Úvodní model: kóty se dokreslí po načtení obrázku.
+document.querySelectorAll('.uvodni-model').forEach(function (f) {
+  var i = f.querySelector('img');
+  function hotovo() { f.classList.add('nacteno'); }
+  if (!i || i.complete) hotovo(); else { i.addEventListener('load', hotovo); i.addEventListener('error', hotovo); }
 });
+
+// Úvodní model: zvednutí střechy podle posunu stránky. Kde CSS scroll-driven animace nejsou (Firefox, starší Safari),
+// dopočítá se totéž tady; jen transform a opacity, překresluje se jen při scrollu.
+(function () {
+  var f = document.querySelector('[data-maketa]');
+  if (!f || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()')) return;
+  var viko = f.querySelector('.um-viko'), zav = f.querySelector('.kotvy-zavreno'), otv = f.querySelector('.kotvy-otevreno');
+  var ceka = false;
+  function r(a, b, y) { return Math.min(1, Math.max(0, (y - a) / (b - a))); }
+  function krok() {
+    ceka = false;
+    var vh = window.innerHeight / 100, y = window.scrollY, m = window.innerWidth < 768;
+    if (y > 120 * vh) return;
+    var p = m ? r(10 * vh, 58 * vh, y) : r(2 * vh, 44 * vh, y);
+    var o = p < 0.28 ? 1 : p < 0.72 ? 1 - 0.78 * (p - 0.28) / 0.44 : 0.22 * (1 - (p - 0.72) / 0.28);
+    viko.style.transform = p ? 'translate3d(0,' + (-22 * p) + '%,0)' : '';
+    viko.style.opacity = o;
+    var z = 1 - (m ? r(0, 18 * vh, y) : r(0, 14 * vh, y)); zav.style.opacity = z; zav.style.visibility = z ? 'visible' : 'hidden';
+    var q = m ? r(42 * vh, 60 * vh, y) : r(28 * vh, 46 * vh, y); otv.style.opacity = q; otv.style.visibility = q ? 'visible' : 'hidden';
+    otv.style.transform = 'translate3d(0,' + (0.8 * (1 - q)) + 'rem,0)';
+  }
+  window.addEventListener('scroll', function () { if (!ceka) { ceka = true; requestAnimationFrame(krok); } }, { passive: true });
+  krok();
+})();
 
 // Seznam bytů: filtr zahrádka / balkon.
 (function () {
   var radky = document.querySelectorAll('a.radek[data-podlazi]');
   if (!radky.length) return;
-  var tl = document.querySelectorAll('[data-filtr]');
+  var tl = document.querySelectorAll('[data-cenik-filtr]');
   function filtr(f) {
-    tl.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.filtr === f)); });
+    tl.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.cenikFiltr === f)); });
     radky.forEach(function (r) { r.hidden = !(f === 'vse' || r.dataset.podlazi === f); });
   }
-  tl.forEach(function (t) { t.addEventListener('click', function () { filtr(t.dataset.filtr); }); });
+  tl.forEach(function (t) { t.addEventListener('click', function () { filtr(t.dataset.cenikFiltr); }); });
   document.querySelectorAll('[data-filtr-odkaz]').forEach(function (a) {
     a.addEventListener('click', function () { filtr(a.dataset.filtrOdkaz); });
   });
+  var q = new URLSearchParams(location.search).get('filtr');
+  if (q === 'prizemi' || q === 'patro') filtr(q);
 })();
 
 // Praha, nebo Hradec: kolik m² za rozpočet.

@@ -1,58 +1,69 @@
-# Rezidence Metelka – koncept v3 (28. 10. 2026)
+# Rezidence Metelka – koncept v4 „Model na stole“ (28. 10. 2026)
 
-## Proč v3
-v2 (jednostránkový, Gilda Display, AI vizualizace) Rafael odmítl: „ten web je na nic. fakt moc špatnej“ –
-levný a šablonovitý dojem, slabá úvodní obrazovka, špatné fotky, moc textu a tabulek.
-Zadání: celý web znovu, **vícestránkový a pořádně propracovaný**, fotky z Facebooku klientky.
-FB patří skupině CFIG SE (Rezidence Karlovina, Pardubice). Rafael: „Je to jejich firma, použít.“
-→ Metelka dostane vizuální jazyk sesterského projektu Karlovina (stejný developer = stejná rodina značek)
-a interiéry Karloviny jako ilustrační vizualizace. Fasádu Karloviny nepoužívám (nebyla by to Metelka).
+Předchozí verze: `koncept-v3.md` (a v git historii). v3 měla self-review 8/10, Rafael ji odmítl:
+chce „milionkrát lepší“. Slabiny v3: statický hero s interiérem, který není Metelka; fasáda nakreslená
+linkou působila jako schéma, ne jako prodej; výběr bytu byl seznam s kresbou, žádný „wow“ moment.
 
 ## Tři koncepty
-1. **Prodejní kniha developera** – web jako tištěný katalog CFIG: velký obraz přes celou šířku,
-   prostrkané verzálky Marcellus, písková tlačítka, espresso pásy, každý byt má vlastní list (kartu bytu).
-2. **Fasáda jako rozcestník** – dům nakreslený zlatou linkou, každé okno je byt; klik vede na kartu bytu.
-3. **Minutová osa** – Hradec měřený minutami od dveří: nádraží 5, D11 5,5, centrum 9, Praha 62.
+1. **Model na stole** – web jako prodejní kancelář developera: na stole stojí bílý architektonický
+   model domu, zvednete střechu a vidíte byty i s nábytkem, ťuknete na byt a dostanete jeho kartu.
+2. **Klíč od bytu** – celý web vede jednu cestu „od branky ke dveřím bytu“ (zahrada → chodba → byt),
+   každá kapitola je jedna místnost.
+3. **Ceník jako katalogový list** – tištěný list developera s výsekem, kde se ceník a půdorys skládají.
 
-## Výběr
-**1 jako rámec, 2 a 3 jako signature momenty.** Klientka chce „jednoduché a posh, zlatá, béžová,
-tenké černé písmo“ a její vzor je Karlovina – katalogový jazyk přesně tohle dělá. Kupce bytu zajímá
-konkrétní byt: proto 32 karet bytů (vzor Florian Residence) a fasáda jako výběr. Exteriér Metelky
-nemáme → dům ukazuji jako schéma (označené), ne vymyšlený render.
+## Výběr: 1 – Model na stole
+- Exteriér Metelky neexistuje (klientka nemá vizualizace). Bílý model je poctivý: je to maketa podle
+  půdorysu z podkladů (2 domy × 16 bytů, přízemí se zahrádkou, patro s balkonem), ne vymyšlená fasáda.
+- Kupující řeší konkrétní byt. Model ukáže, kde přesně byt je, ze které strany je zahrádka a balkon.
+- Developerské weby na špičce (Florian Residence, Rezidence Park Kampa, Central Group 3D výběr)
+  mají interaktivní výběr v modelu. U malého projektu za 4,99 mil. to nikdo nemá → odlišení.
+- Fasádu Karloviny nepoužívám. Interiéry Karloviny jen jako „Ilustrační vizualizace interiéru“
+  se zmínkou, že jsou ze sesterského projektu.
 
-## Mapa webu
-- `/` úvod: hero s interiérem přes celou obrazovku + titul REZIDENCE METELKA + lišta faktů;
-  úvodní text s obrazem; fasáda (výběr bytu, signature 1); tři kapitoly (Byt / Hradec / Praha);
-  „Promyšleno do detailu“ (akordeon + obraz, jako Karlovina); domluvit prohlídku.
-- `/byty/` výběr: přepínač domu, fasáda s okny-byty, filtr (vše / zahrádka / balkon), seznam řádků.
-- `/byty/k-metelce-i/byt-01/` … 32 karet bytu: číslo, 4 klíčové údaje, půdorys s místnostmi,
-  přehled ploch a ceny, „Mám zájem“, tisk karty, poloha v domě, předchozí/další, podobné byty.
-- `/standardy/` byt a dům: půdorys, materiály vzorového bytu, řez domem, okna, teplo, sklep a stání.
-- `/lokalita/` Hradec: Salon republiky, minutová osa (signature 2), sport, rodiny.
-- `/praha-nebo-hradec/` srovnání: 27 m² vs. 47 m², posuvník rozpočtu, nájem a výnos, dojezd, zdroje.
-- `/galerie/` interiéry + Hradec, lightbox, autoři fotek.
-- `/kontakt/` formulář s výběrem bytu, Mgr. Anna Krčmová, adresa.
+## Skladba (úvod)
+1. **Hero „zvednutá střecha“** (signature 1): uzavřený model, scrollem se střecha zvedne a zmizí,
+   pod ní byt 12 se zlatým obrysem a nábytkem; popisky balkon/zahrádka → „Byt 12 – karta bytu →“.
+   Lišta 4 doložených faktů (32 × 2+kk, 47,21 m², od 4 990 000 Kč, D11 5,5 min).
+2. Úvod – jedna věta: byt prochází celým domem, okna na obě strany.
+3. **Výběr bytu v modelu** (signature 2): živý three.js model, přepínač dům / přízemí / patro, filtr
+   zahrádka × balkon, ťuknutí na byt = panel s cenou a odkazem na kartu. Bez WebGL (nebo před
+   načtením) statický render + plán 2 × 8 se stejným panelem.
+4. Jeden byt – řez bytem v modelu + půdorys z podkladů.
+5. Dvě patra – zahrádka 5 490 000 Kč vs. balkon 4 990 000 Kč (řezy modelem).
+6. Interiér – ilustrační vizualizace (označeno).
+7. Hradec – Salon republiky, foto Wikimedia (autor uveden).
+8. Domluvit prohlídku – formulář (ukázkový režim).
 
-## Písma, paleta, fotky
-- **Marcellus 400** (písmo skupiny CFIG, prostrkané verzálky) + **Jost 300/400** (tenké černé písmo).
-  Háčky otestovány renderem 28. 10. (scratchpad/fonty/test.png). Předchozí web v registru: Gilda / Nyght Serif → bez opakování.
-- Paleta z Karloviny + zadání: papír #F6F1EA, béž #EDE4D6, písek #D9C3A0 (tlačítka), zlatá #A8844F
-  (linky), tmavá zlatá #8C6B3A (text), espresso #1F1A16, vínová #7B3F3F (drobné akcenty jako u Karloviny).
-  Tělo textu 17–18 px skoro černé, ne malé šedé.
-- Fotky: interiéry a koupelny Karloviny (rezidencekarlovina.cz / FB CFIG) s popiskem „ilustrační
-  vizualizace“, Hradec z Wikimedia Commons (CC BY-SA, autoři v patičce galerie), půdorys z podkladů klientky.
+Podstránky: `/byty/` (ceník + filtr + model), 32 karet bytu (řez patrem s vybraným bytem, plochy,
+cena, cena za m², předchozí/další), `/standardy/`, `/lokalita/`, `/galerie/`, `/praha-nebo-hradec/`,
+`/kontakt/`.
 
-## Méně textu a tabulek
-Každá stránka: jedna věta nadpisu, nejvýš 2 krátké odstavce na blok, čísla jako velká typografie.
-Tabulky jen na kartě bytu (plochy místností), jinak řádky s linkou nebo osa.
+## Technika pohybu
+- Zvednutí střechy = CSS scroll-driven animace (`animation-timeline: scroll(root)`), dvě vrstvy
+  offline renderu (otevřený model + víko s maskou alfy). Bez pinningu, scroll běží nativně.
+  Fallback bez podpory = malá JS funkce jen při scrollu, `prefers-reduced-motion` = bez animace.
+- Rendery z vlastního three.js modelu (`tools/render/`, `tools/render_vse.py`, GTAO, měkké stíny).
+- Živý model se načítá líně až u sekce výběru, renderuje jen při změně (žádná rAF smyčka v klidu),
+  na dotyku bez orbitu (jen ťuknutí), aby nebral scroll.
+
+## Písma, paleta
+- **Noto Serif Display 200–300** (tenké černé písmo, jak klientka chce „posh“) + **Albert Sans 300–500**.
+  Háčky otestovány. Předchozí weby v registru: Marcellus/Jost (metelka v3), Nyght Serif (jogamysli),
+  Archivo (bagermini) → bez opakování.
+- Paleta: papír #efe9df, papír 2 #e6ddcf, bílá modelu #f8f5ef, inkoust #1f1c19, zlatá #c79d5a
+  (obrys vybraného bytu, linky), zlatá text #87642d. Zlatá a béžová podle zadání klientky,
+  bez tmavé „luxusní“ sekce.
 
 ## Zakázané vzory
-- Lišta faktů v hero (4 údaje) = doložená čísla z ceníku a OSRM, v kontextu nabídky. Žádné countery.
-- Prostrkané verzálky nad nadpisy = jazyk značky Karlovina (vínové), ne „01 / ——“.
-- Jinak žádný.
+- Lišta faktů v hero: 4 čísla z ceníku a OSRM, žádné countery. Jinak žádný.
 
 ## Porovnání
-- Schválené: Skalský dvůr (teplá elegance, display 400, velký obraz), Parolek (výkres jako signature).
-- Odmítnuté: metelka v1 a v2 (málo obrazu, AI fotky, tabulky, jedna dlouhá stránka) → vícestránkový,
-  obraz přes celou šířku, karty bytů. Zábranský (tmavá + zlatá) → světlý web, tmavé jen pásy.
-- Posledních 5 v registru: bagermini (Archivo), jogamysli (Nyght Serif) – jiné písmo i skladba.
+- Schválené: Skalský dvůr (teplá elegance, velký obraz), Parolek (nápad z oboru – výkres),
+  Kling (předmět, který se scrollem promění) → stejný princip, jiný předmět.
+- Odmítnuté: metelka v1–v3 (AI fotky, tabulky, cizí interiér v hero, schéma fasády) → v hero
+  vlastní model Metelky, cizí obrazy jen označené dál na stránce. Zábranský (tmavá + zlatá) → světlé.
+- Posledních 5 v registru: jiný display font i skladba.
+
+## Co chybí od klientky
+Viz `brief.json` → `chybi` (telefon/e-mail prodeje, exteriér, termín dokončení a stav prodeje,
+standard vs. vzorový byt, logo, fotky vzorového bytu, souhlas s VDEKOR).
