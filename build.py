@@ -156,9 +156,54 @@ def jsonld(site):
     return json.dumps(j, ensure_ascii=False).replace("</", "<\\/")
 
 
+def cz(n, des=2):
+    t = f"{n:,.{des}f}".replace(",", " ").replace(".", ",")
+    return t
+
+
+def m2(n):
+    """47.21 -> 47,21 · 52.0 -> 52 · 7.8 -> 7,8"""
+    t = cz(n, 2)
+    if "," in t:
+        t = t.rstrip("0").rstrip(",")
+    return t
+
+
+def obohat_byty(data):
+    """Doplní k bytům cestu, kód a sousedy pro karty bytů."""
+    if "byty" not in data:
+        return
+    rim = ["I", "II", "III"]
+    vsechny = []
+    for i, dum in enumerate(data["byty"]["domy"]):
+        dum["slug"] = "k-metelce-" + rim[i].lower()
+        dum["rim"] = rim[i]
+        dum["index"] = i
+        for b in dum["byty"]:
+            b["slug"] = f"byt-{b['cislo']:02d}"
+            b["cesta"] = f"byty/{dum['slug']}/{b['slug']}/"
+            b["kod"] = f"{rim[i]}.{b['cislo']:02d}"
+            b["dum_nazev"] = dum["nazev"]
+            b["dum_slug"] = dum["slug"]
+            b["pozice"] = (b["cislo"] - 1) % 8 + 1
+            b["krajni"] = b["pozice"] in (1, 8)
+            b["patro_text"] = "přízemí" if b["podlazi"] == "prizemi" else "patro"
+            b["cena_text"] = cz(b["cena"], 0) + " Kč"
+            b["cena_m2_text"] = cz(b["cena_m2"], 0) + " Kč"
+            vsechny.append(b)
+    for j, b in enumerate(vsechny):
+        b["predchozi"] = {k: vsechny[j - 1][k] for k in ("cesta", "kod", "cislo", "dum_nazev")} if j > 0 else None
+        b["dalsi"] = {k: vsechny[j + 1][k] for k in ("cesta", "kod", "cislo", "dum_nazev")} if j + 1 < len(vsechny) else None
+        podobne = [x for x in vsechny if x is not b and x["podlazi"] == b["podlazi"]]
+        podobne.sort(key=lambda x: (x["dum_slug"] != b["dum_slug"], abs(x["cislo"] - b["cislo"])))
+        b["podobne"] = [{k: x[k] for k in ("cesta", "kod", "cislo", "dum_nazev", "plocha", "venku", "venku_typ", "cena_text", "patro_text")} for x in podobne[:3]]
+    data["byty"]["vsechny"] = vsechny
+
+
 def main():
     data = nacti_data()
     site = data["site"]
+    obohat_byty(data)
     base = site.get("base", "/")
     if not base.startswith("/") or not base.endswith("/"):
         raise BuildError("site.base musí začínat a končit lomítkem (např. /slug/ nebo /)")
@@ -192,7 +237,7 @@ def main():
 
     env = Environment(loader=FileSystemLoader(SRC), autoescape=select_autoescape(["html"]), undefined=StrictUndefined)
     env.globals.update(site=site, data=data, base=base, asset=asset, url=url, img=obr.img, img_url=obr.img_url,
-                       og_url=og_url, jsonld=jsonld(site), titulek="", popis="", cesta="", noindex=False)
+                       og_url=og_url, jsonld=jsonld(site), titulek="", popis="", cesta="", noindex=False, cz=cz, m2=m2, prekryv=False, aktivni="", bez_cta=False)
     stranky = []
     for f in sorted(os.listdir(SRC)):
         if not f.endswith(".html") or f.startswith("_"):
@@ -212,6 +257,17 @@ def main():
             stranky.append(jmeno + "/")
         with open(vystup, "w", encoding="utf-8") as fh:
             fh.write(kod)
+
+    # karty bytů: src/_byt.html -> byty/<dum>/byt-NN/
+    tpl = env.get_template("_byt.html")
+    for dum in data["byty"]["domy"]:
+        for b in dum["byty"]:
+            obr.reset()
+            kod = nbsp(tpl.render(byt=b, dum=dum, cesta=b["cesta"]))
+            os.makedirs(os.path.join(DIST, b["cesta"]), exist_ok=True)
+            with open(os.path.join(DIST, b["cesta"], "index.html"), "w", encoding="utf-8") as fh:
+                fh.write(kod)
+            stranky.append(b["cesta"])
 
     # robots, sitemap, CNAME
     navrh = bool(site.get("navrh"))

@@ -1,0 +1,34 @@
+{# Schéma fasády ze strany zahrádek: 8 bytů v přízemí, 8 v patře. Každý byt je odkaz na kartu bytu. #}
+{% macro fasada(dum, vybrany=None, popisky=True) %}
+<svg class="fasada" viewBox="0 0 1200 {{ 410 if popisky else 396 }}" role="group" aria-label="Schéma domu {{ dum.nazev }} ze strany zahrádek, vyberte byt">
+  <polygon class="f-strecha" points="52,116 1148,116 1126,84 74,84"/>
+  <line class="f-zem" x1="12" y1="340" x2="1188" y2="340"/>
+  {% for b in dum.byty %}
+    {% set i = b.pozice - 1 %}
+    {% set x = 64 + i * 134 %}
+    {% set dole = b.podlazi == 'prizemi' %}
+    <a href="{{ url(b.cesta) }}" class="f-byt{% if vybrany and vybrany.cislo == b.cislo and vybrany.dum_slug == b.dum_slug %} vybrany{% endif %}" data-kod="{{ b.kod }}" data-info="{{ b.patro_text|capitalize }} · {{ b.dispozice }} · {{ m2(b.plocha) }} m² · {{ b.venku_typ }} {{ m2(b.venku) }} m² · {{ b.cena_text }}" aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}">
+      {% if dole %}
+        <rect class="f-plocha" x="{{ x }}" y="220" width="134" height="120"/>
+        <rect class="f-zahrada" x="{{ x + 3 }}" y="344" width="128" height="{{ 44 if popisky else 34 }}"/>
+        <rect class="f-okno" x="{{ x + 22 }}" y="244" width="36" height="96"/>
+        <line class="f-priecka" x1="{{ x + 40 }}" y1="244" x2="{{ x + 40 }}" y2="340"/>
+        <rect class="f-okno" x="{{ x + 74 }}" y="248" width="40" height="54"/>
+        {% if popisky %}<text class="f-cislo" x="{{ x + 67 }}" y="374" text-anchor="middle">{{ b.kod }}</text>{% endif %}
+      {% else %}
+        <rect class="f-plocha" x="{{ x }}" y="116" width="134" height="104"/>
+        <rect class="f-okno" x="{{ x + 22 }}" y="134" width="36" height="82"/>
+        <line class="f-priecka" x1="{{ x + 40 }}" y1="134" x2="{{ x + 40 }}" y2="216"/>
+        <rect class="f-okno" x="{{ x + 74 }}" y="138" width="40" height="40"/>
+        {% if popisky %}<text class="f-cislo" x="{{ x + 67 }}" y="70" text-anchor="middle">{{ b.kod }}</text>{% endif %}
+      {% endif %}
+    </a>
+  {% endfor %}
+  <rect class="f-obrys" x="64" y="116" width="1072" height="224"/>
+  <line class="f-strop" x1="64" y1="220" x2="1136" y2="220"/>
+  <rect class="f-balkon" x="58" y="216" width="1084" height="6"/>
+  <line class="f-zabradli" x1="58" y1="186" x2="1142" y2="186"/>
+  {% for i in range(0, 9) %}<line class="f-zabradli" x1="{{ 64 + i * 134 }}" y1="186" x2="{{ 64 + i * 134 }}" y2="216"/>{% endfor %}
+  {% for i in range(0, 9) %}<line class="f-plot" x1="{{ 64 + i * 134 }}" y1="340" x2="{{ 64 + i * 134 }}" y2="{{ 388 if popisky else 378 }}"/>{% endfor %}
+</svg>
+{% endmacro %}

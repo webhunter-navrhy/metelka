@@ -1,0 +1,135 @@
+{
+ "interier_zdroj": "Ilustrační vizualizace interiérů: Rezidence Karlovina, CFIG SE (sesterský projekt). Konkrétní vybavení bytů v Rezidenci Metelka se může lišit.",
+ "interier": [
+  {
+   "soubor": "int-obyvak.jpg",
+   "alt": "Obývací pokoj s kuchyní, světlou sedačkou a kulatým jídelním stolem",
+   "popis": "Obývací pokoj s kuchyní"
+  },
+  {
+   "soubor": "int-jidelna-okno.jpg",
+   "alt": "Jídelní kout u velkého okna s výhledem do zeleně",
+   "popis": "Jídelní kout u okna"
+  },
+  {
+   "soubor": "int-obyvak-kuchyne.jpg",
+   "alt": "Obývací pokoj se sedačkou, televizí a kuchyní v pozadí",
+   "popis": "Obytná kuchyň"
+  },
+  {
+   "soubor": "int-kuchyne-stul.jpg",
+   "alt": "Kuchyňská linka s dřevěnými skříňkami a stůl s květinami",
+   "popis": "Kuchyň a stůl"
+  },
+  {
+   "soubor": "int-kuchyne.jpg",
+   "alt": "Rohová kuchyňská linka v dekoru dřeva s tmavým obkladem",
+   "popis": "Kuchyňská linka"
+  },
+  {
+   "soubor": "int-koupelna.jpg",
+   "alt": "Koupelna se sprchovým koutem, umyvadlem a pračkou ve skříni",
+   "popis": "Koupelna"
+  },
+  {
+   "soubor": "int-koupelna-2.jpg",
+   "alt": "Koupelna se sprchou, závěsným WC a podsvíceným zrcadlem",
+   "popis": "Koupelna"
+  },
+  {
+   "soubor": "int-koupelna-3.jpg",
+   "alt": "Sprchový kout a závěsné WC s policemi ve skříni",
+   "popis": "Koupelna"
+  }
+ ],
+ "hradec": [
+  {
+   "soubor": "hk-katedrala-letecky.jpg",
+   "alt": "Katedrála sv. Ducha a Bílá věž z výšky",
+   "popis": "Velké náměstí",
+   "autor": "Vít Luštinec, Wikipedia",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Katedrala_sv._Ducha_Hradec_Kralove_%E2%80%93_letecky_pohled.jpg"
+  },
+  {
+   "soubor": "hk-dron-labe.jpg",
+   "alt": "Hradec Králové z dronu, Labe a Pražský most",
+   "popis": "Labe",
+   "autor": "Vít Luštinec, Wikipedia",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Pohled_na_Hradec_Kr%C3%A1lov%C3%A9_z_dronu.jpg"
+  },
+  {
+   "soubor": "hk-gocarova.jpg",
+   "alt": "Gočárova třída s funkcionalistickými domy",
+   "popis": "Gočárova třída",
+   "autor": "Vít Luštinec, Wikipedia",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kralove_%E2%80%93_Gocarova_trida.jpg"
+  },
+  {
+   "soubor": "hk-muzeum.jpg",
+   "alt": "Muzeum východních Čech od Jana Kotěry",
+   "popis": "Muzeum východních Čech",
+   "autor": "TFerenczy",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Muzeum_v%C3%BDchodn%C3%ADch_%C4%8Cech_(po_rekonstrukci).jpg"
+  },
+  {
+   "soubor": "hk-salon.jpg",
+   "alt": "Masarykovo náměstí a centrum z výšky",
+   "popis": "Centrum",
+   "autor": "Pudelek",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9_(K%C3%B6niggr%C3%A4tz)_-_Salon_republiky.JPG"
+  },
+  {
+   "soubor": "hk-velke-namesti.jpg",
+   "alt": "Velké náměstí s mariánským sloupem",
+   "popis": "Velké náměstí",
+   "autor": "Pudelek",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9_(K%C3%B6niggr%C3%A4tz)_-_Velk%C3%A9_n%C3%A1m%C4%9Bst%C3%AD.jpg"
+  },
+  {
+   "soubor": "hk-labe-most.jpg",
+   "alt": "Nábřeží Labe od Pražského mostu",
+   "popis": "Nábřeží Labe",
+   "autor": "Palickap",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Labe_z_Pra%C5%BEsk%C3%A9ho_mostu.jpg"
+  },
+  {
+   "soubor": "hk-labe-nabrezi.jpg",
+   "alt": "Nábřeží Labe se zábradlím a mostem",
+   "popis": "Labe",
+   "autor": "Vlach Pavel",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Labe.jpg"
+  },
+  {
+   "soubor": "hk-prazsky-most-2.jpg",
+   "alt": "Pražský most a Bílá věž",
+   "popis": "Pražský most",
+   "autor": "Michielverbeek",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9._de_Pra%C5%BEsk%C3%BD_most_over_de_Elbe_met_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_en_de_torens_van_katedr%C3%A1ln%C3%AD_kostel_svat%C3%A9ho_Ducha_(Dm205706-424)_IMG_6780_2018-08-05_18.43.jpg"
+  },
+  {
+   "soubor": "hk-bila-vez-vecer.jpg",
+   "alt": "Bílá věž ve večerním světle",
+   "popis": "Bílá věž",
+   "autor": "Michielverbeek",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_(Dm205706-424)_IMG_6817_2018-08-05_20.09.jpg"
+  },
+  {
+   "soubor": "hk-katedrala-den.jpg",
+   "alt": "Katedrála sv. Ducha a Bílá věž",
+   "popis": "Katedrála sv. Ducha",
+   "autor": "Michielverbeek",
+   "licence": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Katedr%C3%A1la_svat%C3%A9ho_Ducha_Dm205706-424_en_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_IMG_6831_2018-08-06_09.40.jpg"
+  }
+ ]
+}

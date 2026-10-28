@@ -7,9 +7,9 @@
   "popis": "Rezidence Metelka: 32 nových bytů 2+kk v Hradci Králové, ulice K Metelce. Se zahrádkou nebo balkonem, sklepem a parkováním, od 4 990 000 Kč.",
   "navrh": true,
   "domena": "rezidencemetelka.cz",
-  "og_image": "viz-hero-obyvak.jpg",
+  "og_image": "int-obyvak.jpg",
   "logo": "",
-  "theme_color": "#F8F4EE",
+  "theme_color": "#F6F1EA",
   "typ": "ApartmentComplex",
   "ico": "",
   "kontakt": {
@@ -31,12 +31,32 @@
     "demo": true,
     "predmet": "Zájem o byt – Rezidence Metelka"
   },
-  "nav": [
-    {"text": "Lokalita", "href": "#hradec"},
-    {"text": "Praha, nebo Hradec", "href": "#praha"},
-    {"text": "Byt", "href": "#byt"},
-    {"text": "Dům", "href": "#dum"},
-    {"text": "Ceník", "href": "#cenik"},
-    {"text": "Kontakt", "href": "#kontakt"}
+  "nav_levo": [
+    {
+      "text": "Byty",
+      "href": "byty"
+    },
+    {
+      "text": "Standardy",
+      "href": "standardy"
+    },
+    {
+      "text": "Lokalita",
+      "href": "lokalita"
+    }
+  ],
+  "nav_pravo": [
+    {
+      "text": "Praha, nebo Hradec",
+      "href": "praha-nebo-hradec"
+    },
+    {
+      "text": "Galerie",
+      "href": "galerie"
+    },
+    {
+      "text": "Kontakt",
+      "href": "kontakt"
+    }
   ]
 }

@@ -1,9 +1,21 @@
-hk-katedrala.jpg	File:Katedrala sv. Ducha Hradec Kralove – letecky pohled.jpg	Frydolin (Prosím v případě využití fotografie mimo projekty WMF o uvedení titulku "Vít Luštinec, Wikipedia" / Please credit as "Vít Luštinec, Wikipedia" in case you use this outside WMF projects.)	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Katedrala_sv._Ducha_Hradec_Kralove_%E2%80%93_letecky_pohled.jpg
-hk-prazsky-most.jpg	File:Hradec Králové, de Pražský most over de Elbe met de Bílá věž en de torens van katedrální kostel svatého Ducha (Dm205706-424) IMG 6786 2018-08-05 18.48.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_de_Pra%C5%BEsk%C3%BD_most_over_de_Elbe_met_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_en_de_torens_van_katedr%C3%A1ln%C3%AD_kostel_svat%C3%A9ho_Ducha_(Dm205706-424)_IMG_6786_2018-08-05_18.48.jpg
-hk-panorama.jpg	File:Pohled na Hradec Králové z dronu.jpg	Frydolin (Prosím v případě využití fotografie mimo projekty WMF o uvedení titulku "Vít Luštinec, Wikipedia" / Please credit as "Vít Luštinec, Wikipedia" in case you use this outside WMF projects.)	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Pohled_na_Hradec_Kr%C3%A1lov%C3%A9_z_dronu.jpg
-hk-cyklostezka.jpg	File:Lavka cyklostezka HK Vysoka.jpg	Vukin	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Lavka_cyklostezka_HK_Vysoka.jpg
-hk-stribrny-rybnik.jpg	File:Stříbrný rybník 01.jpg	Petr1888	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:St%C5%99%C3%ADbrn%C3%BD_rybn%C3%ADk_01.jpg
-hk-gocarova.jpg	File:Hradec Kralove – Gocarova trida.jpg	<a href="//commons.wikimedia.org/w/index.php?title=User:Frydolin&amp;action=edit	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File%3AHradec_Kralove_%E2%80%93_Gocarova_trida.jpg
-hk-malsovicky-stadion.jpg	File:Malsovicky stadion Hradec Kralove – letecky pohled.jpg	<a href="//commons.wikimedia.org/w/index.php?title=User:Frydolin&amp;action=edit	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File%3AMalsovicky_stadion_Hradec_Kralove_%E2%80%93_letecky_pohled.jpg
-hk-malsovicky-most.jpg	File:Malsovicky most Hradec Kralove – letecky pohled.jpg	<a href="//commons.wikimedia.org/w/index.php?title=User:Frydolin&amp;action=edit	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File%3AMalsovicky_most_Hradec_Kralove_%E2%80%93_letecky_pohled.jpg
-hk-velke-namesti.jpg	File:Hradec Králové (Königgrätz) - Velké náměstí.jpg	Pudelek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File%3AHradec_Kr%C3%A1lov%C3%A9_%28K%C3%B6niggr%C3%A4tz%29_-_Velk%C3%A9_n%C3%A1m%C4%9Bst%C3%AD.jpg
+# v3 (28. 10. 2026)
+int-obyvak.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-jidelna-okno.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-obyvak-kuchyne.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-kuchyne-stul.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-kuchyne.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-koupelna.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-koupelna-2.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+int-koupelna-3.jpg	Rezidence Karlovina, CFIG SE – rezidencekarlovina.cz / FB CFIG (Rafael: „Je to jejich firma, použít“)
+hk-katedrala-letecky.jpg	Vít Luštinec, Wikipedia	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Katedrala_sv._Ducha_Hradec_Kralove_%E2%80%93_letecky_pohled.jpg
+hk-dron-labe.jpg	Vít Luštinec, Wikipedia	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Pohled_na_Hradec_Kr%C3%A1lov%C3%A9_z_dronu.jpg
+hk-gocarova.jpg	Vít Luštinec, Wikipedia	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kralove_%E2%80%93_Gocarova_trida.jpg
+hk-muzeum.jpg	TFerenczy	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Muzeum_v%C3%BDchodn%C3%ADch_%C4%8Cech_(po_rekonstrukci).jpg
+hk-salon.jpg	Pudelek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9_(K%C3%B6niggr%C3%A4tz)_-_Salon_republiky.JPG
+hk-velke-namesti.jpg	Pudelek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9_(K%C3%B6niggr%C3%A4tz)_-_Velk%C3%A9_n%C3%A1m%C4%9Bst%C3%AD.jpg
+hk-labe-most.jpg	Palickap	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Labe_z_Pra%C5%BEsk%C3%A9ho_mostu.jpg
+hk-labe-nabrezi.jpg	Vlach Pavel	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Labe.jpg
+hk-prazsky-most-2.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9._de_Pra%C5%BEsk%C3%BD_most_over_de_Elbe_met_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_en_de_torens_van_katedr%C3%A1ln%C3%AD_kostel_svat%C3%A9ho_Ducha_(Dm205706-424)_IMG_6780_2018-08-05_18.43.jpg
+hk-bila-vez-vecer.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_(Dm205706-424)_IMG_6817_2018-08-05_20.09.jpg
+hk-katedrala-den.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Katedr%C3%A1la_svat%C3%A9ho_Ducha_Dm205706-424_en_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_IMG_6831_2018-08-06_09.40.jpg
+pudorys-vzorovy-byt.jpg	podklady klientky (PDF návrhu vzorového bytu)

@@ -1,21 +1,26 @@
+// Rezidence Metelka – drobné vanilla JS, nativní scroll.
 document.documentElement.classList.add('js');
 
-// Hlavička: po odjetí z hero dostane pozadí. Burger na mobilu.
+// Hlavička: nad úvodní fotkou průhledná, po odjetí plná. Burger otevírá panel.
 (function () {
   var h = document.querySelector('.hlavicka');
-  var menu = document.querySelector('.menu');
-  var burger = document.querySelector('.burger');
-  function stav() { h.classList.toggle('plna', window.scrollY > 40); }
+  if (!h) return;
+  var burger = h.querySelector('.burger');
+  var panel = document.getElementById('panel');
+  function stav() { h.classList.toggle('plna', window.scrollY > 60); }
   stav(); window.addEventListener('scroll', stav, { passive: true });
-  if (burger) {
-    burger.addEventListener('click', function () {
-      var o = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!o)); menu.classList.toggle('otevrene', !o); h.classList.add('plna');
-    });
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) { burger.setAttribute('aria-expanded', 'false'); menu.classList.remove('otevrene'); }
-    });
+  if (!burger || !panel) return;
+  function nastav(o) {
+    burger.setAttribute('aria-expanded', String(o));
+    burger.setAttribute('aria-label', o ? 'Zavřít menu' : 'Otevřít menu');
+    panel.hidden = !o;
+    h.classList.toggle('otevrena', o);
+    document.body.style.overflow = o ? 'hidden' : '';
   }
+  burger.addEventListener('click', function () { nastav(burger.getAttribute('aria-expanded') !== 'true'); });
+  panel.addEventListener('click', function (e) { if (e.target.closest('a')) nastav(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { nastav(false); burger.focus(); } });
+  window.matchMedia('(min-width: 68.01rem)').addEventListener('change', function (m) { if (m.matches) nastav(false); });
 })();
 
 // Postupné odhalení při scrollu.
@@ -24,25 +29,62 @@ document.documentElement.classList.add('js');
   if (!('IntersectionObserver' in window)) { el.forEach(function (e) { e.classList.add('videt'); }); return; }
   var io = new IntersectionObserver(function (zaz) {
     zaz.forEach(function (z) { if (z.isIntersecting) { z.target.classList.add('videt'); io.unobserve(z.target); } });
-  }, { rootMargin: '0px 0px -8% 0px' });
+  }, { rootMargin: '0px 0px -6% 0px' });
   el.forEach(function (e) { io.observe(e); });
 })();
 
-// Půdorys bytu: místnost v seznamu <-> zóna v plánu.
-(function () {
-  var tl = document.querySelectorAll('[data-mistnost]');
+// Půdorys: místnost v seznamu <-> zóna v plánu.
+document.querySelectorAll('.pudorys').forEach(function (p) {
+  var tl = p.querySelectorAll('[data-mistnost]');
   function zapni(id) { tl.forEach(function (t) { t.classList.toggle('aktivni', t.getAttribute('data-mistnost') === id); }); }
   tl.forEach(function (t) {
     var id = t.getAttribute('data-mistnost');
-    t.addEventListener('mouseenter', function () { zapni(id); });
-    t.addEventListener('focus', function () { zapni(id); });
-    t.addEventListener('click', function () { zapni(id); });
+    ['mouseenter', 'focus', 'click'].forEach(function (ev) { t.addEventListener(ev, function () { zapni(id); }); });
+  });
+  p.addEventListener('mouseleave', function () { zapni(null); });
+});
+
+// Fasáda: přepínání domů a popis bytu pod schématem.
+document.querySelectorAll('.vyber').forEach(function (s) {
+  var taby = s.querySelectorAll('[data-dum-tab]');
+  var panely = s.querySelectorAll('[data-dum-panel]');
+  var kod = s.querySelector('.fi-kod'), text = s.querySelector('.fi-text');
+  var vychozi = text ? text.textContent : '';
+  function dum(slug) {
+    taby.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.dumTab === slug)); });
+    panely.forEach(function (p) { if (p.dataset.dumPanel === slug) p.removeAttribute('data-skryt'); else p.setAttribute('data-skryt', ''); });
+    var t = s.querySelector('[data-dum-tab="' + slug + '"]');
+    if (kod && t) kod.textContent = t.textContent;
+    if (text) text.textContent = vychozi;
+  }
+  taby.forEach(function (t) { t.addEventListener('click', function () { dum(t.dataset.dumTab); }); });
+  s.querySelectorAll('.f-byt').forEach(function (b) {
+    function ukaz() {
+      s.querySelectorAll('.f-byt.aktivni').forEach(function (x) { x.classList.remove('aktivni'); });
+      b.classList.add('aktivni');
+      if (kod) kod.textContent = 'Byt ' + b.dataset.kod;
+      if (text) text.textContent = b.dataset.info;
+    }
+    b.addEventListener('mouseenter', ukaz); b.addEventListener('focus', ukaz);
+  });
+});
+
+// Seznam bytů: filtr zahrádka / balkon.
+(function () {
+  var radky = document.querySelectorAll('a.radek[data-podlazi]');
+  if (!radky.length) return;
+  var tl = document.querySelectorAll('[data-filtr]');
+  function filtr(f) {
+    tl.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.filtr === f)); });
+    radky.forEach(function (r) { r.hidden = !(f === 'vse' || r.dataset.podlazi === f); });
+  }
+  tl.forEach(function (t) { t.addEventListener('click', function () { filtr(t.dataset.filtr); }); });
+  document.querySelectorAll('[data-filtr-odkaz]').forEach(function (a) {
+    a.addEventListener('click', function () { filtr(a.dataset.filtrOdkaz); });
   });
 })();
 
-function kc(n) { return Math.round(n).toLocaleString('cs-CZ').replace(/\s/g, ' ') + ' Kč'; }
-
-// Rozpočet: kolik m² nového bytu dostanu v Praze a v Hradci.
+// Praha, nebo Hradec: kolik m² za rozpočet.
 (function () {
   var r = document.getElementById('rozpocet');
   if (!r) return;
@@ -53,121 +95,64 @@ function kc(n) { return Math.round(n).toLocaleString('cs-CZ').replace(/\s/g, ' 
   var max = (+r.max) / cH;
   function prepocet() {
     var v = +r.value, aP = v / cP, aH = v / cH;
-    out.textContent = (v / 1e6).toLocaleString('cs-CZ', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mil. Kč';
-    mP.textContent = Math.round(aP) + ' m²'; mH.textContent = Math.round(aH) + ' m²';
-    // čtverec = plocha; strana úměrná odmocnině
+    out.textContent = (v / 1e6).toLocaleString('cs-CZ', { minimumFractionDigits: 1, maximumFractionDigits: 2 }) + ' mil. Kč';
+    mP.textContent = Math.round(aP) + ' m²'; mH.textContent = Math.round(aH) + ' m²';
     qP.style.width = qP.style.height = (Math.sqrt(aP / max) * 100) + '%';
     qH.style.width = qH.style.height = (Math.sqrt(aH / max) * 100) + '%';
   }
   r.addEventListener('input', prepocet); prepocet();
 })();
 
-// Výběr bytu: dům, podlaží, byt -> detail.
+// Kontakt: ?byt=I.03 předvybere byt ve formuláři.
 (function () {
-  var data = document.getElementById('byty-data');
-  if (!data) return;
-  var domy = JSON.parse(data.textContent);
-  var stav = { dum: 0, podlazi: 'prizemi', byt: null };
-  var plan = document.getElementById('plan');
-  var det = {
-    nazev: document.getElementById('d-nazev'), sub: document.getElementById('d-sub'), plocha: document.getElementById('d-plocha'),
-    venku: document.getElementById('d-venku'), venkuT: document.getElementById('d-venku-t'), kobka: document.getElementById('d-kobka'),
-    celkem: document.getElementById('d-celkem'), cena: document.getElementById('d-cena'), m2: document.getElementById('d-m2'), btn: document.getElementById('d-btn')
-  };
-  var NS = 'http://www.w3.org/2000/svg';
-  function el(n, a, t) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; return e; }
-  function cz(n) { return String(n).replace('.', ','); }
-
-  function kresli() {
-    while (plan.firstChild) plan.removeChild(plan.firstChild);
-    var byty = domy[stav.dum].byty.filter(function (b) { return b.podlazi === stav.podlazi; });
-    var W = 880, x0 = 30, sirka = 820, y0 = 70, hl = 210, n = byty.length, w = sirka / n;
-    var pr = stav.podlazi === 'prizemi';
-    // vnější pás: pavlač / zahrádky
-    plan.appendChild(el('text', { x: x0, y: 22, class: 'strana' }, pr ? 'PŘÍZEMÍ · 8 BYTŮ' : 'PAVLAČ · 8 BYTŮ V PATŘE'));
-    if (!pr) plan.appendChild(el('rect', { x: x0, y: 32, width: sirka, height: 26, class: 'pas' }));
-    for (var i = 0; i < n; i++) {
-      var b = byty[i], x = x0 + i * w;
-      var g = el('g', { class: 'jednotka' + (stav.byt === b.cislo ? ' vybrana' : ''), tabindex: 0, role: 'button', 'aria-label': 'Byt ' + b.cislo + ', ' + b.dispozice + ', ' + kc(b.cena) });
-      g.appendChild(el('rect', { x: x + 2, y: y0, width: w - 4, height: hl }));
-      g.appendChild(el('text', { x: x + w / 2, y: y0 + hl / 2 - 10, 'text-anchor': 'middle' }, String(b.cislo)));
-      g.appendChild(el('text', { x: x + w / 2, y: y0 + hl / 2 + 18, 'text-anchor': 'middle', class: 'm' }, b.dispozice));
-      g.appendChild(el('text', { x: x + w / 2, y: y0 + hl / 2 + 36, 'text-anchor': 'middle', class: 'm' }, cz(b.plocha) + ' m²'));
-      (function (b) {
-        g.addEventListener('click', function () { vyber(b.cislo); });
-        g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); vyber(b.cislo); } });
-      })(b);
-      plan.appendChild(g);
-      if (pr) plan.appendChild(el('rect', { x: x + 2, y: y0 + hl + 12, width: w - 4, height: 70, class: 'zahrada' }));
-      if (pr) plan.appendChild(el('text', { x: x + w / 2, y: y0 + hl + 52, 'text-anchor': 'middle', class: 'strana' }, cz(b.venku) + ' m²'));
-    }
-    if (!pr) plan.appendChild(el('rect', { x: x0, y: y0 + hl + 12, width: sirka, height: 26, class: 'pas' }));
-    plan.appendChild(el('text', { x: x0, y: pr ? y0 + hl + 106 : y0 + hl + 60, class: 'strana' }, pr ? 'ZAHRÁDKY BYTŮ V PŘÍZEMÍ' : 'BALKONY BYTŮ NA PATŘE'));
-    plan.appendChild(el('rect', { x: x0, y: y0, width: sirka, height: hl, class: 'obrys' }));
-    plan.setAttribute('viewBox', '0 0 ' + W + ' ' + (pr ? y0 + hl + 116 : y0 + hl + 70));
-  }
-
-  function vyber(c) {
-    stav.byt = c;
-    var b = domy[stav.dum].byty.filter(function (x) { return x.cislo === c; })[0];
-    det.nazev.textContent = 'Byt č. ' + b.cislo;
-    det.sub.textContent = domy[stav.dum].nazev + ' · ' + (b.podlazi === 'prizemi' ? 'přízemí se zahrádkou' : 'patro s balkonem');
-    det.plocha.textContent = cz(b.plocha) + ' m²';
-    det.venkuT.textContent = b.venku_typ.charAt(0).toUpperCase() + b.venku_typ.slice(1);
-    det.venku.textContent = cz(b.venku) + ' m²';
-    det.kobka.textContent = cz(b.kobka) + ' m²';
-    det.celkem.textContent = cz(b.celkem) + ' m²';
-    det.cena.textContent = kc(b.cena);
-    det.m2.textContent = kc(b.cena_m2) + ' / m² bytu';
-    det.btn.setAttribute('href', '#kontakt');
-    det.btn.dataset.byt = domy[stav.dum].nazev + ', byt č. ' + b.cislo;
-    kresli();
-  }
-
-  document.querySelectorAll('[data-dum]').forEach(function (t) {
-    t.addEventListener('click', function () {
-      stav.dum = +t.dataset.dum;
-      document.querySelectorAll('[data-dum]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === t)); });
-      var prvni = domy[stav.dum].byty.filter(function (b) { return b.podlazi === stav.podlazi; })[0];
-      vyber(prvni.cislo);
-    });
-  });
-  document.querySelectorAll('[data-podlazi]').forEach(function (t) {
-    t.addEventListener('click', function () {
-      stav.podlazi = t.dataset.podlazi;
-      document.querySelectorAll('[data-podlazi]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === t)); });
-      var prvni = domy[stav.dum].byty.filter(function (b) { return b.podlazi === stav.podlazi; })[0];
-      vyber(prvni.cislo);
-    });
-  });
-  det.btn.addEventListener('click', function () {
-    var s = document.querySelector('.formular select[name=byt]');
-    if (s && det.btn.dataset.byt) {
-      var o = Array.prototype.find.call(s.options, function (x) { return x.value === det.btn.dataset.byt; });
-      if (!o) { o = new Option(det.btn.dataset.byt, det.btn.dataset.byt); s.add(o, 1); }
-      s.value = det.btn.dataset.byt;
-    }
-  });
-  vyber(domy[0].byty[0].cislo);
+  var s = document.querySelector('.formular select[name=byt]');
+  if (!s) return;
+  var byt = new URLSearchParams(location.search).get('byt');
+  if (byt && Array.prototype.some.call(s.options, function (o) { return o.value === 'Byt ' + byt; })) s.value = 'Byt ' + byt;
 })();
 
-// Formulář: demo režim neodesílá nic, ostrý režim posílá na endpoint ze site.json (data-endpoint).
-(function () {
-  document.querySelectorAll('form.formular').forEach(function (f) {
+// Formulář: v návrhu jen ukázka, nic se neodesílá.
+document.querySelectorAll('.formular').forEach(function (f) {
+  f.addEventListener('submit', function (e) {
     var stav = f.querySelector('.formular-stav');
-    f.addEventListener('submit', function (e) {
-      var endpoint = f.getAttribute('data-endpoint');
-      var demo = f.getAttribute('data-demo') === '1';
-      if (f.querySelector('.past input').value) { e.preventDefault(); return; }
+    if (f.dataset.demo === '1') {
       e.preventDefault();
-      if (demo || !endpoint) {
-        stav.textContent = 'Ukázka formuláře: zatím se nic neodesílá. Po spuštění webu přijde zpráva přímo paní Krčmové.';
-        return;
-      }
-      stav.textContent = 'Odesílám…';
-      fetch(endpoint, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); f.reset(); stav.textContent = 'Děkujeme, ozveme se vám co nejdřív.'; })
-        .catch(function () { stav.textContent = 'Odeslání se nepodařilo. Zkuste to prosím znovu.'; });
-    });
+      stav.textContent = 'Děkujeme. V tomto návrhu se formulář zatím neodesílá, na hotovém webu zpráva přijde přímo makléřce.';
+      return;
+    }
+    if (!window.fetch) return;
+    e.preventDefault();
+    stav.textContent = 'Odesílám…';
+    fetch(f.dataset.endpoint, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+      .then(function (r) { if (!r.ok) throw r; f.reset(); stav.textContent = 'Děkujeme, ozveme se vám.'; })
+      .catch(function () { stav.textContent = 'Zprávu se nepodařilo odeslat. Zkuste to prosím znovu.'; });
+  });
+});
+
+// Tisk karty bytu.
+document.querySelectorAll('.tisk').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
+
+// Galerie: lightbox s listováním.
+(function () {
+  var d = document.querySelector('.lightbox');
+  if (!d || !d.showModal) return;
+  var pol = Array.prototype.slice.call(document.querySelectorAll('.g-polozka'));
+  var img = d.querySelector('img'), pop = d.querySelector('.lb-popis'), i = 0;
+  function ukaz(n) {
+    i = (n + pol.length) % pol.length;
+    var a = pol[i], m = a.querySelector('img');
+    img.src = a.href; img.alt = m ? m.alt : '';
+    pop.textContent = a.dataset.popis || '';
+  }
+  pol.forEach(function (a, n) {
+    a.addEventListener('click', function (e) { e.preventDefault(); ukaz(n); d.showModal(); });
+  });
+  d.querySelector('.lb-zavrit').addEventListener('click', function () { d.close(); });
+  d.querySelector('.lb-pred').addEventListener('click', function () { ukaz(i - 1); });
+  d.querySelector('.lb-dal').addEventListener('click', function () { ukaz(i + 1); });
+  d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+  d.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') ukaz(i - 1);
+    if (e.key === 'ArrowRight') ukaz(i + 1);
   });
 })();

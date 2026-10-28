@@ -1,0 +1,52 @@
+{% extends "_base.html" %}
+{% set titulek = 'Galerie – Rezidence Metelka' %}
+{% set popis = 'Ilustrační vizualizace interiérů bytů a fotografie Hradce Králové v okolí Rezidence Metelka.' %}
+{% set cesta = 'galerie/' %}
+{% set aktivni = 'galerie' %}
+{% set f = data.fotky %}
+{% block obsah %}
+<section class="stranka-hlava" aria-labelledby="h1">
+  <div class="wrap sh-mrizka">
+    <div>
+      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Galerie</span></nav>
+      <h1 id="h1">Galerie</h1>
+    </div>
+    <p class="perex">Interiéry, jak mohou byty vypadat, a&nbsp;Hradec Králové kolem nich. Kliknutím fotku zvětšíte.</p>
+  </div>
+</section>
+
+<section class="galerie-sekce" aria-labelledby="h-int">
+  <div class="wrap">
+    <h2 id="h-int" class="mensi">Interiéry</h2>
+    <div class="galerie-mrizka">
+      {% for x in f.interier %}
+      <a class="g-polozka{% if loop.index in (1, 6) %} g-siroka{% endif %}{% if loop.last %} g-pas{% endif %}" href="{{ img_url(x.soubor, 1920) }}" data-popis="{{ x.popis }} · ilustrační vizualizace">{{ img(x.soubor, x.alt, sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x.popis }}</span></a>
+      {% endfor %}
+    </div>
+    <p class="pozn">{{ f.interier_zdroj }}</p>
+  </div>
+</section>
+
+<section class="galerie-sekce sekce" aria-labelledby="h-hk">
+  <div class="wrap">
+    <h2 id="h-hk" class="mensi">Hradec Králové</h2>
+    <div class="galerie-mrizka">
+      {% for x in f.hradec %}
+      <a class="g-polozka{% if loop.index in (1, 7) %} g-siroka{% endif %}{% if loop.last %} g-pas{% endif %}" href="{{ img_url(x.soubor, 1920) }}" data-popis="{{ x.popis }} · {{ x.autor }}, {{ x.licence }}">{{ img(x.soubor, x.alt, sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x.popis }}</span></a>
+      {% endfor %}
+    </div>
+    <div class="autori" id="autori">
+      <h3>Autoři fotografií</h3>
+      <ul>{% for x in f.hradec %}<li>{{ x.popis }}: <a href="{{ x.url }}" rel="noopener" target="_blank">{{ x.autor }}</a>, {{ x.licence }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" aria-label="Zvětšená fotografie">
+  <img alt="">
+  <p class="lb-popis"></p>
+  <button type="button" class="lb-zavrit" aria-label="Zavřít">Zavřít</button>
+  <button type="button" class="lb-pred" aria-label="Předchozí fotka">‹</button>
+  <button type="button" class="lb-dal" aria-label="Další fotka">›</button>
+</dialog>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% set titulek = 'Kontakt – Rezidence Metelka' %}
+{% set popis = 'Domluvte si prohlídku bytu v Rezidenci Metelka v Hradci Králové. Prodej bytů: Mgr. Anna Krčmová.' %}
+{% set cesta = 'kontakt/' %}
+{% set aktivni = 'kontakt' %}
+{% set bez_cta = true %}
+{% block obsah %}
+<section class="kontakt-stranka tmava" aria-labelledby="h1">
+  <div class="ks-foto">{{ img('int-jidelna-okno.jpg', 'Jídelní kout u velkého okna', sizes='(min-width: 64rem) 50vw, 100vw') }}</div>
+  <div class="ks-obsah">
+    <nav class="drobky svetle" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
+    <h1 id="h1">Domluvit prohlídku</h1>
+    <p class="perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;pošleme kartu bytu.</p>
+    <div class="karta-formular">
+      {% include "_formular.html" %}
+    </div>
+  </div>
+</section>
+
+<section class="sekce" aria-label="Kontaktní údaje">
+  <div class="wrap kontakt-udaje">
+    <div class="odhal">
+      <p class="nadtitul">Prodej bytů</p>
+      <h2 class="mensi">{{ site.kontakt.jmeno }}</h2>
+      {% if site.kontakt.telefon or site.kontakt.email %}
+      <p>{% if site.kontakt.telefon %}<a href="tel:{{ site.kontakt.telefon|replace(' ','') }}">{{ site.kontakt.telefon }}</a><br>{% endif %}{% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}</p>
+      {% else %}
+      <p class="doplnime">Telefon a e-mail doplníme.</p>
+      {% endif %}
+    </div>
+    <div class="odhal">
+      <p class="nadtitul">Adresa projektu</p>
+      <h2 class="mensi">K Metelce</h2>
+      <p>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}, Svobodné Dvory<br><a class="odkaz" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></p>
+    </div>
+    <div class="odhal">
+      <p class="nadtitul">Než přijedete</p>
+      <h2 class="mensi">Vyberte si byt</h2>
+      <p>Na kartě každého bytu je půdorys, plochy a&nbsp;cena. <a class="odkaz" href="{{ url('byty') }}">Byty a ceník</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}
