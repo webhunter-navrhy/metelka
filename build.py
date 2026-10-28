@@ -23,7 +23,7 @@ from PIL import Image, ImageOps
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC, DATA, IMG, STATIC, DIST, CACHE = (os.path.join(ROOT, p) for p in ("src", "_data", "img", "static", "dist", ".cache/img"))
-SIRKY = (640, 1280, 1920)
+SIRKY = (640, 1280, 1600, 1920)
 RASTER = (".jpg", ".jpeg", ".png", ".webp")
 
 
@@ -76,12 +76,16 @@ class Obrazky:
         varianty = []
         for w in sirky:
             vyska = round(h0 * w / w0)
-            cache = os.path.join(CACHE, f"{h}-{w}.webp")
+            cache = os.path.join(CACHE, f"{h}-{w}-t200.webp")
             if not os.path.exists(cache):
                 r = im.resize((w, vyska), Image.LANCZOS) if w != w0 else im
                 if r.mode not in ("RGB", "RGBA"):
                     r = r.convert("RGBA" if "A" in r.getbands() else "RGB")
-                r.save(cache, "WEBP", quality=80, method=6)
+                # kvalita 80, u detailních fotek postupně níž, aby varianta nepřesáhla ~200 kB
+                for q in (80, 72, 64, 57, 50):
+                    r.save(cache, "WEBP", quality=q, method=6)
+                    if os.path.getsize(cache) <= 200_000:
+                        break
             out = f"{stem}-{w}.webp"
             shutil.copy(cache, os.path.join(cil_dir, out))
             varianty.append((w, vyska, f"img/{out}"))
