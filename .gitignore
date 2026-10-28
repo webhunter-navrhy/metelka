@@ -10,3 +10,5 @@ kolaz_*.png
 _snimky/
 deploy.sh.bak-*
 tools/render/jsm
+_srovnani/
+_viz/

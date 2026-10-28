@@ -1,42 +1,34 @@
-{% extends "_base.html" %}
+{% extends "_v5.html" %}
 {% set titulek = 'Kontakt – Rezidence Metelka' %}
 {% set popis = 'Domluvte si prohlídku bytu v Rezidenci Metelka v Hradci Králové. Prodej bytů: Mgr. Anna Krčmová.' %}
 {% set cesta = 'kontakt/' %}
 {% set aktivni = 'kontakt' %}
 {% set bez_cta = true %}
+{% block telo %}stranka-kontakt{% endblock %}
 {% block obsah %}
-<section class="kontakt-stranka" aria-labelledby="h1">
-  <div class="wrap ks-mrizka">
-    <div>
+<section class="kontakt-uvod kontakt-hero" aria-labelledby="h1">
+  <div class="ku-foto">{{ img('teple/int-jidelna-okno.jpg', 'Jídelní kout u velkého okna s výhledem do zeleně', sizes='100vw', eager=true) }}</div>
+  <div class="obal ku-mrizka">
+    <div class="ku-text">
       <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
-      <h1 id="h1">Domluvit prohlídku</h1>
+      <h1 id="h1" class="h1">Domluvit <i>prohlídku</i></h1>
       <p class="perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;pošleme kartu bytu.</p>
-      <figure class="ks-foto">{{ img('int-jidelna-okno.jpg', 'Jídelní kout u velkého okna s výhledem do zeleně', sizes='(min-width: 52rem) 40vw, 100vw') }}<figcaption>Ilustrační vizualizace interiéru</figcaption></figure>
+      <dl class="ku-udaje">
+        <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.telefon %}<br><a href="tel:{{ site.kontakt.telefon|replace(' ','') }}">{{ site.kontakt.telefon }}</a>{% endif %}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}{% if not site.kontakt.telefon and not site.kontakt.email %}<br><span class="doplnime">telefon a e-mail doplníme</span>{% endif %}</dd></div>
+        <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></dd></div>
+      </dl>
     </div>
-    <div>{% include "_formular.html" %}</div>
+    <div class="ku-form sklo-svetle">{% include "_formular.html" %}</div>
   </div>
+  <p class="fs-pozn">Ilustrační vizualizace interiéru</p>
 </section>
 
-<section class="sekce" aria-label="Kontaktní údaje">
-  <div class="wrap kontakt-udaje">
-    <div class="odhal">
-      <p class="nadtitul">Prodej bytů</p>
-      <h2 class="mensi">{{ site.kontakt.jmeno }}</h2>
-      {% if site.kontakt.telefon or site.kontakt.email %}
-      <p>{% if site.kontakt.telefon %}<a href="tel:{{ site.kontakt.telefon|replace(' ','') }}">{{ site.kontakt.telefon }}</a><br>{% endif %}{% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}</p>
-      {% else %}
-      <p class="doplnime">Telefon a e-mail doplníme.</p>
-      {% endif %}
-    </div>
-    <div class="odhal">
-      <p class="nadtitul">Adresa projektu</p>
-      <h2 class="mensi">K Metelce</h2>
-      <p>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}, Svobodné Dvory<br><a class="odkaz" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></p>
-    </div>
-    <div class="odhal">
-      <p class="nadtitul">Než přijedete</p>
-      <h2 class="mensi">Vyberte si byt</h2>
-      <p>Na kartě každého bytu je půdorys, plochy a&nbsp;cena. <a class="odkaz" href="{{ url('byty') }}">Byty a ceník</a></p>
+<section class="sekce tma pred-prohlidkou" aria-labelledby="h-pred">
+  <div class="obal">
+    <div class="hlava-2"><div><p class="nad">Než přijedete</p><h2 id="h-pred" class="h2">Vyberte si <i>byt</i></h2></div><p class="perex">Na kartě každého bytu je jeho poloha v&nbsp;domě, půdorys, plochy a&nbsp;cena.</p></div>
+    <div class="produkty-mini">
+      <a href="{{ url('byty') }}#k-metelce-i-prizemi" class="pm sklo"><span class="nad">Přízemí se zahrádkou</span><b>5 490 000 Kč</b><span class="sipka sipka-svetla">16 bytů</span></a>
+      <a href="{{ url('byty') }}#k-metelce-i-patro" class="pm sklo"><span class="nad">Patro s balkonem</span><b>4 990 000 Kč</b><span class="sipka sipka-svetla">16 bytů</span></a>
     </div>
   </div>
 </section>

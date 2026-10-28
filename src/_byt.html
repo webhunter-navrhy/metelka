@@ -1,52 +1,52 @@
-{% extends "_base.html" %}
+{% extends "_v5.html" %}
 {% from "_pudorys.html" import pudorys %}
+{% from "_komponenty.html" import bod, bod_x %}
 {% set dole = byt.podlazi == 'prizemi' %}
 {% set titulek = 'Byt ' ~ byt.kod ~ ' – ' ~ byt.dispozice ~ ', ' ~ byt.venku_typ ~ ' – Rezidence Metelka' %}
 {% set popis = 'Byt ' ~ byt.kod ~ ' v domě ' ~ dum.nazev ~ ', ' ~ byt.patro_text ~ ': ' ~ byt.dispozice ~ ', ' ~ m2(byt.plocha) ~ ' m², ' ~ byt.venku_typ ~ ' ' ~ m2(byt.venku) ~ ' m², sklep a parkovací stání. Cena ' ~ byt.cena_text ~ '.' %}
 {% set aktivni = 'byty' %}
+{% block telo %}stranka-byt{% endblock %}
 {% block obsah %}
 <article class="karta-bytu">
-  <header class="kb-hlava">
-    <div class="wrap">
-      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><a href="{{ url('byty') }}">Byty</a><span>{{ dum.nazev }}</span><span>Byt {{ byt.kod }}</span></nav>
-      <div class="kb-hlava-mrizka">
-        <div class="kb-titul">
-          <p class="kb-stitek">{{ dum.nazev }} · {{ byt.patro_text }}</p>
-          <h1><span class="sr">Byt </span>{{ byt.kod }}</h1>
-          <p class="kb-pod">{{ byt.dispozice }}, {{ 'přízemí se zahrádkou' if dole else 'patro s balkonem' }}<br>{{ byt.pozice }}. byt zleva ze strany zahrádek{% if byt.krajni %}, krajní{% endif %}</p>
-        </div>
-        <figure class="kb-poloha">
-          {{ img('model-poloha-%02d.png' % byt.cislo, 'Model domu ' ~ dum.nazev ~ ' ze strany zahrádek, zlatě vyznačený byt ' ~ byt.kod, sizes='(min-width: 52rem) 58vw, 100vw', eager=true) }}
-          <figcaption>Poloha bytu v&nbsp;domě. Model podle projektové dokumentace, fasáda bude upřesněna.</figcaption>
-        </figure>
+  <header class="kb tma">
+    <figure class="kb-fasada" style="--bx:{{ bod_x(byt) }}%">
+      <div class="kb-platno">
+        {{ img('viz-c.jpg', 'Vizualizace domu ' ~ dum.nazev ~ ' ze strany zahrádek, zlatě vyznačený byt ' ~ byt.kod, sizes='(min-width: 48rem) 100vw, 1140px', eager=true) }}
+        <span class="kb-bod" style="{{ bod(byt) }}"><span class="kb-bod-kruh">{{ '%02d' % byt.cislo }}</span><span class="kb-bod-stitek sklo">Byt {{ byt.kod }}</span></span>
       </div>
-      <dl class="kb-cisla">
-        <div><dt>Plocha bytu</dt><dd>{{ m2(byt.plocha) }} m²</dd></div>
-        <div><dt>{{ byt.venku_typ|capitalize }}</dt><dd>{{ m2(byt.venku) }} m²</dd></div>
-        <div><dt>Sklepní kóje</dt><dd>{{ m2(byt.kobka) }} m²</dd></div>
-        <div><dt>Cena</dt><dd>{{ byt.cena_text }}</dd></div>
-      </dl>
+    </figure>
+    <div class="obal kb-mrizka">
+      <div class="kb-titul">
+        <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><a href="{{ url('byty') }}">Byty</a><span>{{ dum.nazev }}</span></nav>
+        <p class="nad">{{ dum.nazev }} · {{ 'přízemí se zahrádkou' if dole else 'patro s balkonem' }}</p>
+        <h1 class="kb-kod"><span class="sr">Byt </span>{{ byt.kod }}</h1>
+        <p class="kb-pod">{{ byt.dispozice }}, {{ byt.pozice }}. z&nbsp;osmi bytů {{ 'v přízemí' if dole else 'v patře' }}{% if byt.krajni %}, krajní{% endif %}. Okna na obě strany domu.</p>
+      </div>
+      <div class="kb-cena-karta sklo">
+        <p class="nad">Cena bytu</p>
+        <p class="kb-cena">{{ byt.cena_text }}</p>
+        <p class="kb-cena-m2">{{ byt.cena_m2_text }} za m² bytu · se sklepem a&nbsp;stáním</p>
+        <div class="tlacitka"><a class="tl tl-zlato" href="{{ url('kontakt') }}?byt={{ byt.kod }}">Mám zájem o&nbsp;tento byt</a><button type="button" class="tl tl-svetly tisk">Vytisknout kartu</button></div>
+      </div>
     </div>
+    <dl class="obal kb-cisla">
+      <div><dt>Plocha bytu</dt><dd>{{ m2(byt.plocha) }}<small> m²</small></dd></div>
+      <div><dt>{{ byt.venku_typ|capitalize }}</dt><dd>{{ m2(byt.venku) }}<small> m²</small></dd></div>
+      <div><dt>Sklepní kóje</dt><dd>{{ m2(byt.kobka) }}<small> m²</small></dd></div>
+      <div><dt>Parkovací stání</dt><dd>1</dd></div>
+    </dl>
   </header>
 
-  <div class="wrap kb-telo">
-    <div class="kb-hlavni">
-      <section aria-labelledby="h-pudorys">
-        <h2 id="h-pudorys" class="mensi">Půdorys a místnosti</h2>
+  <section class="sekce kb-telo" aria-labelledby="h-pudorys">
+    <div class="obal kb-telo-mrizka">
+      <div>
+        <p class="nad">Půdorys</p>
+        <h2 id="h-pudorys" class="h2 h2-m">Místnosti</h2>
         {{ pudorys(byt.mistnosti, byt.plocha) }}
-        <p class="pozn">Půdorys vzorového bytu se zařízením. {% if dole %}Světlá výška v přízemí 2,5&nbsp;m.{% else %}Byty v patře mají šikmé stropy se světlou výškou 2,11–3,22&nbsp;m a&nbsp;vstup z&nbsp;pavlače.{% endif %}</p>
-      </section>
-
-      <section class="kb-model" aria-labelledby="h-model">
-        <h2 id="h-model" class="mensi">Byt {{ byt.kod }} v&nbsp;modelu</h2>
-        {{ img('model-byt-%02d.png' % byt.cislo, 'Model ' ~ ('přízemí' if dole else 'patra') ~ ' bez stropu, zlatě byt ' ~ byt.kod ~ ' s ložnicí, koupelnou a obývacím pokojem', sizes='(min-width: 64rem) 55vw, 100vw') }}
-        <p class="pozn">{{ 'Přízemí' if dole else 'Patro' }} bez stropu, pohled ze strany {{ 'zahrádek' if dole else 'balkonů' }}. Model podle projektové dokumentace, zařízení je orientační.</p>
-      </section>
-    </div>
-
-    <aside class="kb-panel" aria-labelledby="h-prehled">
-      <div class="kb-panel-obal">
-        <h2 id="h-prehled" class="mensi">Přehled bytu</h2>
+        <p class="pozn">Půdorys vzorového bytu se zařízením. {% if dole %}Světlá výška v&nbsp;přízemí 2,5&nbsp;m, z&nbsp;obývacího pokoje se vychází do zahrádky.{% else %}Byty v&nbsp;patře mají šikmé stropy se světlou výškou 2,11–3,22&nbsp;m, vstup z&nbsp;pavlače a&nbsp;balkon u&nbsp;obývacího pokoje.{% endif %}</p>
+      </div>
+      <aside class="kb-tabulka-obal" aria-labelledby="h-prehled">
+        <h2 id="h-prehled" class="h3">Přehled bytu {{ byt.kod }}</h2>
         <dl class="kb-tabulka">
           <div><dt>Dům</dt><dd>{{ dum.nazev }}</dd></div>
           <div><dt>Podlaží</dt><dd>{{ byt.patro_text|capitalize }}</dd></div>
@@ -56,46 +56,41 @@
           <div><dt>Sklepní kóje</dt><dd>{{ cz(byt.kobka) }} m²</dd></div>
           <div><dt>Parkovací stání</dt><dd>1</dd></div>
           <div class="soucet"><dt>Celkem s {{ 'zahrádkou' if dole else 'balkonem' }} a sklepem</dt><dd>{{ cz(byt.celkem) }} m²</dd></div>
+          <div class="soucet"><dt>Cena</dt><dd>{{ byt.cena_text }}</dd></div>
         </dl>
-        <p class="kb-cena"><span>Cena bytu</span><b>{{ byt.cena_text }}</b><small>{{ byt.cena_m2_text }} za m² bytu</small></p>
-        <a class="btn" href="{{ url('kontakt') }}?byt={{ byt.kod }}">Mám zájem o tento byt</a>
-        <button type="button" class="btn btn-obrys tisk">Vytisknout kartu bytu</button>
         <p class="pozn">Ceník k&nbsp;16. 9. 2026. Aktuální dostupnost vám potvrdíme.</p>
-      </div>
-    </aside>
-  </div>
+      </aside>
+    </div>
+  </section>
 
-  <section class="kb-inspirace sekce bez-horni" aria-labelledby="h-insp">
-    <div class="wrap">
-      <h2 id="h-insp" class="mensi">Jak může byt vypadat</h2>
-      <div class="dvojice">
-        <figure class="odhal">{{ img('int-obyvak-kuchyne.jpg', 'Obývací pokoj s kuchyní a sedačkou', sizes='(min-width: 52rem) 60vw, 100vw') }}<figcaption>Obývací pokoj s kuchyní · ilustrační vizualizace</figcaption></figure>
-        <figure class="odhal">{{ img('int-koupelna.jpg', 'Koupelna se sprchovým koutem a pračkou ve skříni', sizes='(min-width: 52rem) 36vw, 100vw') }}<figcaption>Koupelna · ilustrační vizualizace</figcaption></figure>
-      </div>
+  <section class="kb-inspirace" aria-labelledby="h-insp">
+    <figure class="kb-insp-1">{{ img('teple/int-obyvak-kuchyne.jpg', 'Obývací pokoj s kuchyní a sedačkou', sizes='(min-width: 52rem) 62vw, 100vw') }}</figure>
+    <figure class="kb-insp-2">{{ img('teple/int-koupelna.jpg', 'Koupelna se sprchovým koutem a pračkou ve skříni', sizes='(min-width: 52rem) 38vw, 100vw') }}</figure>
+    <div class="kb-insp-text sklo-tmave">
+      <h2 id="h-insp" class="h3">Jak může byt vypadat</h2>
       <ul class="v-cene">
         <li><b>Trojskla</b><span>U<sub>w</sub> = 0,84 W/m²K</span></li>
         <li><b>Teplá koupelna</b><span>otopný žebřík, 24 °C</span></li>
         <li><b>Kuchyňská linka</b><span>myčka, sporák, lednice</span></li>
-        <li><b>Sklep a stání</b><span>kóje 3 m², 1 stání</span></li>
       </ul>
-      <a class="odkaz" href="{{ url('standardy') }}">Všechny standardy</a>
+      <a class="sipka sipka-svetla" href="{{ url('standardy') }}">Všechny standardy</a>
+      <p class="kb-insp-pozn">Ilustrační vizualizace interiéru</p>
     </div>
   </section>
 
-  <nav class="kb-dalsi wrap" aria-label="Další byty">
-    {% if byt.predchozi %}<a class="kb-predchozi" href="{{ url(byt.predchozi.cesta) }}"><small>Předchozí byt</small>{{ byt.predchozi.kod }}</a>{% else %}<span></span>{% endif %}
-    <a class="kb-vse" href="{{ url('byty') }}#seznam">Všechny byty</a>
-    {% if byt.dalsi %}<a class="kb-nasledujici" href="{{ url(byt.dalsi.cesta) }}"><small>Další byt</small>{{ byt.dalsi.kod }}</a>{% else %}<span></span>{% endif %}
-  </nav>
-
-  <section class="podobne sekce" aria-labelledby="h-podobne">
-    <div class="wrap">
-      <h2 id="h-podobne" class="mensi">Podobné byty</h2>
-      <div class="podobne-mrizka">
+  <section class="sekce tma kb-dalsi" aria-labelledby="h-podobne">
+    <div class="obal">
+      <nav class="kb-listovani" aria-label="Další byty">
+        {% if byt.predchozi %}<a href="{{ url(byt.predchozi.cesta) }}"><small>Předchozí byt</small><b>{{ byt.predchozi.kod }}</b></a>{% else %}<span></span>{% endif %}
+        <a class="kb-vse" href="{{ url('byty') }}#cenik">Všech 32 bytů</a>
+        {% if byt.dalsi %}<a class="kb-dal" href="{{ url(byt.dalsi.cesta) }}"><small>Další byt</small><b>{{ byt.dalsi.kod }}</b></a>{% else %}<span></span>{% endif %}
+      </nav>
+      <h2 id="h-podobne" class="h3">Podobné byty</h2>
+      <div class="podobne">
         {% for p in byt.podobne %}
         <a class="podobny" href="{{ url(p.cesta) }}">
           <span class="p-kod">{{ p.kod }}</span>
-          <span class="p-text">{{ p.dum_nazev }} · {{ p.patro_text }}<br>{{ m2(p.plocha) }} m² + {{ p.venku_typ }} {{ m2(p.venku) }} m²</span>
+          <span class="p-text">{{ p.dum_nazev }} · {{ p.patro_text }}<br>{{ p.venku_typ|capitalize }} {{ m2(p.venku) }} m²</span>
           <span class="p-cena">{{ p.cena_text }}</span>
         </a>
         {% endfor %}

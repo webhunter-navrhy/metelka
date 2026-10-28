@@ -1,122 +1,124 @@
 {
- "slug": "metelka",
- "zdroj_url": null,
- "firma": "Rezidence Metelka (projekt K Metelce I a II)",
- "obor": [
-  "developerský projekt",
-  "prodej bytů",
-  "novostavba"
- ],
- "mesto": "Hradec Králové – Svobodné Dvory / Plotiště nad Labem, ulice K Metelce, 503 11",
- "ico": "",
- "ares": null,
- "domena": "rezidencemetelka.cz (koupená klientkou 19. 10. 2026)",
- "kontakty": {
-  "jmeno": "Mgr. Anna Krčmová",
-  "role": "investorka (spolu s p. Jánem Machem), zadavatelka webu",
-  "email": "",
-  "telefon": ""
- },
- "cilova_skupina": "kupci bytu 2+kk v HK – mladé páry, jednotlivci, investoři do pronájmu; lidé, kteří dojíždějí po D11",
- "ton": "posh, klidný, elegantní; jednoduchý web; zlatá, béžová, lehce černé tenké písmo; text s důrazem na HK, blízkost centra, sport a dálnice, NE na zeleň (WhatsApp 19. 10. 2026)",
- "logo": null,
- "barvy": {
-  "zadani_klientky": "zlatá, béžová, lehce černé tenké písmo",
-  "z_vzoroveho_bytu": "Egger Kašmír (greige), dub rybí kost, černé matné doplňky, ecru textil"
- },
- "fotky": [
-  {
-   "soubor": "img/pudorys-vzorovy-byt.jpg",
-   "zdroj": "K METELCE VZOROVY BYT (VDEKOR Interiors, 19. 6. 2026), str. 2",
-   "rozliseni": "2982x1642"
+  "slug": "metelka",
+  "zdroj_url": null,
+  "firma": "Rezidence Metelka (projekt K Metelce I a II)",
+  "obor": [
+    "developerský projekt",
+    "prodej bytů",
+    "novostavba"
+  ],
+  "mesto": "Hradec Králové – Svobodné Dvory / Plotiště nad Labem, ulice K Metelce, 503 11",
+  "ico": "",
+  "ares": null,
+  "domena": "rezidencemetelka.cz (koupená klientkou 19. 10. 2026)",
+  "kontakty": {
+    "jmeno": "Mgr. Anna Krčmová",
+    "role": "investorka (spolu s p. Jánem Machem), zadavatelka webu",
+    "email": "",
+    "telefon": ""
   },
-  {
-   "soubor": "img/hk-*.jpg",
-   "zdroj": "Wikimedia Commons, CC BY-SA, viz foto/zdroje.txt"
+  "cilova_skupina": "kupci bytu 2+kk v HK – mladé páry, jednotlivci, investoři do pronájmu; lidé, kteří dojíždějí po D11",
+  "ton": "posh, klidný, elegantní; jednoduchý web; zlatá, béžová, lehce černé tenké písmo; text s důrazem na HK, blízkost centra, sport a dálnice, NE na zeleň (WhatsApp 19. 10. 2026)",
+  "logo": null,
+  "barvy": {
+    "zadani_klientky": "zlatá, béžová, lehce černé tenké písmo",
+    "z_vzoroveho_bytu": "Egger Kašmír (greige), dub rybí kost, černé matné doplňky, ecru textil"
   },
-  {
-   "soubor": "img/viz-*.jpg",
-   "zdroj": "AI vizualizace (FLUX) podle materiálů VDEKOR – na webu označeno jako ilustrační"
-  }
- ],
- "fakta": [
-  {
-   "fakt": "Projekt má dva domy: K Metelce I a K Metelce II, v každém 16 bytů 2+kk (celkem 32).",
-   "zdroj": "K Metelce - ceník 16.9.2026.xlsx, list K Metelce"
-  },
-  {
-   "fakt": "Každý byt 47,21 m²: chodba 5,77 + koupelna s WC 6,99 + ložnice 10,40 + kuchyň s obývacím pokojem 24,05 m².",
-   "zdroj": "ceník 16. 9. 2026; PŮDORYSPODKROVÝ.pdf"
-  },
-  {
-   "fakt": "Ke každému bytu sklepní kóje 3 m² a parkovací stání.",
-   "zdroj": "ceník 16. 9. 2026 (sloupce Sklepní kóje, Parkovací stání, plocha kóje 3)"
-  },
-  {
-   "fakt": "Přízemí: byty 1–8 se zahrádkou 52 m² (byty 1 a 8) nebo 55 m² (2–7), cena 5 490 000 Kč.",
-   "zdroj": "ceník 16. 9. 2026"
-  },
-  {
-   "fakt": "Patro (v ceníku I. NP, ve výkresu podkroví): byty 9–16 s balkonem 7,80 m² (9 a 16) nebo 8,25 m² (10–15), cena 4 990 000 Kč.",
-   "zdroj": "ceník 16. 9. 2026; PŮDORYSPODKROVÝ.pdf (BALKÓN)"
-  },
-  {
-   "fakt": "Cena je včetně sklepní kóje a zahrádky / balkonu.",
-   "zdroj": "ceník, hlavička sloupce Částka v Kč"
-  },
-  {
-   "fakt": "Šířka domu 11 m, světlá výška přízemí 2,5 m, podkroví 2,11–3,22 m, hřeben +6,46 m.",
-   "zdroj": "BYTOVÉ DOMY ŘEZ.pdf"
-  },
-  {
-   "fakt": "Nosné zdivo Porotherm 30 P+D, příčky Porotherm 14 P+D, stěny zatepleny čedičovou vlnou Isover 240 mm, střecha Kingspan 180 mm + čedičová vlna 220 mm, podlaha na terénu EPS 220 mm, stropní panely Spirol 200 mm.",
-   "zdroj": "BYTOVÉ DOMY ŘEZ.pdf, legenda hmot"
-  },
-  {
-   "fakt": "Okna plastová s trojsklem, bílá / zlatý dub, Uw = 0,84 W/m²K; střešní okna Uw = 0,86 W/m²K.",
-   "zdroj": "BYTOVÉ DOMY ŘEZ.pdf"
-  },
-  {
-   "fakt": "V koupelně otopný registr 450×1200 mm, teplota koupelny 24 °C, pokojů 20 °C; v kuchyni myčka, elektrický sporák, lednice.",
-   "zdroj": "PŮDORYSPODKROVÝ.pdf"
-  },
-  {
-   "fakt": "Vzorový byt navrhlo studio VDEKOR Interiors (19. 6. 2026): podlaha rybí kost, nábytek a kuchyň Egger Kašmír, dlažba a obklad Argenta Gravel Cream 60×60, černé baterie Hansgrohe Rebris S, tapety Harlequin Crater a Marble, prosklený předěl koupelny a ložnice, vestavěné skříně.",
-   "zdroj": "K METELCE VZOROVY BYT.pdf + VYBER PRODUKTOV VYBAVENI VZOROVEHO BYTU.xlsx"
-  },
-  {
-   "fakt": "Vzdálenosti autem z ulice K Metelce (OSRM / OpenStreetMap, orientačně): hlavní nádraží 2,5 km / 5 min, Velké náměstí 4,7 km / 9 min, Univerzita HK 3,7 km / 7 min, Fakultní nemocnice 6,1 km / 10 min, zimní stadion 4,4 km / 8 min, Malšovická aréna 5,6 km / 9 min, Tenis centrum 4,9 km / 8 min, Park Golf Club Roudnička 8 km / 13 min, nájezd na D11 cca 3–4 km, Pardubice 31 km / 29 min, Praha 113 km / 80 min.",
-   "zdroj": "Nominatim + router.project-osrm.org, 19. 10. 2026"
-  },
-  {
-   "fakt": "Dům má na patře pavlač (CHODBA 1,2 m) na jedné straně a balkon 1,2 m na druhé, 8 bytů vedle sebe, každý průchozí přes celou hloubku domu (okna na obě strany), délka domu 42,9 m.",
-   "zdroj": "PŮDORYSPODKROVÝ.pdf (kóty 42856, 11000, 1200)"
-  },
-  {
-   "fakt": "Ceník: cena za m² bez příslušenství 116 289 Kč (přízemí) a 105 698 Kč (patro).",
-   "zdroj": "K Metelce - ceník 16.9.2026.xlsx, sloupec Cena m² bez příslušenství"
-  }
- ],
- "neuvadet": [
-  "ceník obsahuje i listy jiných projektů (Žacléř, Staré Buky) – na web nepatří",
-  "stav prodeje jednotlivých bytů neznáme – na webu bez rezervováno/prodáno",
-  "investor p. Mach – jméno na web nedáváme bez souhlasu"
- ],
- "chybi": [
-  "telefon a e-mail pro zájemce (kontakt na webu je zatím označený jako doplníme)",
-  "vizualizace nebo fotky exteriéru domů (na webu je zatím řez domem jako kresba)",
-  "termín dokončení / kolaudace a stav prodeje bytů (volné / rezervované)",
-  "co přesně je ve standardu bytu vs. ve vzorovém bytě (podlaha, kuchyň, koupelna)",
-  "logo, pokud nějaké vzniká (zatím wordmark písmem)",
-  "fotky hotového vzorového bytu (zatím ilustrační vizualizace podle návrhu VDEKOR)",
-  "souhlas s uvedením studia VDEKOR Interiors"
- ],
- "poznamka": "Nový návrh 27. 10. 2026 (v1 rezidencemetelka odmítnut Rafaelem 19. 10.). Fakta převzata z v1 a ověřena proti podkladům 27. 10.; design a texty nové.",
- "inspirace_klientky": "FB reklama Rezidence Karlovina (Pardubice) – zlaté verzálky, béžové tlačítko, velká vizualizace domu; zaslal Rafael 27. 10. 2026",
- "zadani_rafael_27_10": [
-  "research okolí: byty relativně levné, srovnání s Prahou (kdo nemá na Prahu, dojezd není daleko)",
-  "něco pro rodiny",
-  "web skvělý, krásný, obsahově geniální"
- ],
- "termin_spusteni": "do 20. 12. 2026 (WhatsApp 19. 10. 2026)"
+  "fotky": [
+    {
+      "soubor": "img/pudorys-vzorovy-byt.jpg",
+      "zdroj": "K METELCE VZOROVY BYT (VDEKOR Interiors, 19. 6. 2026), str. 2",
+      "rozliseni": "2982x1642"
+    },
+    {
+      "soubor": "img/hk-*.jpg",
+      "zdroj": "Wikimedia Commons, CC BY-SA, viz foto/zdroje.txt"
+    },
+    {
+      "soubor": "img/viz-*.jpg",
+      "zdroj": "AI vizualizace (FLUX) podle materiálů VDEKOR – na webu označeno jako ilustrační"
+    }
+  ],
+  "fakta": [
+    {
+      "fakt": "Projekt má dva domy: K Metelce I a K Metelce II, v každém 16 bytů 2+kk (celkem 32).",
+      "zdroj": "K Metelce - ceník 16.9.2026.xlsx, list K Metelce"
+    },
+    {
+      "fakt": "Každý byt 47,21 m²: chodba 5,77 + koupelna s WC 6,99 + ložnice 10,40 + kuchyň s obývacím pokojem 24,05 m².",
+      "zdroj": "ceník 16. 9. 2026; PŮDORYSPODKROVÝ.pdf"
+    },
+    {
+      "fakt": "Ke každému bytu sklepní kóje 3 m² a parkovací stání.",
+      "zdroj": "ceník 16. 9. 2026 (sloupce Sklepní kóje, Parkovací stání, plocha kóje 3)"
+    },
+    {
+      "fakt": "Přízemí: byty 1–8 se zahrádkou 52 m² (byty 1 a 8) nebo 55 m² (2–7), cena 5 490 000 Kč.",
+      "zdroj": "ceník 16. 9. 2026"
+    },
+    {
+      "fakt": "Patro (v ceníku I. NP, ve výkresu podkroví): byty 9–16 s balkonem 7,80 m² (9 a 16) nebo 8,25 m² (10–15), cena 4 990 000 Kč.",
+      "zdroj": "ceník 16. 9. 2026; PŮDORYSPODKROVÝ.pdf (BALKÓN)"
+    },
+    {
+      "fakt": "Cena je včetně sklepní kóje a zahrádky / balkonu.",
+      "zdroj": "ceník, hlavička sloupce Částka v Kč"
+    },
+    {
+      "fakt": "Šířka domu 11 m, světlá výška přízemí 2,5 m, podkroví 2,11–3,22 m, hřeben +6,46 m.",
+      "zdroj": "BYTOVÉ DOMY ŘEZ.pdf"
+    },
+    {
+      "fakt": "Nosné zdivo Porotherm 30 P+D, příčky Porotherm 14 P+D, stěny zatepleny čedičovou vlnou Isover 240 mm, střecha Kingspan 180 mm + čedičová vlna 220 mm, podlaha na terénu EPS 220 mm, stropní panely Spirol 200 mm.",
+      "zdroj": "BYTOVÉ DOMY ŘEZ.pdf, legenda hmot"
+    },
+    {
+      "fakt": "Okna plastová s trojsklem, bílá / zlatý dub, Uw = 0,84 W/m²K; střešní okna Uw = 0,86 W/m²K.",
+      "zdroj": "BYTOVÉ DOMY ŘEZ.pdf"
+    },
+    {
+      "fakt": "V koupelně otopný registr 450×1200 mm, teplota koupelny 24 °C, pokojů 20 °C; v kuchyni myčka, elektrický sporák, lednice.",
+      "zdroj": "PŮDORYSPODKROVÝ.pdf"
+    },
+    {
+      "fakt": "Vzorový byt navrhlo studio VDEKOR Interiors (19. 6. 2026): podlaha rybí kost, nábytek a kuchyň Egger Kašmír, dlažba a obklad Argenta Gravel Cream 60×60, černé baterie Hansgrohe Rebris S, tapety Harlequin Crater a Marble, prosklený předěl koupelny a ložnice, vestavěné skříně.",
+      "zdroj": "K METELCE VZOROVY BYT.pdf + VYBER PRODUKTOV VYBAVENI VZOROVEHO BYTU.xlsx"
+    },
+    {
+      "fakt": "Vzdálenosti autem z ulice K Metelce (OSRM / OpenStreetMap, orientačně): hlavní nádraží 2,5 km / 5 min, Velké náměstí 4,7 km / 9 min, Univerzita HK 3,7 km / 7 min, Fakultní nemocnice 6,1 km / 10 min, zimní stadion 4,4 km / 8 min, Malšovická aréna 5,6 km / 9 min, Tenis centrum 4,9 km / 8 min, Park Golf Club Roudnička 8 km / 13 min, nájezd na D11 cca 3–4 km, Pardubice 31 km / 29 min, Praha 113 km / 80 min.",
+      "zdroj": "Nominatim + router.project-osrm.org, 19. 10. 2026"
+    },
+    {
+      "fakt": "Dům má na patře pavlač (CHODBA 1,2 m) na jedné straně a balkon 1,2 m na druhé, 8 bytů vedle sebe, každý průchozí přes celou hloubku domu (okna na obě strany), délka domu 42,9 m.",
+      "zdroj": "PŮDORYSPODKROVÝ.pdf (kóty 42856, 11000, 1200)"
+    },
+    {
+      "fakt": "Ceník: cena za m² bez příslušenství 116 289 Kč (přízemí) a 105 698 Kč (patro).",
+      "zdroj": "K Metelce - ceník 16.9.2026.xlsx, sloupec Cena m² bez příslušenství"
+    }
+  ],
+  "neuvadet": [
+    "ceník obsahuje i listy jiných projektů (Žacléř, Staré Buky) – na web nepatří",
+    "stav prodeje jednotlivých bytů neznáme – na webu bez rezervováno/prodáno",
+    "investor p. Mach – jméno na web nedáváme bez souhlasu"
+  ],
+  "chybi": [
+    "STŘECHA: vizualizace domu (viz-a/b/c) má střechu jen lokálně retušovanou na nízký sklon. Projekt má dvě nízké pultové střechy (+5,84 / +6,46 m). Před odesláním klientce přegenerovat s plochou střechou. V tomhle stavu klientce neposílat.",
+    "ověřit u klientky číslování bytů na fasádě: podle půdorysu pud-1 je byt 1 (a 9) na vzdáleném konci domu, štít vpředu u bytu 8 (16)",
+    "telefon a e-mail pro zájemce (kontakt na webu je zatím označený jako doplníme)",
+    "termín dokončení / kolaudace a stav prodeje bytů (volné / rezervované)",
+    "co přesně je ve standardu bytu vs. ve vzorovém bytě (podlaha, kuchyň, koupelna)",
+    "logo, pokud nějaké vzniká (zatím wordmark písmem)",
+    "fotky hotového vzorového bytu (zatím ilustrační vizualizace podle návrhu VDEKOR)",
+    "souhlas s uvedením studia VDEKOR Interiors",
+    "skutečné vizualizace exteriéru od projektanta (teď vlastní AI vizualizace podle projektové dokumentace)"
+  ],
+  "poznamka": "Nový návrh 27. 10. 2026 (v1 rezidencemetelka odmítnut Rafaelem 19. 10.). Fakta převzata z v1 a ověřena proti podkladům 27. 10.; design a texty nové.",
+  "inspirace_klientky": "FB reklama Rezidence Karlovina (Pardubice) – zlaté verzálky, béžové tlačítko, velká vizualizace domu; zaslal Rafael 27. 10. 2026",
+  "zadani_rafael_27_10": [
+    "research okolí: byty relativně levné, srovnání s Prahou (kdo nemá na Prahu, dojezd není daleko)",
+    "něco pro rodiny",
+    "web skvělý, krásný, obsahově geniální"
+  ],
+  "termin_spusteni": "do 20. 12. 2026 (WhatsApp 19. 10. 2026)"
 }

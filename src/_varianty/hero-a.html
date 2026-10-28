@@ -1,0 +1,60 @@
+{% extends "_v5.html" %}
+{% set titulek = 'Varianta A – Zlatá hodina | Rezidence Metelka' %}
+{% block telo %}v-a{% endblock %}
+{% block hlavicka %}
+<header class="ha-hl">
+  <a href="{{ url('') }}" class="wm">Rezidence <i>Metelka</i></a>
+  <nav class="ha-menu" aria-label="Hlavní">
+    {% for n in site.nav_levo + site.nav_pravo %}{% if n.href != 'kontakt' %}<a href="{{ url(n.href) }}">{{ n.text }}</a>{% endif %}{% endfor %}
+  </nav>
+  <a class="ha-cta" href="{{ url('kontakt') }}"><span>Domluvit prohlídku</span><svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg></a>
+</header>
+{% endblock %}
+{% block obsah %}
+<section class="ha" aria-labelledby="ha-titul">
+  <div class="ha-foto">
+    <picture>
+      <source media="(max-width: 47.99rem)" srcset="{{ img_url('viz-a-m.jpg', 1280) }}" width="878" height="1300">
+      {{ img('viz-a.jpg', 'Vizualizace domu K Metelce ve večerním slunci: dvě podlaží, zahrádky oddělené živým plotem, balkony s černým zábradlím a okna v rámech zlatého dubu.', sizes='100vw', eager=true) }}
+    </picture>
+  </div>
+  <h1 id="ha-titul" class="ha-titul"><span class="ha-pre">Rezidence</span><span class="ha-jmeno" aria-hidden="false">Metelka</span></h1>
+  <div class="ha-dum" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 47.99rem)" srcset="{{ img_url('viz-a-m-dum.png', 1280) }}" width="878" height="1300">
+      {{ img('viz-a-dum.png', '', sizes='100vw', eager=true) }}
+    </picture>
+  </div>
+  <div class="ha-claim">
+    <p class="ha-veta">Devět minut na Velké náměstí.</p>
+    <p class="ha-pod">Osmdesát minut do Prahy po D11. Dva nízké domy v&nbsp;klidné části Hradce Králové.</p>
+  </div>
+  <ul class="ha-metriky" aria-label="Rezidence v číslech">
+    <li class="sklo"><b>32</b><span>bytů 2+kk<em> ve dvou domech</em></span></li>
+    <li class="sklo"><b>4,99<small> mil.</small></b><span>Kč, cena od<em> se sklepem a stáním</em></span></li>
+    <li class="sklo"><b>55<small> m²</small></b><span>zahrádka<em> u bytů v přízemí</em></span></li>
+  </ul>
+</section>
+
+<form class="rez" action="{{ url('byty') }}" aria-label="Vyberte si byt">
+  <fieldset class="rez-pole">
+    <legend>Dům</legend>
+    <label><input type="radio" name="dum" value="k-metelce-i" checked><span>K Metelce I</span></label>
+    <label><input type="radio" name="dum" value="k-metelce-ii"><span>K Metelce II</span></label>
+  </fieldset>
+  <fieldset class="rez-pole">
+    <legend>Byt</legend>
+    <label><input type="radio" name="patro" value="prizemi" checked><span>Přízemí se zahrádkou</span></label>
+    <label><input type="radio" name="patro" value="patro"><span>Patro s balkonem</span></label>
+  </fieldset>
+  <div class="rez-cena"><span class="rez-leg">Cena bytu</span><b data-cena>5 490 000 Kč</b><small data-cena-pozn>zahrádka 52–55 m², sklep, stání</small></div>
+  <button class="rez-btn" type="submit"><span>Ukázat 8 bytů <em>v přízemí</em></span><svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg></button>
+</form>
+{% endblock %}
+{% block skripty %}
+<script>
+(()=>{const f=document.querySelector('.rez');if(!f)return;const c=f.querySelector('[data-cena]'),p=f.querySelector('[data-cena-pozn]'),b=f.querySelector('.rez-btn em');
+const u=()=>{const pr=f.patro.value==='prizemi';c.textContent=pr?'5 490 000 Kč':'4 990 000 Kč';p.textContent=pr?'zahrádka 52–55 m², sklep, stání':'balkon 7,80–8,25 m², sklep, stání';b.textContent=pr?'v přízemí':'v patře';};
+f.addEventListener('change',u);u();f.addEventListener('submit',e=>{e.preventDefault();location.href=f.action+'#'+f.dum.value+'-'+f.patro.value;});})();
+</script>
+{% endblock %}

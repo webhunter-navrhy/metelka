@@ -1,0 +1,37 @@
+{# Sdílené kusy v5. Souřadnice jsou v pixelech vizualizací (viz _viz/strecha, tools/strecha_nizsi.py). #}
+
+{# --- Výkres: vizualizace viz-b.jpg (1500×1180, výřez od y=120) se zlatými kótami a popisky skladby --- #}
+{% macro vykres(sizes='(min-width: 64rem) 60vw, 100vw', eager=false, popis=true) %}
+{% set W, H = 1500, 1180 %}
+{% set popisky = [
+  {'tx': 700, 'ty': 494, 'x': 700, 'y': 404, 't': 'Střecha Kingspan 180&nbsp;mm<br>+ čedičová vlna 220&nbsp;mm'},
+  {'tx': 1000, 'ty': 652, 'x': 1080, 'y': 596, 't': 'Okna v rámu zlatý dub<br>trojsklo U<sub>w</sub> 0,84 W/m²K'},
+  {'tx': 230, 'ty': 790, 'x': 120, 'y': 708, 't': 'Porotherm 30 P+D<br>+ čedičová vlna 240&nbsp;mm'},
+  {'tx': 900, 'ty': 946, 'x': 960, 'y': 884, 't': 'Zahrádka 52–55&nbsp;m²<br>u každého bytu v přízemí'}
+] %}
+<div class="vykres">
+  {{ img('viz-b.jpg', 'Vizualizace domu K Metelce ve večerním slunci se zlatými kótami z projektu: štít domu, řada zahrádek s živými ploty a průběžný balkon v patře.' if popis else '', sizes=sizes, eager=eager) }}
+  <svg class="vykres-koty" viewBox="0 0 {{ W }} {{ H }}" aria-hidden="true">
+    <g class="k-cara">
+      <path d="M385 1035 V1105 M385 1085 L1500 981 M373 1097 l24 -24"/>
+      <path d="M35 1005 V1065 M385 1035 V1065 M35 1050 L385 1050 M23 1062 l24 -24 M373 1062 l24 -24"/>
+      <path d="M185 451 H40 M30 985 H72 M60 451 V985 M48 463 l24 -24 M48 997 l24 -24"/>
+      {% for p in popisky %}<path d="M{{ p.tx }} {{ p.ty }} L{{ p.x }} {{ p.y }}"/>{% endfor %}
+    </g>
+    {% for p in popisky %}<circle class="k-bod" cx="{{ p.tx }}" cy="{{ p.ty }}" r="7"/>{% endfor %}
+  </svg>
+  <span class="kota" style="left:{{ 1210 / W * 100 }}%;top:{{ 1008 / H * 100 }}%">42 856</span>
+  <span class="kota" style="left:{{ 210 / W * 100 }}%;top:{{ 1050 / H * 100 }}%">11 000</span>
+  <span class="kota" style="left:{{ 60 / W * 100 }}%;top:{{ 451 / H * 100 }}%">+6,46</span>
+  <span class="kota kota-0" style="left:{{ 60 / W * 100 }}%;top:{{ 985 / H * 100 }}%">±0,00</span>
+  {% for p in popisky %}<span class="popisek p{{ loop.index }}" style="left:{{ p.x / W * 100 }}%;top:{{ p.y / H * 100 }}%">{{ p.t|safe }}</span>{% endfor %}
+</div>
+{% endmacro %}
+
+{# --- Fasáda: viz-c.jpg (2340×1000, výřez od y=300). Středy bytů zleva doprava = pozice 8 → 1:
+     byt 1 (a 9) je na vzdáleném konci domu, štít vlevo je u bytu 8 (16). Podle půdorysu patra (_research/pdf/pud-1.jpg). #}
+{% set _osy = [29.8, 42.6, 52.6, 60.1, 66.2, 71.5, 75.9, 79.9] %}
+{% set _pat = [46.8, 48.6, 50.0, 51.0, 51.9, 52.6, 53.2, 53.8] %}
+{% set _pri = [69.3, 68.3, 67.6, 67.0, 66.5, 66.1, 65.8, 65.5] %}
+{% macro bod(b) %}{% set i = 8 - b.pozice %}left:{{ _osy[i] }}%;top:{{ (_pat if b.podlazi == 'patro' else _pri)[i] }}%{% endmacro %}
+{% macro bod_x(b) %}{{ _osy[8 - b.pozice] }}{% endmacro %}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>{{ titulek or site.nazev }}</title>
+<meta name="description" content="{{ popis or site.popis }}">
+{% if site.navrh or noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+<meta name="theme-color" content="#17110b">
+<link rel="canonical" href="{{ site.url }}{{ cesta or '' }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="{{ titulek or site.nazev }}">
+<meta property="og:description" content="{{ popis or site.popis }}">
+<meta property="og:url" content="{{ site.url }}{{ cesta or '' }}">
+{% if og_url %}<meta property="og:image" content="{{ og_url }}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">{% endif %}
+<link rel="preload" href="{{ base }}fonts/v5/bodonimoda-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}fonts/v5/instrumentsans-latin.woff2" as="font" type="font/woff2" crossorigin>
+{% block preload %}{% endblock %}
+<link rel="stylesheet" href="{{ asset('fonts/v5/fonts.css') }}">
+<link rel="stylesheet" href="{{ asset('css/v5.css') }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317110b'/%3E%3Cpath d='M6 21h20M8 21v-8h16v8' fill='none' stroke='%23d9b77e' stroke-width='1.4'/%3E%3C/svg%3E">
+{% block head %}{% endblock %}
+{% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
+</head>
+<body class="{% block telo %}{% endblock %}">
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="hl" data-hl>
+  <a href="{{ url('') }}" class="wm" aria-label="Rezidence Metelka – úvod">Rezidence <i>Metelka</i></a>
+  <nav class="hl-menu" aria-label="Hlavní">
+    {% for n in site.nav_levo + site.nav_pravo %}{% if n.href != 'kontakt' %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ n.text }}</a>{% endif %}{% endfor %}
+  </nav>
+  <a class="hl-cta" href="{{ url('kontakt') }}"{% if aktivni == 'kontakt' %} aria-current="page"{% endif %}><span>Domluvit prohlídku</span><svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg></a>
+  <button class="burger" type="button" aria-expanded="false" aria-controls="panel" aria-label="Otevřít menu"><span></span><span></span></button>
+</header>
+<div class="panel" id="panel" hidden>
+  <nav aria-label="Menu">
+    <a href="{{ url('') }}"{% if not aktivni %} aria-current="page"{% endif %}>Úvod</a>
+    {% for n in site.nav_levo + site.nav_pravo %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ n.text }}</a>{% endfor %}
+  </nav>
+  <p class="panel-pozn">K Metelce, Hradec Králové<br>32 bytů 2+kk od 4 990 000 Kč</p>
+</div>
+<main id="obsah">
+{% block obsah %}{% endblock %}
+{% if not bez_cta %}
+<section class="zaver" aria-labelledby="h-zaver">
+  <div class="zaver-foto">{{ img('teple/int-jidelna-okno.jpg', '', sizes='100vw') }}</div>
+  <div class="zaver-obsah">
+    <p class="nad">Prohlídka</p>
+    <h2 id="h-zaver" class="h2">Projděte si byt<br><i>na místě</i></h2>
+    <p class="zaver-text">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Prodej bytů má na starosti {{ site.kontakt.jmeno }}.</p>
+    <div class="tlacitka"><a class="tl tl-zlato" href="{{ url('kontakt') }}">Domluvit prohlídku</a><a class="tl tl-svetly" href="{{ url('byty') }}">Vybrat byt</a></div>
+  </div>
+</section>
+{% endif %}
+</main>
+<footer class="pata">
+  <div class="pata-horni">
+    <p class="pata-wm">Rezidence <i>Metelka</i></p>
+    <p class="pata-claim">Dva nízké domy, 32 bytů 2+kk se zahrádkou nebo balkonem. K&nbsp;Metelce, Svobodné Dvory, Hradec Králové.</p>
+  </div>
+  <div class="pata-sloupce">
+    <div>
+      <h2>Stránky</h2>
+      <ul><li><a href="{{ url('') }}">Úvod</a></li>{% for n in site.nav_levo + site.nav_pravo %}<li><a href="{{ url(n.href) }}">{{ n.text }}</a></li>{% endfor %}</ul>
+    </div>
+    <div>
+      <h2>Prodej bytů</h2>
+      <p>{{ site.kontakt.jmeno }}<br>{% if site.kontakt.telefon %}<a href="tel:{{ site.kontakt.telefon|replace(' ','') }}">{{ site.kontakt.telefon }}</a><br>{% endif %}{% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a><br>{% endif %}{% if not site.kontakt.telefon %}<span class="doplnime">telefon a e-mail doplníme</span><br>{% endif %}<a class="podtrh" href="{{ url('kontakt') }}">Napsat zprávu</a></p>
+    </div>
+    <div>
+      <h2>Adresa projektu</h2>
+      <p>{{ site.kontakt.adresa.ulice }}, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></p>
+    </div>
+    <div>
+      <h2>Ceny</h2>
+      <p>Přízemí se zahrádkou<br><b>5 490 000 Kč</b><br>Patro s balkonem<br><b>4 990 000 Kč</b></p>
+    </div>
+  </div>
+  <div class="pata-dolni">
+    <p>Exteriér domů je vizualizace podle projektové dokumentace, fasáda a&nbsp;materiály budou upřesněny. Interiéry jsou ilustrační vizualizace ze sesterského projektu Rezidence Karlovina, vybavení bytů v&nbsp;Metelce se může lišit. Fotografie Hradce Králové: Wikimedia Commons, barevně sladěné, autoři v&nbsp;<a href="{{ url('galerie') }}#autori">galerii</a>.</p>
+    <p>Ceník k&nbsp;16. 9. 2026. Informace na webu nejsou nabídkou ve smyslu občanského zákoníku.</p>
+  </div>
+</footer>
+<script src="{{ asset('js/web.js') }}" defer></script>
+{% block skripty %}{% endblock %}
+</body>
+</html>

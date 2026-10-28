@@ -1,55 +1,54 @@
-{% extends "_base.html" %}
+{% extends "_v5.html" %}
 {% set titulek = 'Galerie – Rezidence Metelka' %}
-{% set popis = 'Ilustrační vizualizace interiérů bytů a fotografie Hradce Králové v okolí Rezidence Metelka.' %}
+{% set popis = 'Vizualizace domů K Metelce, ilustrační vizualizace interiérů bytů a fotografie Hradce Králové v okolí Rezidence Metelka.' %}
 {% set cesta = 'galerie/' %}
 {% set aktivni = 'galerie' %}
 {% set f = data.fotky %}
+{% block telo %}stranka-gal{% endblock %}
 {% block obsah %}
-<section class="stranka-hlava" aria-labelledby="h1">
-  <div class="wrap sh-mrizka">
-    <div>
-      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Galerie</span></nav>
-      <h1 id="h1">Galerie</h1>
-    </div>
-    <p class="perex">Interiéry, jak mohou byty vypadat, a&nbsp;Hradec Králové kolem nich. Kliknutím fotku zvětšíte.</p>
+<section class="sh sh-foto" aria-labelledby="h1">
+  <div class="sh-obr">{{ img('teple/int-obyvak.jpg', 'Obývací pokoj s kuchyní, světlou sedačkou a kulatým jídelním stolem', sizes='100vw', eager=true) }}</div>
+  <div class="obal sh-obsah">
+    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Galerie</span></nav>
+    <h1 id="h1" class="h1">Galerie</h1>
+    <p class="perex">Dům ve vizualizaci, interiéry, jak mohou byty vypadat, a&nbsp;Hradec Králové kolem nich. Kliknutím fotku zvětšíte.</p>
   </div>
+  <p class="fs-pozn">Ilustrační vizualizace interiéru</p>
 </section>
 
-<section class="galerie-sekce" aria-labelledby="h-model">
-  <div class="wrap">
-    <h2 id="h-model" class="mensi">Model domu</h2>
+<section class="sekce tma galerie-sekce" aria-labelledby="h-dum">
+  <div class="obal">
+    <div class="hlava-2"><div><p class="nad">Exteriér</p><h2 id="h-dum" class="h2">Dům ve <i>zlaté hodině</i></h2></div><p class="perex">Vizualizace podle projektové dokumentace. Fasáda a&nbsp;materiály budou upřesněny.</p></div>
     <div class="galerie-mrizka">
-      {% for x in [('model-hero.png', 'Dům ze strany zahrádek', 'Model domu ze strany zahrádek s balkony'), ('model-sever.png', 'Severní strana s pavlačí', 'Model domu ze severu s pavlačí a vstupy do bytů'), ('model-rez-prizemi.png', 'Přízemí bez stropu', 'Model přízemí bez stropu s dispozicí bytů'), ('model-rez-patro.png', 'Patro bez střechy', 'Model patra bez střechy s dispozicí bytů')] %}
-      <a class="g-polozka{% if loop.first %} g-siroka{% endif %}" href="{{ img_url(x[0], 1920) }}" data-popis="{{ x[1] }} · model podle projektové dokumentace">{{ img(x[0], x[2], sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x[1] }}</span></a>
+      {% for x in [('viz-a.jpg', 'Dům ze strany zahrádek', 'Vizualizace domu K Metelce ze strany zahrádek ve večerním slunci'), ('viz-zahradky.jpg', 'Zahrádky v přízemí', 'Vizualizace zahrádek s živými ploty u bytů v přízemí'), ('viz-balkony.jpg', 'Balkony v patře', 'Vizualizace průběžného balkonu bytů v patře')] %}
+      <a class="g-polozka{% if loop.first %} g-siroka{% endif %}" href="{{ img_url(x[0], 1920) }}" data-popis="{{ x[1] }} · vizualizace podle projektové dokumentace">{{ img(x[0], x[2], sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x[1] }}</span></a>
       {% endfor %}
     </div>
-    <p class="pozn">Model podle projektové dokumentace. Fasáda a&nbsp;materiály budou upřesněny.</p>
   </div>
 </section>
 
-<section class="galerie-sekce" aria-labelledby="h-int">
-  <div class="wrap">
-    <h2 id="h-int" class="mensi">Interiéry</h2>
+<section class="sekce galerie-sekce" aria-labelledby="h-int">
+  <div class="obal">
+    <div class="hlava-2"><div><p class="nad">Interiéry</p><h2 id="h-int" class="h2">Jak může <i>byt vypadat</i></h2></div><p class="perex">{{ f.interier_zdroj }}</p></div>
     <div class="galerie-mrizka">
       {% for x in f.interier %}
-      <a class="g-polozka{% if loop.index in (1, 6) %} g-siroka{% endif %}{% if loop.last %} g-pas{% endif %}" href="{{ img_url(x.soubor, 1920) }}" data-popis="{{ x.popis }} · ilustrační vizualizace">{{ img(x.soubor, x.alt, sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x.popis }}</span></a>
+      <a class="g-polozka{% if loop.index in (1, 6) %} g-siroka{% endif %}{% if loop.last %} g-pas{% endif %}" href="{{ img_url('teple/' ~ x.soubor, 1920) }}" data-popis="{{ x.popis }} · ilustrační vizualizace">{{ img('teple/' ~ x.soubor, x.alt, sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x.popis }}</span></a>
       {% endfor %}
     </div>
-    <p class="pozn">{{ f.interier_zdroj }}</p>
   </div>
 </section>
 
-<section class="galerie-sekce sekce" aria-labelledby="h-hk">
-  <div class="wrap">
-    <h2 id="h-hk" class="mensi">Hradec Králové</h2>
+<section class="sekce tma galerie-sekce" aria-labelledby="h-hk">
+  <div class="obal">
+    <div class="hlava-2"><div><p class="nad">Okolí</p><h2 id="h-hk" class="h2">Hradec <i>Králové</i></h2></div><p class="perex">Fotografie z&nbsp;Wikimedia Commons, barevně sladěné s&nbsp;webem.</p></div>
     <div class="galerie-mrizka">
       {% for x in f.hradec %}
-      <a class="g-polozka{% if loop.index in (1, 7) %} g-siroka{% endif %}{% if loop.last %} g-pas{% endif %}" href="{{ img_url(x.soubor, 1920) }}" data-popis="{{ x.popis }} · {{ x.autor }}, {{ x.licence }}">{{ img(x.soubor, x.alt, sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x.popis }}</span></a>
+      <a class="g-polozka{% if loop.index in (1, 7) %} g-siroka{% endif %}{% if loop.last %} g-pas{% endif %}" href="{{ img_url('teple/' ~ x.soubor, 1920) }}" data-popis="{{ x.popis }} · {{ x.autor }}, {{ x.licence }}">{{ img('teple/' ~ x.soubor, x.alt, sizes='(min-width: 52rem) 50vw, 100vw') }}<span>{{ x.popis }}</span></a>
       {% endfor %}
     </div>
     <div class="autori" id="autori">
-      <h3>Autoři fotografií</h3>
-      <ul>{% for x in f.hradec %}<li>{{ x.popis }}: <a href="{{ x.url }}" rel="noopener" target="_blank">{{ x.autor }}</a>, {{ x.licence }}</li>{% endfor %}</ul>
+      <h3 class="h3">Autoři fotografií</h3>
+      <ul>{% for x in f.hradec %}<li>{{ x.popis }}: <a href="{{ x.url }}" rel="noopener" target="_blank">{{ x.autor }}</a>, {{ x.licence }}, barevně upraveno</li>{% endfor %}</ul>
     </div>
   </div>
 </section>

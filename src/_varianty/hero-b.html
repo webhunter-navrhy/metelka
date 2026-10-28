@@ -1,0 +1,59 @@
+{% extends "_v5.html" %}
+{% set titulek = 'Varianta B – Výkres, který ožil | Rezidence Metelka' %}
+{# souřadnice v pixelech vizualizace viz-b.jpg (1500×1180), výřez z vizualizace 2600×1300 od y=120 #}
+{% set W, H = 1500, 1180 %}
+{% set popisky = [
+  {'x': 640, 'y': 440, 't': 'Střecha Kingspan 180&nbsp;mm<br>+ čedičová vlna 220&nbsp;mm'},
+  {'x': 1040, 'y': 640, 't': 'Okna zlatý dub, trojsklo<br>U<sub>w</sub> 0,84 W/m²K'},
+  {'x': 120, 'y': 680, 't': 'Porotherm 30 P+D<br>+ čedičová vlna 240&nbsp;mm'},
+  {'x': 860, 'y': 870, 't': 'Zahrádka 52–55&nbsp;m²<br>u každého bytu v přízemí'}
+] %}
+{% block telo %}v-b{% endblock %}
+{% block hlavicka %}
+<header class="hb-hl">
+  <a href="{{ url('') }}" class="hb-razitko"><span class="wm">Rezidence <i>Metelka</i></span><span class="mono">List A-00 · Úvod</span></a>
+  <nav class="hb-menu" aria-label="Hlavní">
+    {% for n in site.nav_levo + site.nav_pravo %}{% if n.href != 'kontakt' %}<a href="{{ url(n.href) }}"><span class="mono">A-0{{ loop.index }}</span>{{ n.text }}</a>{% endif %}{% endfor %}
+  </nav>
+  <a class="hb-cta" href="{{ url('kontakt') }}">Domluvit prohlídku<svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg></a>
+</header>
+{% endblock %}
+{% block obsah %}
+<section class="hb" aria-labelledby="hb-titul">
+  <div class="hb-text">
+    <p class="mono hb-nad">Bytové domy K&nbsp;Metelce I a II<br>Svobodné Dvory, Hradec Králové</p>
+    <h1 id="hb-titul">Rezidence<br><i>Metelka</i></h1>
+    <p class="hb-veta">32 bytů 2+kk, u&nbsp;kterých víte, z&nbsp;čeho je každá stěna. Trojskla, 24 cm čedičové vlny a&nbsp;okna na obě strany domu.</p>
+    <div class="hb-karta">
+      <div class="hb-karta-hl"><span class="mono">Byt 2+kk</span><b>47,21 m²</b></div>
+      <a class="hb-radek" href="{{ url('byty') }}#prizemi"><span>Přízemí<small>zahrádka 52–55 m²</small></span><b>5 490 000 Kč</b></a>
+      <a class="hb-radek" href="{{ url('byty') }}#patro"><span>Patro<small>balkon 7,80–8,25 m²</small></span><b>4 990 000 Kč</b></a>
+      <p class="mono hb-karta-pat">Cena se sklepní kójí 3 m² a parkovacím stáním</p>
+    </div>
+  </div>
+  <figure class="hb-list">
+    <div class="hb-foto">
+      {{ img('viz-b.jpg', 'Vizualizace domu K Metelce ve večerním slunci s kótami z projektu: štít domu, řada zahrádek s živými ploty a průběžný balkon v patře.', sizes='(min-width: 64rem) 64vw, 100vw', eager=true) }}
+      <svg class="hb-koty" viewBox="0 0 {{ W }} {{ H }}" aria-hidden="true">
+        <g class="k-cara">
+          <path d="M385 1035 V1105"/>
+          <path d="M385 1085 L1500 981"/>
+          <path d="M373 1097 l24 -24"/>
+          <path d="M35 1005 V1065 M385 1035 V1065"/>
+          <path d="M35 1050 L385 1050"/>
+          <path d="M23 1062 l24 -24 M373 1062 l24 -24"/>
+          <path d="M185 360 H40 M30 985 H72"/>
+          <path d="M60 360 V985"/>
+          <path d="M48 372 l24 -24 M48 997 l24 -24"/>
+        </g>
+      </svg>
+      <span class="kota mono" style="left:{{ 1210 / W * 100 }}%;top:{{ 1008 / H * 100 }}%">42 856</span>
+      <span class="kota mono" style="left:{{ 210 / W * 100 }}%;top:{{ 1050 / H * 100 }}%">11 000</span>
+      <span class="kota mono" style="left:{{ 60 / W * 100 }}%;top:{{ 360 / H * 100 }}%">+6,46</span>
+      <span class="kota kota-0 mono" style="left:{{ 60 / W * 100 }}%;top:{{ 985 / H * 100 }}%">±0,00</span>
+      {% for p in popisky %}<span class="popisek mono p{{ loop.index }}" style="left:{{ p.x / W * 100 }}%;top:{{ p.y / H * 100 }}%"><i></i>{{ p.t|safe }}</span>{% endfor %}
+    </div>
+    <figcaption class="mono hb-souradnice"><span>50.2238° N&nbsp;&nbsp;15.7970° E</span><span>Vizualizace podle výkresů · M 1:1</span><span>Pohled od zahrádek · kóty v mm</span></figcaption>
+  </figure>
+</section>
+{% endblock %}

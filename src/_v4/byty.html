@@ -1,0 +1,50 @@
+{% extends "_base.html" %}
+{% from "_vyber.html" import vyber %}
+{% set titulek = 'Byty a ceník – Rezidence Metelka' %}
+{% set popis = 'Ceník 32 bytů 2+kk v Rezidenci Metelka v Hradci Králové: byty se zahrádkou za 5 490 000 Kč a s balkonem za 4 990 000 Kč, každý se sklepem a parkovacím stáním.' %}
+{% set cesta = 'byty/' %}
+{% set aktivni = 'byty' %}
+{% block obsah %}
+<section class="stranka-hlava" aria-labelledby="h1">
+  <div class="wrap sh-mrizka">
+    <div>
+      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Byty</span></nav>
+      <h1 id="h1">Byty a&nbsp;ceník</h1>
+    </div>
+    <p class="perex">Všech 32 bytů má dispozici 2+kk a&nbsp;47,21&nbsp;m². Liší se domem, podlažím a&nbsp;tím, jestli k&nbsp;nim patří zahrádka, nebo balkon.</p>
+  </div>
+</section>
+
+<section class="vyber-sekce" id="vyber" aria-label="Výběr bytu v modelu">
+  <div class="wrap">{{ vyber() }}</div>
+</section>
+
+<section class="sekce" id="cenik" aria-labelledby="h-cenik">
+  <div class="wrap">
+    <div class="cenik-hlava">
+      <h2 id="h-cenik">Ceník</h2>
+      <div class="vb-skupina" role="group" aria-label="Filtrovat byty">
+        <button type="button" class="prep" data-cenik-filtr="vse" aria-pressed="true">Všechny</button>
+        <button type="button" class="prep" data-cenik-filtr="prizemi" aria-pressed="false">Se zahrádkou</button>
+        <button type="button" class="prep" data-cenik-filtr="patro" aria-pressed="false">S balkonem</button>
+      </div>
+    </div>
+    <div class="radky" role="list">
+      <div class="radek radek-hlava" aria-hidden="true"><span>Byt</span><span>Dům</span><span>Podlaží</span><span>Plocha bytu</span><span>Zahrádka / balkon</span><span>Cena</span><span></span></div>
+      {% for b in data.byty.vsechny %}
+      <a class="radek" role="listitem" href="{{ url(b.cesta) }}" data-podlazi="{{ b.podlazi }}">
+        <span class="r-kod">{{ b.kod }}</span>
+        <span class="r-dum">{{ b.dum_nazev }}</span>
+        <span class="r-podlazi">{{ b.patro_text|capitalize }}</span>
+        <span class="r-plocha">{{ m2(b.plocha) }} m²</span>
+        <span class="r-venku">{{ b.venku_typ|capitalize }} {{ m2(b.venku) }} m²</span>
+        <span class="r-cena">{{ b.cena_text }}</span>
+        <span class="r-sipka" aria-hidden="true">Karta bytu</span>
+      </a>
+      {% endfor %}
+    </div>
+    <p class="pozn">Ceník k&nbsp;16. 9. 2026. Ke každému bytu patří sklepní kóje 3&nbsp;m² a&nbsp;parkovací stání. Aktuální dostupnost vám potvrdíme.</p>
+  </div>
+</section>
+{% endblock %}
+{% block skripty %}<script type="module" src="{{ asset('js/vyber.js') }}"></script>{% endblock %}

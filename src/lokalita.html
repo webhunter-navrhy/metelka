@@ -1,4 +1,4 @@
-{% extends "_base.html" %}
+{% extends "_v5.html" %}
 {% set titulek = 'Lokalita – Rezidence Metelka, Hradec Králové' %}
 {% set popis = 'K Metelce ve Svobodných Dvorech: hlavní nádraží 5 minut, D11 směr Praha 5,5 minuty, Velké náměstí 9 minut. Spádová ZŠ Svobodné Dvory, bazén, stadion a Labská stezka.' %}
 {% set cesta = 'lokalita/' %}
@@ -19,72 +19,77 @@
   {'m': 13, 't': 'Park Golf Club', 'k': 'Sport'},
   {'m': 15, 't': 'Hvězdárna a planetárium', 'k': 'Rodina'}
 ] %}
+{% block telo %}stranka-lok{% endblock %}
 {% block obsah %}
-<section class="stranka-hlava" aria-labelledby="h1">
-  <div class="wrap sh-mrizka">
-    <div>
-      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Lokalita</span></nav>
-      <h1 id="h1">Lokalita</h1>
-    </div>
-    <p class="perex">Hradec Králové. Všechno blízko: centrum, sport i&nbsp;dálnice.</p>
+<section class="sh sh-foto" aria-labelledby="h1">
+  <div class="sh-obr">{{ img('teple/hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='100vw', eager=true) }}</div>
+  <div class="obal sh-obsah">
+    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Lokalita</span></nav>
+    <h1 id="h1" class="h1">Salon republiky<br>za <i>devět minut</i></h1>
+    <p class="perex">K&nbsp;Metelce ve Svobodných Dvorech, klidné severozápadní části Hradce Králové. Centrum, nádraží i&nbsp;dálnice na dosah.</p>
   </div>
-</section>
-<section class="pas-panorama" aria-label="Hradec Králové z výšky">
-  <figure>{{ img('hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='100vw') }}<figcaption>Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
+  <ol class="obal sh-metriky">
+    <li class="sklo"><b>5</b><span>min na hlavní nádraží</span></li>
+    <li class="sklo"><b>5,5</b><span>min na D11 směr Praha</span></li>
+    <li class="sklo"><b>9</b><span>min na Velké náměstí</span></li>
+  </ol>
+  <p class="fs-pozn">Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0</p>
 </section>
 
-<section class="salon sekce" aria-labelledby="h-salon">
-  <div class="wrap salon-mrizka">
-    <div class="salon-text odhal">
-      <p class="nadtitul">Salon republiky</p>
-      <h2 id="h-salon">Město, které navrhli architekti</h2>
+<section class="sekce salon" aria-labelledby="h-salon">
+  <div class="obal salon-mrizka">
+    <div class="salon-text">
+      <p class="nad">Gočárův Hradec</p>
+      <h2 id="h-salon" class="h2">Město, které navrhli <i>architekti</i></h2>
       <p class="perex">Starosta František Ulrich pozval do Hradce Jana Kotěru a&nbsp;Josefa Gočára. Gočárův plán z&nbsp;let 1926–1928 dává městu řád dodnes: široké třídy, okruhy a&nbsp;krátké vzdálenosti.</p>
-      <p>Ulice K&nbsp;Metelce leží ve Svobodných Dvorech, klidné části na severozápadě města. Autobus č. 16 jede na nádraží 8&nbsp;minut, do centra 14.</p>
+      <p>Ulice K&nbsp;Metelce leží ve Svobodných Dvorech. Autobus č. 16 jede na nádraží 8&nbsp;minut, do centra 14.</p>
     </div>
-    <figure class="salon-f1 odhal">{{ img('hk-gocarova.jpg', 'Gočárova třída s funkcionalistickými domy z výšky', sizes='(min-width: 64rem) 44vw, 100vw') }}<figcaption>Gočárova třída · Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
-    <figure class="salon-f2 odhal">{{ img('hk-muzeum.jpg', 'Muzeum východních Čech od Jana Kotěry', sizes='(min-width: 64rem) 30vw, 100vw') }}<figcaption>Muzeum východních Čech od Jana Kotěry · TFerenczy, CC BY-SA 4.0</figcaption></figure>
+    <figure class="salon-f1 odhal">{{ img('teple/hk-gocarova.jpg', 'Gočárova třída s funkcionalistickými domy z výšky', sizes='(min-width: 64rem) 44vw, 100vw') }}<figcaption>Gočárova třída · Vít Luštinec, CC BY-SA 4.0</figcaption></figure>
+    <figure class="salon-f2 odhal">{{ img('teple/hk-muzeum.jpg', 'Muzeum východních Čech od Jana Kotěry', sizes='(min-width: 64rem) 30vw, 100vw') }}<figcaption>Muzeum východních Čech od Jana Kotěry · TFerenczy, CC BY-SA 4.0</figcaption></figure>
   </div>
 </section>
 
-<section class="minuty sekce" aria-labelledby="h-minuty">
-  <div class="wrap minuty-mrizka">
-    <div class="minuty-hlava odhal">
-      <p class="nadtitul">Minuty od dveří</p>
-      <h2 id="h-minuty">Čtvrthodina, a&nbsp;máte celý Hradec</h2>
-      <p>Časy autem z&nbsp;ulice K&nbsp;Metelce bez provozu. Ve špičce počítejte s&nbsp;rezervou.</p>
-      <ul class="minuty-legenda" aria-label="Legenda">
+<section class="sekce tma minuty" aria-labelledby="h-minuty">
+  <div class="obal minuty-mrizka">
+    <div class="minuty-hlava">
+      <p class="nad">Minuty od dveří</p>
+      <h2 id="h-minuty" class="h2">Čtvrthodina, a&nbsp;máte <i>celý Hradec</i></h2>
+      <p class="perex">Časy autem z&nbsp;ulice K&nbsp;Metelce bez provozu. Ve špičce počítejte s&nbsp;rezervou.</p>
+      <ul class="legenda" aria-label="Legenda">
         <li data-k="Město">Město</li><li data-k="Doprava">Doprava</li><li data-k="Sport">Sport</li><li data-k="Rodina">Rodina</li>
       </ul>
     </div>
     <ol class="osa" aria-label="Místa podle minut autem">
-      {% for i in range(0, 16) %}<li class="osa-ryska" aria-hidden="true" style="--m:{{ i }}"><span>{{ i }}</span></li>{% endfor %}
       {% for b in osa %}
-      <li class="osa-bod" style="--m:{{ b.m }}" data-k="{{ b.k }}"><b>{{ cz(b.m, 1)|replace(',0','') }} min</b><span>{{ b.t }}</span></li>
+      <li class="osa-bod odhal" style="--m:{{ b.m }}" data-k="{{ b.k }}"><b>{{ cz(b.m, 1)|replace(',0','') }}<small> min</small></b><span>{{ b.t }}</span></li>
       {% endfor %}
     </ol>
   </div>
-  <div class="wrap dal odhal">
-    <h3>A dál</h3>
+  <div class="obal dal">
+    <h3 class="h3">A dál</h3>
     <dl>
-      <div><dt>Pardubice</dt><dd>29 <small>min autem</small></dd></div>
-      <div><dt>Safari Park Dvůr Králové</dt><dd>31 <small>min autem</small></dd></div>
-      <div><dt>Praha, Černý Most</dt><dd>62 <small>min autem</small></dd></div>
-      <div><dt>Praha hl. n.</dt><dd>92 <small>min přímým vlakem</small></dd></div>
+      <div><dt>Pardubice</dt><dd>29<small> min autem</small></dd></div>
+      <div><dt>Safari Park Dvůr Králové</dt><dd>31<small> min autem</small></dd></div>
+      <div><dt>Praha, Černý Most</dt><dd>62<small> min autem</small></dd></div>
+      <div><dt>Praha hl. n.</dt><dd>92<small> min přímým vlakem</small></dd></div>
     </dl>
+    <p class="pozn pozn-svetla">{{ o.jizdni_rad_pozn }}</p>
   </div>
-  <p class="wrap pozn">{{ o.jizdni_rad_pozn }}</p>
 </section>
 
-<section class="sport sekce" aria-labelledby="h-sport">
-  <div class="wrap">
-    <div class="sport-mrizka">
-      <figure class="sport-foto odhal">{{ img('hk-labe-most.jpg', 'Nábřeží Labe s cyklostezkou a stromy', sizes='(min-width: 64rem) 46vw, 100vw') }}<figcaption>Nábřeží Labe · Palickap, CC BY-SA 4.0</figcaption></figure>
-      <div class="odhal">
-        <p class="nadtitul">Sport</p>
-        <h2 id="h-sport">{{ o.sport.nadpis }}</h2>
-        <p class="perex">Padesátimetrový bazén, hokej, fotbal, tenis i&nbsp;lezecká stěna. Na kolo stačí sjet k&nbsp;Labi: stezka vede po rovině až do Kuksu.</p>
-      </div>
+<section class="foto-sekce sport-foto" aria-labelledby="h-sport">
+  <div class="fs-foto">{{ img('teple/hk-labe-most.jpg', 'Nábřeží Labe s cyklostezkou a stromy', sizes='100vw') }}</div>
+  <div class="obal fs-obsah">
+    <div class="fs-text">
+      <p class="nad">Sport</p>
+      <h2 id="h-sport" class="h2">{{ o.sport.nadpis }}</h2>
+      <p class="perex">Padesátimetrový bazén, hokej, fotbal, tenis i&nbsp;lezecká stěna. Na kolo stačí sjet k&nbsp;Labi: stezka vede po rovině až do Kuksu.</p>
     </div>
+  </div>
+  <p class="fs-pozn">Nábřeží Labe · Palickap, CC BY-SA 4.0</p>
+</section>
+<section class="sekce sport-mista" aria-label="Sportoviště">
+  <div class="obal">
     <ul class="mista">
       {% for s in o.sport.mista %}
       <li class="odhal"><span class="mista-min">{{ s.min }}<small> min</small></span><div><h3>{{ s.nazev }}</h3><p>{{ s.popis }}</p></div></li>
@@ -93,29 +98,27 @@
   </div>
 </section>
 
-<section class="rodiny sekce bez-horni" aria-labelledby="h-rodiny">
-  <div class="wrap">
-    <div class="rodiny-mrizka">
-      <div class="odhal">
-        <p class="nadtitul">Pro rodiny</p>
-        <h2 id="h-rodiny">{{ o.rodiny.nadpis }}</h2>
-        <p class="perex">Ulice K&nbsp;Metelce patří podle městské vyhlášky č. 5/2025 pod ZŠ a&nbsp;MŠ Svobodné Dvory. Úplná základní škola s&nbsp;družinou je 3,5&nbsp;minuty autem.</p>
-        <p>Na víkend Muzeum východních Čech s&nbsp;volným vstupem do 19&nbsp;let, Divadlo DRAK nebo planetárium. Za půl hodiny jste na safari ve Dvoře Králové.</p>
-      </div>
-      <div class="rodiny-seznamy odhal">
-        {% for g in o.rodiny.skupiny[:2] %}
-        <div>
-          <h3>{{ g.nazev }}</h3>
-          <ul>{% for p in g.polozky %}<li><span>{{ p.nazev }}</span>{% if p.min %}<b>{{ p.min }} min</b>{% endif %}</li>{% endfor %}</ul>
-        </div>
-        {% endfor %}
-      </div>
+<section class="sekce tma rodiny" aria-labelledby="h-rodiny">
+  <div class="obal rodiny-mrizka">
+    <div>
+      <p class="nad">Pro rodiny</p>
+      <h2 id="h-rodiny" class="h2">{{ o.rodiny.nadpis }}</h2>
+      <p class="perex">Ulice K&nbsp;Metelce patří podle městské vyhlášky č. 5/2025 pod ZŠ a&nbsp;MŠ Svobodné Dvory. Úplná základní škola s&nbsp;družinou je 3,5&nbsp;minuty autem.</p>
+      <p>Na víkend Muzeum východních Čech s&nbsp;volným vstupem do 19&nbsp;let, Divadlo DRAK nebo planetárium. Za půl hodiny jste na safari ve Dvoře Králové.</p>
     </div>
-    <p class="pozn">{{ o.rodiny.pozn }}</p>
+    <div class="rodiny-seznamy">
+      {% for g in o.rodiny.skupiny[:2] %}
+      <div>
+        <h3 class="h3">{{ g.nazev }}</h3>
+        <ul>{% for p in g.polozky %}<li><span>{{ p.nazev }}</span>{% if p.min %}<b>{{ p.min }} min</b>{% endif %}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
   </div>
+  <p class="obal pozn pozn-svetla">{{ o.rodiny.pozn }}</p>
 </section>
 
-<section class="pas-panorama" aria-label="Hradec Králové z výšky">
-  <figure>{{ img('hk-dron-labe.jpg', 'Hradec Králové z dronu: Labe, most a historické centrum na podzim', sizes='100vw') }}<figcaption>Hradec Králové z dronu · Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
+<section class="panorama" aria-label="Hradec Králové z výšky">
+  <figure>{{ img('teple/hk-dron-labe.jpg', 'Hradec Králové z dronu: Labe, most a historické centrum na podzim', sizes='100vw') }}<figcaption>Hradec Králové z dronu · Vít Luštinec, Wikipedia, CC BY-SA 4.0</figcaption></figure>
 </section>
 {% endblock %}

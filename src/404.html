@@ -1,11 +1,12 @@
-{% extends "_base.html" %}
+{% extends "_v5.html" %}
 {% set titulek = 'Stránka nenalezena – ' ~ site.nazev %}
 {% set noindex = true %}
 {% block obsah %}
-<section class="stranka-hlava" aria-labelledby="h1">
-  <div class="wrap">
-    <h1 id="h1">Tuto stránku jsme nenašli</h1>
-    <p class="perex">Adresa možná změnila místo. <a class="odkaz" href="{{ url('byty') }}">Byty a ceník</a> · <a class="odkaz" href="{{ url('') }}">Úvod</a></p>
+<section class="sh tma sh-404" aria-labelledby="h1">
+  <div class="obal">
+    <h1 id="h1" class="h1">Tuto stránku <i>jsme nenašli</i></h1>
+    <p class="perex">Adresa možná změnila místo.</p>
+    <div class="tlacitka"><a class="tl tl-zlato" href="{{ url('byty') }}">Byty a ceník</a><a class="tl tl-svetly" href="{{ url('') }}">Úvod</a></div>
   </div>
 </section>
 {% endblock %}

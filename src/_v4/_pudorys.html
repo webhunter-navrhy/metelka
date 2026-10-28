@@ -1,0 +1,19 @@
+{# Půdorys bytu 2+kk s místnostmi. m = plochy místností z ceníku. #}
+{% macro pudorys(m, celkem, sizes='(min-width: 64rem) 58vw, 100vw') %}
+<div class="pudorys">
+  <div class="pudorys-obraz">
+    {{ img('pudorys-vzorovy-byt.jpg', 'Půdorys bytu 2+kk: ložnice, koupelna s WC, chodba a obývací pokoj s kuchyní', sizes=sizes) }}
+    <button type="button" class="zona" data-mistnost="loznice" style="left:6%;top:17.7%;width:25.5%;height:52%" aria-label="Ložnice {{ m2(m.loznice) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="koupelna" style="left:31.5%;top:17.7%;width:17.4%;height:52.5%" aria-label="Koupelna s WC {{ m2(m.koupelna) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="chodba" style="left:6%;top:71%;width:56%;height:20.5%" aria-label="Chodba {{ m2(m.chodba) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="obyvak" style="left:51.5%;top:17.7%;width:43%;height:73.8%" aria-label="Obývací pokoj s kuchyní {{ m2(m.obyvak) }} m²"></button>
+  </div>
+  <ul class="mistnosti">
+    <li><button type="button" data-mistnost="obyvak"><span>Obývací pokoj s kuchyní</span><b>{{ cz(m.obyvak) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="loznice"><span>Ložnice</span><b>{{ cz(m.loznice) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="koupelna"><span>Koupelna s WC</span><b>{{ cz(m.koupelna) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="chodba"><span>Chodba</span><b>{{ cz(m.chodba) }} m²</b></button></li>
+    <li class="soucet"><span>Byt celkem</span><b>{{ cz(celkem) }} m²</b></li>
+  </ul>
+</div>
+{% endmacro %}

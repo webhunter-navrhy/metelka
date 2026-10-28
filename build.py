@@ -105,6 +105,43 @@ class Obrazky:
         return Markup(f'<img src="{self.base}{nejv}" srcset="{srcset}" sizes="{sizes}" width="{w}" height="{h}"{a}{c}{s} '
                       f'{nacitani} decoding="async">')
 
+    def _avif(self, nazev, q=52):
+        """AVIF varianty (stejné šířky jako WebP) – jen pro obrázky, kde na tom záleží (hero)."""
+        klic = ("avif", nazev)
+        if klic in self.info:
+            return self.info[klic]
+        i = self._zpracuj(nazev)
+        zdroj = os.path.join(IMG, nazev)
+        h = hashlib.sha1(open(zdroj, "rb").read()).hexdigest()[:12]
+        stem = re.sub(r"[^A-Za-z0-9._-]+", "-", os.path.splitext(nazev)[0])
+        im = ImageOps.exif_transpose(Image.open(zdroj)); im.load()
+        w0, h0 = im.size
+        varianty = []
+        for w, vyska, _ in i["varianty"]:
+            cache = os.path.join(CACHE, f"{h}-{w}-q{q}.avif")
+            if not os.path.exists(cache):
+                r = im.resize((w, vyska), Image.LANCZOS) if w != w0 else im
+                if r.mode not in ("RGB", "RGBA"):
+                    r = r.convert("RGBA" if "A" in r.getbands() else "RGB")
+                r.save(cache, "AVIF", quality=q, speed=4)
+            out = f"{stem}-{w}.avif"
+            shutil.copy(cache, os.path.join(DIST, "img", out))
+            varianty.append((w, vyska, f"img/{out}"))
+        self.info[klic] = varianty
+        return varianty
+
+    def zdroje(self, nazev, sizes="100vw", media="", avif=True, q=52):
+        """<source> AVIF + WebP pro <picture> (s media pro mobilní výřez)."""
+        i = self._zpracuj(nazev)
+        w, h = i["varianty"][-1][0], i["varianty"][-1][1]
+        m = f' media="{media}"' if media else ""
+        out = []
+        if avif:
+            out.append(f'<source type="image/avif"{m} srcset="' + ", ".join(f"{self.base}{p} {w_}w" for w_, _, p in self._avif(nazev, q)) + f'" sizes="{sizes}" width="{w}" height="{h}">')
+        if media:
+            out.append(f'<source type="image/webp"{m} srcset="' + ", ".join(f"{self.base}{p} {w_}w" for w_, _, p in i["varianty"]) + f'" sizes="{sizes}" width="{w}" height="{h}">')
+        return Markup("".join(out))
+
     def img_url(self, nazev, w=1280):
         i = self._zpracuj(nazev)
         if not i["raster"]:
@@ -241,7 +278,7 @@ def main():
         return base + (cesta + "/" if cesta else "")
 
     env = Environment(loader=FileSystemLoader(SRC), autoescape=select_autoescape(["html"]), undefined=StrictUndefined)
-    env.globals.update(site=site, data=data, base=base, asset=asset, url=url, img=obr.img, img_url=obr.img_url,
+    env.globals.update(site=site, data=data, base=base, asset=asset, url=url, img=obr.img, img_url=obr.img_url, zdroje=obr.zdroje,
                        og_url=og_url, jsonld=jsonld(site), titulek="", popis="", cesta="", noindex=False, cz=cz, m2=m2, prekryv=False, aktivni="", bez_cta=False)
     stranky = []
     for f in sorted(os.listdir(SRC)):

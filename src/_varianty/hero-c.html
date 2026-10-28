@@ -1,0 +1,66 @@
+{% extends "_v5.html" %}
+{% set titulek = 'Varianta C – Vyberte si okno | Rezidence Metelka' %}
+{# středy bytů na vizualizaci viz-c.jpg (2340×1000), pozice 1–8 zleva #}
+{% set osy = [29.8, 42.6, 52.6, 60.1, 66.2, 71.5, 75.9, 79.9] %}
+{% set pat_y = [46.8, 48.6, 50.0, 51.0, 51.9, 52.6, 53.2, 53.8] %}
+{% set pri_y = [69.3, 68.3, 67.6, 67.0, 66.5, 66.1, 65.8, 65.5] %}
+{% block telo %}v-c{% endblock %}
+{% block hlavicka %}
+<header class="hc-hl">
+  <a href="{{ url('') }}" class="wm">Rezidence <i>Metelka</i></a>
+  <div class="hc-domy" role="tablist" aria-label="Dům">
+    <button role="tab" aria-selected="true" data-dum="0">K Metelce <i>I</i></button>
+    <button role="tab" aria-selected="false" data-dum="1">K Metelce <i>II</i></button>
+  </div>
+  <nav class="hc-menu" aria-label="Hlavní">
+    {% for n in site.nav_levo + site.nav_pravo %}{% if n.href in ['standardy', 'lokalita', 'galerie'] %}<a href="{{ url(n.href) }}">{{ n.text }}</a>{% endif %}{% endfor %}
+    <a class="hc-cta" href="{{ url('kontakt') }}">Domluvit prohlídku</a>
+  </nav>
+</header>
+{% endblock %}
+{% block obsah %}
+<section class="hc" aria-labelledby="hc-titul">
+  <div class="hc-hlava">
+    <h1 id="hc-titul"><span class="hc-pre">Rezidence Metelka</span>Vyberte si <i>okno.</i></h1>
+    <p>Všech 32 bytů je stejně velkých – 2+kk, 47,21&nbsp;m², okna na obě strany. Vybíráte jen dům a&nbsp;podlaží: zahrádku, nebo balkon.</p>
+  </div>
+  <div class="hc-fasada">
+    {{ img('viz-c.jpg', 'Vizualizace domu K Metelce ve večerním slunci: osm bytů v přízemí se zahrádkami a osm bytů v patře s průběžným balkonem.', sizes='100vw', eager=true) }}
+    {% for dum in data.byty.domy %}
+    <ol class="hc-body" aria-label="Byty v domě {{ dum.nazev }}" data-dum="{{ loop.index0 }}"{% if not loop.first %} hidden{% endif %}>
+      {% for b in dum.byty %}{% set o = osy[b.pozice - 1] %}
+      <li style="left:{{ o }}%;top:{{ (pat_y if b.podlazi == 'patro' else pri_y)[b.pozice - 1] }}%"{% if b.cislo == 12 %} class="je-vybrany"{% endif %}>
+        <a href="{{ url(b.cesta) }}" data-cislo="{{ b.cislo }}" aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}"><span>{{ '%02d' % b.cislo }}</span></a>
+        <div class="hc-karta sklo" aria-hidden="true">
+          <p class="mono">Byt {{ b.kod }} · {{ b.patro_text }}</p>
+          <p class="hc-karta-cena">{{ b.cena_text }}</p>
+          <p>2+kk 47,21 m² · {{ b.venku_typ }} {{ m2(b.venku) }} m²</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% endfor %}
+  </div>
+  <div class="hc-produkty">
+    <a class="hc-produkt" href="{{ url('byty') }}#prizemi">
+      <span class="mono">Byty 01–08</span>
+      <h2>Přízemí se zahrádkou</h2>
+      <p>Zahrádka 52–55 m², sklep a&nbsp;stání.</p>
+      <b>5 490 000 Kč</b>
+    </a>
+    <a class="hc-produkt" href="{{ url('byty') }}#patro">
+      <span class="mono">Byty 09–16</span>
+      <h2>Patro s&nbsp;balkonem</h2>
+      <p>Balkon 7,80–8,25 m², sklep a&nbsp;stání.</p>
+      <b>4 990 000 Kč</b>
+    </a>
+  </div>
+</section>
+{% endblock %}
+{% block skripty %}
+<script>
+(()=>{const ol=[...document.querySelectorAll('.hc-body')];ol.forEach(s=>s.addEventListener('pointerover',e=>{const li=e.target.closest('li');if(!li)return;s.querySelectorAll('li').forEach(x=>x.classList.toggle('je-vybrany',x===li));}));
+const f=document.querySelector('.hc-fasada'),v=f&&f.querySelector('.je-vybrany');if(f&&v&&f.scrollWidth>f.clientWidth)f.scrollLeft=v.offsetLeft-f.clientWidth/2;
+const bt=[...document.querySelectorAll('.hc-domy button')];bt.forEach(b=>b.addEventListener('click',()=>{bt.forEach(x=>x.setAttribute('aria-selected',x===b));ol.forEach(o=>o.hidden=o.dataset.dum!==b.dataset.dum);}));})();
+</script>
+{% endblock %}
