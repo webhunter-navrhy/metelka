@@ -86,7 +86,12 @@
       start = $('.body[data-dum="' + mh[1] + '"] li[data-podlazi="' + mh[2] + '"] a', fas);
       filtr({ dum: mh[1], patro: mh[2] });
     }
-    if (start) vyber(start, true);
+    // úvodní najetí na vybraný byt až po načtení (posun před vykreslením by Chromu zastavil měření LCP)
+    if (start) {
+      vyber(start, false);
+      var najed = function () { setTimeout(function () { vyber(start, true); }, 350); };
+      if (d.readyState === 'complete') najed(); else window.addEventListener('load', najed);
+    }
     mys.addEventListener('change', function () { var v = $('.body:not([hidden]) li.je-vybrany a', fas); if (v) vyber(v, false); });
   }
 
