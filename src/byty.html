@@ -22,7 +22,7 @@
   </div>
   <div class="vb-fasada" data-fasada>
     <div class="vb-platno">
-      {{ img('viz-c.jpg', 'Vizualizace domu K Metelce ve večerním slunci ze strany zahrádek: osm bytů v přízemí se zahrádkami a osm bytů v patře s průběžným balkonem. Čísla bytů jsou vyznačená na oknech.', sizes='(min-width: 48rem) 100vw, 1040px', eager=true) }}
+      {{ img('viz-c.jpg', 'Vizualizace domu K Metelce ve večerním slunci ze strany zahrádek: osm bytů v přízemí se zahrádkami a osm bytů v patře s průběžným balkonem. Čísla bytů jsou vyznačená na oknech.', sizes='(min-width: 48rem) 100vw, 800px', eager=true) }}
       {% for dum in data.byty.domy %}
       <ol class="body" id="body-{{ dum.slug }}" role="tabpanel" aria-labelledby="tab-{{ dum.slug }}" data-dum="{{ dum.slug }}"{% if not loop.first %} hidden{% endif %}>
         {% for b in dum.byty %}
