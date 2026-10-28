@@ -30,6 +30,9 @@ async def main(base, stranky):
                 k = await pg.evaluate(KONTROLA)
                 await pg.screenshot(path=os.path.join(OUT, f"s-{jm}-{w}.png"))
                 await pg.evaluate("document.querySelectorAll('.odhal').forEach(e=>e.classList.add('videt'))")
+                # nejdřív projet stránku, aby se natáhly lazy fotky, a počkat na ně
+                await pg.evaluate("document.querySelectorAll('img[loading=lazy]').forEach(i=>i.loading='eager')")
+                await pg.wait_for_load_state("networkidle"); await pg.wait_for_timeout(800)
                 H = await pg.evaluate("document.documentElement.scrollHeight")
                 dily, y = [], 0
                 while y < H:

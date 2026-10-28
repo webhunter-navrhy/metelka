@@ -11,7 +11,8 @@ JS = """() => new Promise(res => {
   setTimeout(() => {
     const fcp = (performance.getEntriesByName('first-contentful-paint')[0] || {}).startTime || 0;
     const kb = performance.getEntriesByType('resource').reduce((s, r) => s + (r.transferSize || 0), 0) + (performance.getEntriesByType('navigation')[0].transferSize || 0);
-    res({ lcp: Math.round(lcp), fcp: Math.round(fcp), kb: Math.round(kb / 1024), el: String(el).split('/').pop() });
+    const n = performance.getEntriesByType('navigation')[0];
+    res({ ttfb: Math.round(n.responseStart), lcp: Math.round(lcp), fcp: Math.round(fcp), kb: Math.round(kb / 1024), el: String(el).split('/').pop() });
   }, 600);
 })"""
 async def mer(b, url, mobil):
@@ -30,7 +31,7 @@ async def main(base, stranky):
             for mobil in (True, False):
                 v = [await mer(b, base + s, mobil) for _ in range(2)]
                 v.sort(key=lambda x: x["lcp"]); r = v[-1]
-                print(f"{('/' + s):28s} {'mobil' if mobil else 'PC   '}  LCP {r['lcp']/1000:.2f} s  FCP {r['fcp']/1000:.2f} s  {r['kb']} kB  ({r['el']})  [lepší běh LCP {v[0]['lcp']/1000:.2f} s]")
+                print(f"{('/' + s):28s} {'mobil' if mobil else 'PC   '}  LCP {r['lcp']/1000:.2f} s  FCP {r['fcp']/1000:.2f} s  TTFB {r['ttfb']/1000:.2f} s  {r['kb']} kB  ({r['el']})  [lepší běh LCP {v[0]['lcp']/1000:.2f} s]")
         await b.close()
 a = sys.argv[1:]
 base = a.pop(0) if a and a[0].startswith("http") else BASE
