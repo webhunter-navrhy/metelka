@@ -98,6 +98,7 @@ body.menu-otevrene .hlava { position: fixed; left: 0; right: 0; top: 0; }
 
 /* drobečky */
 .drobky { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 13px; color: var(--text2); margin-bottom: 22px; }
+.drobky a { padding: 10px 0; margin: -10px 0; }
 .drobky a:hover { color: var(--text); }
 .drobky a::after { content: '/'; margin-left: 10px; color: var(--pisek2); }
 
