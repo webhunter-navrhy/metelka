@@ -215,7 +215,8 @@ svg.rez { display: block; width: 100%; height: auto; color: var(--text); }
 .pata-sloupce { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 40px 0; }
 .pata-sloupce h2 { margin: 0 0 14px; font: 500 11px/1.3 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #c9a46a; }
 .pata-sloupce ul { list-style: none; margin: 0; padding: 0; }
-.pata-sloupce li { padding: 3px 0; }
+.pata-sloupce li { padding: 0; }
+.pata-sloupce li a { display: inline-flex; align-items: center; min-height: 40px; }
 .pata-sloupce p { margin: 0; line-height: 1.8; }
 .pata-sloupce b { font: 300 22px/1.4 var(--serif); color: #f3ece0; }
 .pata .doplnime { color: #c9a46a; }
