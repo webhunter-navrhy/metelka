@@ -8,9 +8,11 @@
 {% block obsah %}
 <div class="obal ph-uvod">
   <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Praha, nebo Hradec</span></nav>
-  <h1 id="h1" class="h1">Praha, <em>nebo</em><br>Hradec?</h1>
   <div class="ph-mrizka">
-    <p class="perex">Stejné peníze, 4&nbsp;990&nbsp;000&nbsp;Kč. V&nbsp;Praze za ně koupíte průměrně 27&nbsp;m² nového bytu. V&nbsp;Metelce celý byt 2+kk se sklepem a&nbsp;parkovacím stáním.</p>
+    <div>
+      <h1 id="h1" class="h1">Praha, <em>nebo</em><br>Hradec?</h1>
+      <p class="perex">Stejné peníze, 4&nbsp;990&nbsp;000&nbsp;Kč. V&nbsp;Praze za ně koupíte průměrně 27&nbsp;m² nového bytu. V&nbsp;Metelce celý byt 2+kk se sklepem a&nbsp;parkovacím stáním.</p>
+    </div>
     <dl class="ph-ceny">
       <div><dt>Nový byt v&nbsp;Praze, průměr za m²</dt><dd>{{ p.cena_m2_praha_text|replace(' Kč','') }}<small>Kč</small></dd></div>
       <div class="zl"><dt>Rezidence Metelka, byt v&nbsp;patře za m²</dt><dd>{{ p.cena_m2_metelka_text|replace(' Kč','') }}<small>Kč</small></dd></div>

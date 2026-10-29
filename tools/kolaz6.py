@@ -16,7 +16,7 @@ for v in sys.argv[1:]:
     dole = [vyska(Image.open(V / p).convert('RGB'), H) for p in PINY]
     w = max(sum(i.width for i in hore), sum(i.width for i in dole)) + G * 5
     k = Image.new('RGB', (w, 2 * H + 3 * G + 60), '#ffffff'); d = ImageDraw.Draw(k)
-    d.text((G, 12), f'Metelka v6 – varianta {v.upper()} (1440 + 390)   |   dole piny: Leon Home, RANTY, NORTH/FORM, Bravik', fill='#555', font=F)
+    d.text((G, 12), f'Metelka v6 – {v} (1440 + 390)   |   dole piny: Leon Home, RANTY, NORTH/FORM, Bravik', fill='#555', font=F)
     x = G
     for i in hore: k.paste(i, (x, 60)); x += i.width + G
     x = G

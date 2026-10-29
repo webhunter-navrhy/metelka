@@ -60,7 +60,7 @@ button { cursor: pointer; }
 .tl-o { border-color: rgba(27, 24, 21, .28); }
 .tl-o:hover { border-color: var(--text); }
 .tlacitka { display: flex; flex-wrap: wrap; gap: 10px; }
-.sipka { display: inline-flex; align-items: center; gap: 10px; font: 500 14.5px/1.3 var(--sans); border-bottom: 1px solid var(--linka); padding-bottom: 4px; }
+.sipka { display: inline-flex; align-items: flex-end; gap: 10px; min-height: 40px; font: 500 14.5px/1.3 var(--sans); border-bottom: 1px solid var(--linka); padding-bottom: 4px; }
 .sipka::after { content: '→'; color: var(--zlata-t); transition: transform .2s; }
 .sipka:hover::after { transform: translateX(3px); }
 
@@ -77,7 +77,7 @@ figcaption.popis { margin-top: 10px; font-size: 12.5px; color: var(--text2); }
 
 /* hlavička */
 .hlava { position: relative; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px var(--okraj); max-width: 1536px; margin: 0 auto; }
-.znak { display: flex; flex-direction: column; line-height: 1; }
+.znak { display: flex; flex-direction: column; justify-content: center; min-height: 40px; line-height: 1; }
 .znak b { font: 300 22px/1 var(--serif); font-variation-settings: 'opsz' 72; letter-spacing: .32em; text-transform: uppercase; }
 .znak small { font: 500 9.5px/1 var(--sans); letter-spacing: .42em; text-transform: uppercase; color: var(--zlata-t); margin-top: 6px; }
 .menu { display: flex; gap: 30px; font-size: 14.5px; color: var(--text2); }
@@ -382,7 +382,7 @@ a.radek::after { content: '→'; color: var(--zlata-t); }
 
 /* Praha, nebo Hradec */
 .ph-uvod { padding-top: clamp(20px, 4vw, 56px); }
-.ph-uvod .h1 { font-size: clamp(56px, 8.6vw, 150px); line-height: .9; }
+.ph-uvod .h1 { font-size: clamp(56px, 7.4vw, 124px); line-height: .9; margin-bottom: clamp(24px, 3vw, 44px); }
 .ph-mrizka { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 88px); align-items: end; margin-top: clamp(28px, 4vw, 56px); }
 .kalk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 88px); align-items: center; }
 .kalk label { display: flex; justify-content: space-between; align-items: baseline; margin: 28px 0 14px; font-size: 14px; color: var(--text2); }
@@ -484,7 +484,6 @@ input[type=range] { width: 100%; accent-color: var(--zlata); height: 28px; }
   .r-venku { grid-column: 2; font-size: 13px; color: var(--text2); }
   .r-cena { grid-column: 3; grid-row: 1 / span 2; }
   a.radek::after { display: none; }
-  .kb-fasada { order: -1; }
   .podobne { grid-template-columns: 1fr; }
   .deska { height: auto; grid-template-columns: 1fr 1fr; grid-template-rows: none; }
   .deska figure { aspect-ratio: 1; }
@@ -504,7 +503,7 @@ input[type=range] { width: 100%; accent-color: var(--zlata); height: 28px; }
   .sr-radek { grid-template-columns: 1fr 1fr; }
   .sr-co { grid-column: 1 / -1; font-size: 13px; color: var(--text2); }
   .sr-hlava .sr-co { display: none; }
-  .kontakt .ram { min-height: 0; aspect-ratio: 4 / 3; order: -1; }
+  .kontakt .ram { min-height: 0; aspect-ratio: 4 / 3; }
   .udaje { grid-template-columns: 1fr; gap: 18px; }
   .pole-2 { grid-template-columns: 1fr; }
 }
