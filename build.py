@@ -76,16 +76,18 @@ class Obrazky:
         varianty = []
         for w in sirky:
             vyska = round(h0 * w / w0)
-            cache = os.path.join(CACHE, f"{h}-{w}-t200.webp")
+            cache = os.path.join(CACHE, f"{h}-{w}-t150q50.webp")
             if not os.path.exists(cache):
                 r = im.resize((w, vyska), Image.LANCZOS) if w != w0 else im
                 if r.mode not in ("RGB", "RGBA"):
                     r = r.convert("RGBA" if "A" in r.getbands() else "RGB")
-                # kvalita 80, u detailních fotek postupně níž, aby varianta nepřesáhla ~200 kB
+                # kvalita 80, u detailních fotek postupně níž (nejméně 50), aby varianta nepřesáhla 150 kB
                 for q in (80, 72, 64, 57, 50):
                     r.save(cache, "WEBP", quality=q, method=6)
-                    if os.path.getsize(cache) <= 200_000:
+                    if os.path.getsize(cache) <= 150_000:
                         break
+            if os.path.getsize(cache) > 150_000 and varianty:
+                continue   # ani při kvalitě 50 se nevejde: tuhle šířku vynecháme, prohlížeč vezme menší
             out = f"{stem}-{w}.webp"
             shutil.copy(cache, os.path.join(cil_dir, out))
             varianty.append((w, vyska, f"img/{out}"))

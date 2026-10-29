@@ -1,175 +1,133 @@
-{% extends "_v5.html" %}
-{% from "_komponenty.html" import vykres %}
+{% extends "_v6.html" %}
+{% from "_v6k.html" import rez, ceny %}
 {% set titulek = 'Rezidence Metelka – nové byty 2+kk v Hradci Králové' %}
-{% set bez_cta = true %}
 {% set m = data.byty.domy[0].byty[0].mistnosti %}
+{% set zaver = 'v6/obyvak-2.jpg' %}
 {% block telo %}uvod{% endblock %}
 {% block obsah %}
-<section class="ha" aria-labelledby="ha-titul">
-  <div class="ha-foto">
-    <picture>
-      {{ zdroje('viz-a-m.jpg', media='(max-width: 47.99rem)', sizes='100vw') }}
-      {{ zdroje('viz-a.jpg', sizes='100vw') }}
-      {{ img('viz-a.jpg', 'Vizualizace domu K Metelce ve večerním slunci: dvě podlaží, zahrádky oddělené živým plotem, balkony s černým zábradlím a okna v rámech zlatého dubu.', sizes='100vw', eager=true) }}
-    </picture>
+<section class="hero" aria-labelledby="h1">
+  <picture>
+    {{ zdroje('v6/uvod-m.jpg', media='(max-width: 900px)', sizes='100vw') }}
+    {{ zdroje('v6/uvod.jpg', sizes='calc(100vw - 96px)') }}
+    {{ img('v6/uvod.jpg', 'Obývací pokoj s jídelním stolem u okna a kuchyní v dekoru dubu – ilustrační vizualizace interiéru, standard investora', sizes='calc(100vw - 96px)', eager=true) }}
+  </picture>
+  <div class="jmeno"><span class="stitek">Rezidence v Hradci Králové</span><h1 id="h1"><span class="sr">Rezidence </span>Metelka</h1></div>
+  <span class="ilu sklo">Ilustrační vizualizace interiéru · standard investora</span>
+  <div class="karta-h sklo">
+    <span class="stitek">Průchozí byty 2+kk · 47,21 m²</span>
+    <h2 class="serif">Okna na obě strany. <em>Zahrádka, nebo balkon.</em></h2>
+    <p>32 bytů ve dvou domech, devět minut od Velkého náměstí.</p>
+    <div class="rad"><span class="od">cena od<b>4 990 000 Kč</b></span><a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a></div>
   </div>
-  <h1 id="ha-titul" class="ha-titul"><span class="ha-pre">Rezidence</span><span class="ha-jmeno">Metelka</span></h1>
-  <div class="ha-dum" aria-hidden="true">
-    <picture>
-      {{ zdroje('viz-a-m-dum.png', media='(max-width: 47.99rem)', sizes='100vw') }}
-      {{ zdroje('viz-a-dum.png', sizes='100vw') }}
-      {{ img('viz-a-dum.png', '', sizes='100vw', eager=true) }}
-    </picture>
-  </div>
-  <div class="ha-claim">
-    <p class="ha-veta">Devět minut na Velké náměstí.</p>
-    <p class="ha-pod">Osmdesát minut do Prahy po D11. Dva nízké domy v&nbsp;klidné části Hradce Králové.</p>
-  </div>
-  <ul class="ha-metriky" aria-label="Rezidence v číslech">
-    <li class="sklo"><b>32</b><span>bytů 2+kk<em> ve dvou domech</em></span></li>
-    <li class="sklo"><b>4,99<small> mil.</small></b><span>Kč, cena od<em> se sklepem a stáním</em></span></li>
-    <li class="sklo"><b>55<small> m²</small></b><span>zahrádka<em> u bytů v přízemí</em></span></li>
+  <div class="rez-chip sklo" aria-hidden="true"><small>Každý byt prochází celou hloubkou domu</small>{{ rez() }}</div>
+  <ul class="metriky" aria-label="Vzdálenosti autem">
+    <li class="sklo"><b>9 min</b><span>Velké náměstí</span></li>
+    <li class="sklo"><b>3–4 km</b><span>dálnice D11</span></li>
+    <li class="sklo"><b>80 min</b><span>Praha</span></li>
   </ul>
 </section>
 
-<form class="rez" action="{{ url('byty') }}" aria-label="Vyberte si byt">
-  <fieldset class="rez-pole">
-    <legend>Dům</legend>
-    <label><input type="radio" name="dum" value="k-metelce-i" checked><span>K Metelce I</span></label>
-    <label><input type="radio" name="dum" value="k-metelce-ii"><span>K Metelce II</span></label>
-  </fieldset>
-  <fieldset class="rez-pole">
-    <legend>Byt</legend>
-    <label><input type="radio" name="patro" value="prizemi" checked><span>Přízemí se zahrádkou</span></label>
-    <label><input type="radio" name="patro" value="patro"><span>Patro s balkonem</span></label>
-  </fieldset>
-  <div class="rez-cena"><span class="rez-leg">Cena bytu</span><b data-cena>5 490 000 Kč</b><small data-cena-pozn>zahrádka 52–55 m², sklep, stání</small></div>
-  <button class="rez-btn" type="submit"><span>Ukázat 8 bytů <em>v přízemí</em></span><svg viewBox="0 0 24 10" aria-hidden="true"><path d="M0 5h22M18 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1"/></svg></button>
-</form>
-
-<section class="sekce produkty" aria-labelledby="h-produkty">
+<section class="sekce" id="vyber" aria-labelledby="h-vyber" data-vyber>
   <div class="obal">
-    <div class="hlava-2">
-      <div>
-        <p class="nad">Dva typy bytu, jedna dispozice</p>
-        <h2 id="h-produkty" class="h2">Zahrádka, <i>nebo</i> balkon?</h2>
+    <div class="hlava-sekce">
+      <div><span class="stitek">32 bytů 2+kk · dva domy</span><h2 id="h-vyber" class="h2">Vyberte si dům, patro<br>a&nbsp;<em>svou stranu světla</em>.</h2></div>
+      <p class="perex">Všechny byty mají stejnou dispozici 47,21&nbsp;m² a&nbsp;okna na obě strany domu. Liší se tím, co je venku: zahrádka v&nbsp;přízemí, nebo balkon v&nbsp;patře.</p>
+    </div>
+    {{ ceny() }}
+    <div class="filtr" role="group" aria-label="Výběr bytu">
+      <span class="pop">Dům</span>
+      <div class="seg" data-k="dum">{% for d in data.byty.domy %}<button type="button" aria-pressed="{{ 'true' if loop.first else 'false' }}" data-v="{{ d.slug }}">{{ d.nazev }}</button>{% endfor %}</div>
+      <span class="pop">Byt</span>
+      <div class="seg" data-k="patro"><button type="button" aria-pressed="true" data-v="prizemi">Se zahrádkou</button><button type="button" aria-pressed="false" data-v="patro">S balkonem</button></div>
+      <div class="vysl"><span data-o="vysl">K Metelce I · byty 1–8</span><a class="tl tl-z" data-o="odkaz" href="{{ url('byty') }}#k-metelce-i-prizemi"><i></i>Ukázat na domě</a></div>
+    </div>
+    <div class="karty">
+      <a class="karta vybrana" data-p="prizemi" href="{{ url('byty') }}#prizemi">
+        <div class="foto">{{ img('v6/maketa-zahradky.jpg', 'Bílá maketa domu ze strany zahrádek: přízemní byty s vlastními zahrádkami, nad nimi balkony patra', sizes='(min-width: 1100px) 25vw, (min-width: 900px) 46vw, 100vw') }}<span class="ilu sklo">Maketa podle projektu</span></div>
+        <div class="tx"><span class="stitek">Přízemí · 16 bytů</span><h3 class="serif">2+kk a&nbsp;vlastní <em>zahrada</em></h3>
+          <dl><dt>Byt</dt><dd>47,21 m²</dd><dt>Zahrádka</dt><dd>52–55 m²</dd><dt>Světlá výška</dt><dd>2,5 m</dd><dt>Za m² bytu</dt><dd>116 289 Kč</dd></dl>
+          <span class="sipka">Byty v přízemí</span></div>
+      </a>
+      <a class="karta" data-p="patro" href="{{ url('byty') }}#patro">
+        <div class="foto">{{ img('v6/maketa-balkony.jpg', 'Bílá maketa domu: byty v patře s průběžným balkonem a černým zábradlím', sizes='(min-width: 1100px) 25vw, (min-width: 900px) 46vw, 100vw') }}<span class="ilu sklo">Maketa podle projektu</span></div>
+        <div class="tx"><span class="stitek">Patro · 16 bytů</span><h3 class="serif">2+kk a&nbsp;vlastní <em>balkon</em></h3>
+          <dl><dt>Byt</dt><dd>47,21 m²</dd><dt>Balkon</dt><dd>7,80–8,25 m²</dd><dt>Šikmé stropy</dt><dd>2,11–3,22 m</dd><dt>Za m² bytu</dt><dd>105 698 Kč</dd></dl>
+          <span class="sipka">Byty v patře</span></div>
+      </a>
+    </div>
+    <p class="pozn">Dům na obrázcích je bílá maketa podle projektové dokumentace, interiéry jsou ilustrační vizualizace standardu investora. Ke každému bytu sklepní kóje 3&nbsp;m² a&nbsp;parkovací stání. Ceny podle ceníku ze 16. 9. 2026.</p>
+  </div>
+</section>
+
+<section class="sekce pisek" aria-labelledby="h-pruchozi">
+  <div class="obal">
+    <div class="pruchozi">
+      <div class="txt">
+        <span class="stitek">Byt 2+kk · 47,21 m²</span>
+        <h2 id="h-pruchozi" class="serif">Průchozí byty.<br><em>Světlo z&nbsp;obou stran.</em></h2>
+        <p class="perex">Každý byt prochází celou hloubkou domu, s&nbsp;okny na obě strany. Na jedné pavlač, na druhé balkon nebo vlastní zahrádka. Byt se dá příčně vyvětrat.</p>
+        <ul class="mistnosti-l">
+          <li><span>Obývací pokoj s&nbsp;kuchyní</span><b>{{ cz(m.obyvak) }} m²</b></li>
+          <li><span>Ložnice</span><b>{{ cz(m.loznice) }} m²</b></li>
+          <li><span>Koupelna s&nbsp;WC</span><b>{{ cz(m.koupelna) }} m²</b></li>
+          <li><span>Chodba</span><b>{{ cz(m.chodba) }} m²</b></li>
+        </ul>
+        <div class="rez-blok">{{ rez() }}<small><span>Řez domem, 11&nbsp;m od pavlače k&nbsp;balkonu</span><span>47,21 m² · 2+kk</span></small></div>
       </div>
-      <p class="perex">Všech 32 bytů má 2+kk a&nbsp;47,21&nbsp;m², okna na obě strany domu, sklep a&nbsp;vlastní stání. Vybíráte jen podlaží.</p>
+      <figure class="ram odhal">{{ img('v6/obyvak.jpg', 'Obývací pokoj s křesly, televizní stěnou a velkým oknem do zeleně – ilustrační vizualizace interiéru', sizes='(min-width: 900px) 56vw, 100vw') }}<span class="ilu ilu-pp sklo">Ilustrační vizualizace interiéru · standard investora</span></figure>
     </div>
-    <div class="produkty-mrizka">
-      <a class="produkt odhal" href="{{ url('byty') }}#k-metelce-i-prizemi">
-        <div class="produkt-foto">{{ img('viz-zahradky.jpg', 'Byty v přízemí: vchody do zahrádek oddělených živým plotem, nad nimi balkon patra', sizes='(min-width: 52rem) 46vw, 100vw') }}
-          <span class="produkt-cena sklo"><small>Cena bytu</small>5 490 000 Kč</span></div>
-        <div class="produkt-text">
-          <p class="nad">Přízemí · 16 bytů</p>
-          <h3>Se zahrádkou</h3>
-          <dl><div><dt>Zahrádka</dt><dd>52–55 m²</dd></div><div><dt>Světlá výška</dt><dd>2,5 m</dd></div><div><dt>Za m² bytu</dt><dd>116 289 Kč</dd></div></dl>
-          <span class="sipka">Byty v přízemí</span>
-        </div>
-      </a>
-      <a class="produkt odhal" href="{{ url('byty') }}#k-metelce-i-patro">
-        <div class="produkt-foto">{{ img('viz-balkony.jpg', 'Byty v patře: průběžný balkon s černým zábradlím a okna v rámech zlatého dubu', sizes='(min-width: 52rem) 46vw, 100vw') }}
-          <span class="produkt-cena sklo"><small>Cena bytu</small>4 990 000 Kč</span></div>
-        <div class="produkt-text">
-          <p class="nad">Patro · 16 bytů</p>
-          <h3>S balkonem</h3>
-          <dl><div><dt>Balkon</dt><dd>7,8–8,25 m²</dd></div><div><dt>Šikmé stropy</dt><dd>2,11–3,22 m</dd></div><div><dt>Za m² bytu</dt><dd>105 698 Kč</dd></div></dl>
-          <span class="sipka">Byty v patře</span>
-        </div>
-      </a>
+    <div class="pruh">
+      <div><b>5 min</b><span>hlavní nádraží</span></div>
+      <div><b>9 min</b><span>Velké náměstí</span></div>
+      <div><b>3–4 km</b><span>dálnice D11</span></div>
+      <div><b>80 min</b><span>Praha</span></div>
     </div>
   </div>
 </section>
 
-<section class="foto-sekce byt-uvod" aria-labelledby="h-byt">
-  <div class="fs-foto">{{ img('teple/int-obyvak-kuchyne.jpg', 'Obývací pokoj s kuchyní: světlá sedačka, dřevěné skříňky a jídelní stůl u okna', sizes='100vw') }}</div>
-  <div class="obal fs-obsah">
-    <div class="fs-text">
-      <p class="nad">Byt 2+kk · 47,21 m²</p>
-      <h2 id="h-byt" class="h2">Od okna<br><i>k&nbsp;oknu</i></h2>
-      <p class="perex">Každý byt prochází celou hloubkou domu. Ráno slunce v&nbsp;ložnici, večer v&nbsp;obýváku, a&nbsp;když je potřeba, průvan.</p>
+<section class="sekce" aria-labelledby="h-interier">
+  <div class="obal">
+    <div class="hlava-sekce">
+      <div><span class="stitek">Standard investora</span><h2 id="h-interier" class="h2">Dub, krémová <em>a&nbsp;černá</em>.</h2></div>
+      <p class="perex">Vzorový byt pracuje s&nbsp;podlahou z&nbsp;dubu v&nbsp;rybí kosti, dekorem Egger Kašmír, krémovou dlažbou 60&nbsp;×&nbsp;60 a&nbsp;černými bateriemi Hansgrohe. <a class="sipka" href="{{ url('standardy') }}">Standardy a&nbsp;materiály</a></p>
     </div>
-    <div class="mistnosti-karta sklo-tmave">
-      <ul>
-        <li><b>{{ cz(m.obyvak) }}</b><span>m² obývací pokoj s&nbsp;kuchyní</span></li>
-        <li><b>{{ cz(m.loznice) }}</b><span>m² ložnice</span></li>
-        <li><b>{{ cz(m.koupelna) }}</b><span>m² koupelna s&nbsp;WC</span></li>
-        <li><b>{{ cz(m.chodba) }}</b><span>m² chodba</span></li>
-      </ul>
-      <a class="sipka sipka-svetla" href="{{ url('standardy') }}">Půdorys a&nbsp;standardy</a>
+    <div class="trojice">
+      <figure class="ram odhal">{{ img('v6/loznice.jpg', 'Ložnice s manželskou postelí, vestavěnou skříní a oknem – ilustrační vizualizace', sizes='(min-width: 900px) 40vw, 100vw') }}<span class="ilu ilu-lp sklo">Ložnice · ilustrační vizualizace</span></figure>
+      <figure class="ram odhal">{{ img('v6/kuchyn.jpg', 'Kuchyňská linka v dekoru dubu s tmavou zástěnou – ilustrační vizualizace', sizes='(min-width: 900px) 28vw, 50vw') }}<span class="ilu ilu-lp sklo">Kuchyň · ilustrační</span></figure>
+      <figure class="ram odhal">{{ img('v6/koupelna.jpg', 'Koupelna se sprchovým koutem, závěsným WC a pračkou – ilustrační vizualizace', sizes='(min-width: 900px) 28vw, 50vw') }}<span class="ilu ilu-lp sklo">Koupelna · ilustrační</span></figure>
     </div>
-  </div>
-  <p class="fs-pozn">Ilustrační vizualizace interiéru</p>
-</section>
-
-<section class="sekce tma standardy-uvod" aria-labelledby="h-std">
-  <div class="obal std-mrizka">
-    <div class="std-text">
-      <p class="nad">Standardy</p>
-      <h2 id="h-std" class="h2">Víte, z&nbsp;čeho je <i>každá stěna</i></h2>
-      <p class="perex">Zlaté kóty jsou z&nbsp;projektové dokumentace. Žádné „nadstandardní materiály“, ale čísla, která si můžete ověřit.</p>
-      <dl class="cisla-4">
-        <div><dt>Porotherm</dt><dd>30<small> cm</small></dd></div>
-        <div><dt>Čedičová vlna</dt><dd>24<small> cm</small></dd></div>
-        <div><dt>Trojsklo U<sub>w</sub></dt><dd>0,84</dd></div>
-        <div><dt>Koupelna</dt><dd>24<small> °C</small></dd></div>
-      </dl>
-      <a class="sipka sipka-svetla" href="{{ url('standardy') }}">Jak je dům postavený</a>
-    </div>
-    <figure class="std-vykres odhal">{{ vykres() }}</figure>
   </div>
 </section>
 
-<section class="foto-sekce hradec-uvod" aria-labelledby="h-hradec">
-  <div class="fs-foto">{{ img('teple/hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='100vw') }}</div>
-  <div class="obal fs-obsah fs-obsah-dole">
-    <div class="fs-text">
-      <p class="nad">Lokalita</p>
-      <h2 id="h-hradec" class="h2">Salon republiky,<br><i>devět minut</i> od dveří</h2>
-    </div>
-    <ol class="minuty-sklo">
-      <li class="sklo"><b>5</b><span>min na hlavní nádraží</span></li>
-      <li class="sklo"><b>5,5</b><span>min na D11 směr Praha</span></li>
-      <li class="sklo"><b>9</b><span>min na Velké náměstí</span></li>
-      <li class="sklo"><b>62</b><span>min na pražský Černý Most</span></li>
-    </ol>
-  </div>
-  <p class="fs-pozn">Foto Vít Luštinec, Wikipedia, CC BY-SA 4.0 · časy autem bez provozu</p>
-  <a class="fs-odkaz sipka sipka-svetla" href="{{ url('lokalita') }}">Lokalita</a>
-</section>
-
-<section class="sekce tma praha-uvod" aria-labelledby="h-praha">
-  <div class="obal praha-mrizka">
+<section class="sekce pisek" aria-labelledby="h-lok">
+  <div class="obal lok-uvod">
     <div>
-      <p class="nad">Praha, nebo Hradec</p>
-      <h2 id="h-praha" class="h2">Za 27 pražských metrů <i>celý byt</i></h2>
-      <p class="perex">Za 4&nbsp;990&nbsp;000&nbsp;Kč koupíte v&nbsp;Praze průměrně 27&nbsp;m² nového bytu. V&nbsp;Metelce 47,21&nbsp;m² se sklepem a&nbsp;parkovacím stáním.</p>
-      <a class="sipka sipka-svetla" href="{{ url('praha-nebo-hradec') }}">Spočítat svůj rozpočet</a>
+      <span class="stitek">Lokalita · Svobodné Dvory</span>
+      <h2 id="h-lok" class="h2" style="margin-top:14px">Salon republiky<br>za <em>devět minut</em>.</h2>
+      <ul class="minuty">
+        <li><b>5<small>min</small></b><span>hlavní nádraží</span></li>
+        <li><b>9<small>min</small></b><span>Velké náměstí, historické centrum</span></li>
+        <li><b>10<small>min</small></b><span>Fakultní nemocnice</span></li>
+        <li><b>3–4<small>km</small></b><span>dálnice D11 směr Praha</span></li>
+      </ul>
+      <a class="sipka" href="{{ url('lokalita') }}">Lokalita, sport a&nbsp;školy</a>
     </div>
-    <div class="ctverce" aria-label="Srovnání ploch za 4 990 000 Kč: Praha 27 m², Rezidence Metelka 47 m²">
-      <figure class="ctverec ctverec-hradec"><div class="cv-plocha"></div><figcaption><b>47 m²</b><span>Rezidence Metelka<br>105 698 Kč/m²</span></figcaption></figure>
-      <figure class="ctverec ctverec-praha" style="--s:{{ (27 / 47) ** 0.5 }}"><div class="cv-plocha"></div><figcaption><b>27 m²</b><span>Praha, nové byty<br>186 408 Kč/m²</span></figcaption></figure>
-    </div>
+    <figure class="ram odhal">{{ img('hk-katedrala-letecky.jpg', 'Katedrála svatého Ducha a Bílá věž nad střechami Hradce Králové', sizes='(min-width: 900px) 52vw, 100vw') }}<span class="ilu ilu-lp sklo">Hradec Králové · Vít Luštinec, CC BY-SA 4.0</span></figure>
   </div>
 </section>
 
-<section class="kontakt-uvod" aria-labelledby="h-kontakt">
-  <div class="ku-foto">{{ img('teple/int-jidelna-okno.jpg', '', sizes='100vw') }}</div>
-  <div class="obal ku-mrizka">
-    <div class="ku-text">
-      <p class="nad">Prohlídka</p>
-      <h2 id="h-kontakt" class="h2">Projděte si byt<br><i>na místě</i></h2>
-      <p class="perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Prodej bytů má na starosti {{ site.kontakt.jmeno }}.</p>
-      {% if not site.kontakt.telefon %}<p class="doplnime">Telefon a e-mail prodeje doplníme.</p>{% endif %}
+<section class="sekce" aria-labelledby="h-praha">
+  <div class="obal praha-uvod">
+    <div>
+      <span class="stitek">Praha, nebo Hradec</span>
+      <h2 id="h-praha" class="h2" style="margin-top:14px">Za 27 pražských metrů <em>celý byt</em>.</h2>
+      <p class="perex" style="margin:22px 0 28px">Za 4&nbsp;990&nbsp;000&nbsp;Kč koupíte v&nbsp;Praze průměrně 27&nbsp;m² nového bytu. V&nbsp;Metelce 47,21&nbsp;m² se sklepem a&nbsp;parkovacím stáním.</p>
+      <a class="sipka" href="{{ url('praha-nebo-hradec') }}">Spočítat svůj rozpočet</a>
     </div>
-    <div class="ku-form sklo-svetle">{% include "_formular.html" %}</div>
+    <div class="ctverce" aria-label="Srovnání ploch za 4 990 000 Kč: Rezidence Metelka 47 m², Praha 27 m²">
+      <figure class="ctverec ctverec-h" style="--w:clamp(180px,24vw,340px)"><div class="plocha"></div><figcaption><b>47 m²</b><span>Rezidence Metelka · 105 698 Kč/m²</span></figcaption></figure>
+      <figure class="ctverec ctverec-p" style="--w:calc(clamp(180px,24vw,340px) * {{ (27 / 47) ** 0.5 }})"><div class="plocha"></div><figcaption><b>27 m²</b><span>Praha, nové byty</span></figcaption></figure>
+    </div>
   </div>
 </section>
-{% endblock %}
-{% block skripty %}
-<script>
-(()=>{const f=document.querySelector('.rez');if(!f)return;const c=f.querySelector('[data-cena]'),p=f.querySelector('[data-cena-pozn]'),b=f.querySelector('.rez-btn em');
-const u=()=>{const pr=f.patro.value==='prizemi';c.textContent=pr?'5 490 000 Kč':'4 990 000 Kč';p.textContent=pr?'zahrádka 52–55 m², sklep, stání':'balkon 7,80–8,25 m², sklep, stání';b.textContent=pr?'v přízemí':'v patře';};
-f.addEventListener('change',u);u();f.addEventListener('submit',e=>{e.preventDefault();location.href=f.action+'#'+f.dum.value+'-'+f.patro.value;});})();
-</script>
 {% endblock %}

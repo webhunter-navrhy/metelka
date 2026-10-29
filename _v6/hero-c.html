@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rezidence Metelka – varianta C</title>
+<link rel="stylesheet" href="../static/fonts/v6/fonts.css">
+<link rel="stylesheet" href="v6.css">
+<style>
+/* C „Zlatá hodina“: vizualizace přes celou šířku, věta o Hradci na obloze, ceny ve skle */
+:root { --serif-c: 'Fraunces', 'Times New Roman', serif; --serif: var(--serif-c); }
+.serif { font-family: var(--serif-c); font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0; }
+.hero { position: relative; height: 100svh; min-height: 680px; max-height: 1000px; overflow: hidden; }
+.hero picture, .hero picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; }
+.hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(247, 241, 231, .92) 0%, rgba(247, 241, 231, .8) 30%, rgba(247, 241, 231, .3) 50%, rgba(247, 241, 231, 0) 62%), linear-gradient(180deg, rgba(247, 241, 231, .6) 0%, rgba(247, 241, 231, 0) 22%); }
+.hero .hlava { position: absolute; z-index: 3; left: 0; right: 0; top: 0; }
+.nadpis { position: absolute; z-index: 2; left: var(--okraj); top: clamp(96px, 13vh, 132px); max-width: 860px; }
+.nadpis h1 { margin: 14px 0 18px; font: 200 clamp(56px, 6.4vw, 100px)/.95 var(--serif-c); font-variation-settings: 'opsz' 144, 'SOFT' 0, 'WONK' 0; letter-spacing: -.035em; }
+.nadpis h1 em { font-style: italic; }
+.nadpis p { margin: 0; max-width: 46ch; font-size: 17px; color: var(--text2); }
+.ceny { position: absolute; z-index: 2; left: var(--okraj); bottom: 124px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 640px; }
+.ceny a { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 12px; padding: 18px 20px; border-radius: 18px; }
+.ceny small { grid-column: 1 / -1; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--zlata-t); }
+.ceny b { font: 300 30px/1 var(--serif-c); font-variation-settings: 'opsz' 144; }
+.ceny span { font-size: 13px; color: var(--text2); }
+.ceny small span { font-size: inherit; color: inherit; }
+.ceny i { width: 38px; height: 38px; border-radius: 50%; background: var(--text); color: var(--krem2); display: grid; place-items: center; font-style: normal; grid-row: 2 / 4; grid-column: 2; }
+.lista { position: absolute; z-index: 2; left: var(--okraj); right: var(--okraj); bottom: 22px; display: grid; grid-template-columns: repeat(4, 1fr) auto; align-items: center; border-radius: 20px; padding: 6px; }
+.lista div { padding: 12px 18px; border-left: 1px solid rgba(27, 24, 21, .12); }
+.lista div:first-child { border-left: 0; }
+.lista b { display: block; font: 300 26px/1 var(--serif-c); font-variation-settings: 'opsz' 144; }
+.lista span { font-size: 12.5px; color: var(--text2); }
+.lista .tl { margin: 0 6px 0 12px; }
+.ilu { position: absolute; z-index: 2; right: var(--okraj); bottom: 112px; font-size: 11px; color: rgba(255, 255, 255, .9); letter-spacing: .06em; }
+@media (max-width: 900px) {
+  .hero { min-height: 720px; max-height: none; }
+  .hero::before { background: linear-gradient(180deg, rgba(247, 241, 231, .82) 0%, rgba(247, 241, 231, .4) 34%, rgba(247, 241, 231, 0) 52%); }
+  .hero picture img { object-position: 50% 50%; }
+  .nadpis { top: 92px; right: var(--okraj); }
+  .nadpis h1 { font-size: 46px; margin: 10px 0 12px; }
+  .nadpis p { font-size: 15px; }
+  .ceny { top: auto; bottom: 12px; left: 12px; right: 12px; width: auto; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ceny a { padding: 14px; grid-template-columns: 1fr; }
+  .ceny b { font-size: 22px; }
+  .ceny i { display: none; }
+  .ceny small { font-size: 10.5px; }
+  .ceny small .d { display: none; }
+  .lista { display: none; }
+  .ilu { bottom: 124px; right: 12px; color: var(--text2); padding: 6px 10px; border-radius: 999px; background: rgba(251, 247, 240, .7); font-size: 10.5px; letter-spacing: .02em; }
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <picture><source type="image/avif" media="(max-width: 900px)" srcset="img/hero-c-m.avif"><source type="image/webp" media="(max-width: 900px)" srcset="img/hero-c-m.webp"><source type="image/avif" srcset="img/hero-c.avif"><source type="image/webp" srcset="img/hero-c.webp"><img src="img/hero-c.jpg" width="1920" height="1080" alt="Ložnice ve světle zapadajícího slunce – ilustrační vizualizace interiéru, standard investora" fetchpriority="high"></picture>
+  <header class="hlava">
+    <a class="znak" href="#"><b>Metelka</b><small>Rezidence · Hradec Králové</small></a>
+    <nav class="menu"><a href="#">Byty</a><a href="#">Standardy</a><a href="#">Lokalita</a><a href="#">Praha, nebo Hradec</a><a href="#">Kontakt</a></nav>
+    <a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a>
+    <button class="burger" aria-label="Menu"><span></span><span></span></button>
+  </header>
+  <div class="nadpis">
+    <span class="stitek">Hradec Králové · 32 průchozích bytů 2+kk</span>
+    <h1 class="serif">Devět minut<br>od <em>Velkého náměstí.</em></h1>
+    <p>Byty s okny na obě strany domu, se zahrádkou nebo balkonem. Kousek k dálnici D11, do Prahy za 80 minut.</p>
+  </div>
+  <div class="ceny">
+    <a class="sklo" href="#vyber"><small>Přízemí <span class="d">· zahrádka 52–55 m²</span></small><b>5 490 000 Kč</b><i>→</i><span>2+kk · 47,21 m² · sklep</span></a>
+    <a class="sklo" href="#vyber"><small>Patro <span class="d">· balkon 7,80–8,25 m²</span></small><b>4 990 000 Kč</b><i>→</i><span>2+kk · 47,21 m² · sklep</span></a>
+  </div>
+  <span class="ilu">Ilustrační vizualizace interiéru · standard investora</span>
+  <div class="lista sklo">
+    <div><b>5 min</b><span>hlavní nádraží</span></div>
+    <div><b>10 min</b><span>Fakultní nemocnice</span></div>
+    <div><b>8 min</b><span>zimní stadion</span></div>
+    <div><b>80 min</b><span>Praha</span></div>
+    <a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a>
+  </div>
+</section>
+<section class="vyber" id="vyber"></section>
+<script src="vyber.js"></script>
+</body>
+</html>

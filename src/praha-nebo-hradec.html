@@ -1,4 +1,4 @@
-{% extends "_v5.html" %}
+{% extends "_v6.html" %}
 {% set titulek = 'Praha, nebo Hradec? Srovnání cen bytů – Rezidence Metelka' %}
 {% set popis = 'Nový byt v Praze stojí v průměru 186 408 Kč za m², v Rezidenci Metelka 105 698 Kč. Za 4,99 milionu 27 m² v Praze, nebo 47 m² v Hradci se sklepem a parkováním.' %}
 {% set cesta = 'praha-nebo-hradec/' %}
@@ -6,78 +6,68 @@
 {% set p = data.okoli.praha %}
 {% block telo %}stranka-ph{% endblock %}
 {% block obsah %}
-<section class="sh tma ph-hero" aria-labelledby="h1">
-  <div class="obal praha-mrizka">
-    <div>
-      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Praha, nebo Hradec</span></nav>
-      <h1 id="h1" class="h1">Praha, <i>nebo</i> Hradec?</h1>
-      <p class="perex">Stejné peníze, 4&nbsp;990&nbsp;000&nbsp;Kč. V&nbsp;Praze za ně koupíte průměrně 27&nbsp;m² nového bytu, v&nbsp;Metelce celý byt 2+kk se sklepem a&nbsp;parkovacím stáním.</p>
-    </div>
-    <div class="ctverce" aria-label="Srovnání ploch za 4 990 000 Kč: Praha 27 m², Rezidence Metelka 47 m²">
-      <figure class="ctverec ctverec-hradec"><div class="cv-plocha"></div><figcaption><b>47 m²</b><span>Rezidence Metelka<br>105 698 Kč/m²</span></figcaption></figure>
-      <figure class="ctverec ctverec-praha" style="--s:{{ (27 / 47) ** 0.5 }}"><div class="cv-plocha"></div><figcaption><b>27 m²</b><span>Praha, nové byty<br>186 408 Kč/m²</span></figcaption></figure>
-    </div>
+<div class="obal ph-uvod">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Praha, nebo Hradec</span></nav>
+  <h1 id="h1" class="h1">Praha, <em>nebo</em><br>Hradec?</h1>
+  <div class="ph-mrizka">
+    <p class="perex">Stejné peníze, 4&nbsp;990&nbsp;000&nbsp;Kč. V&nbsp;Praze za ně koupíte průměrně 27&nbsp;m² nového bytu. V&nbsp;Metelce celý byt 2+kk se sklepem a&nbsp;parkovacím stáním.</p>
+    <dl class="ph-ceny">
+      <div><dt>Nový byt v&nbsp;Praze, průměr za m²</dt><dd>{{ p.cena_m2_praha_text|replace(' Kč','') }}<small>Kč</small></dd></div>
+      <div class="zl"><dt>Rezidence Metelka, byt v&nbsp;patře za m²</dt><dd>{{ p.cena_m2_metelka_text|replace(' Kč','') }}<small>Kč</small></dd></div>
+      <div><dt>Za 4&nbsp;990&nbsp;000&nbsp;Kč v&nbsp;Praze / v&nbsp;Metelce</dt><dd>27 / 47<small>m²</small></dd></div>
+    </dl>
   </div>
-  <p class="obal pozn pozn-svetla">Plochy čtverců odpovídají metrům čtverečním. Zdroje dole na stránce.</p>
-</section>
+  <p class="pozn">Zdroje dole na stránce.</p>
+</div>
 
-<section class="sekce rozpocet-sekce" aria-labelledby="h-rozpocet">
-  <div class="obal rozpocet-mrizka">
+<section class="sekce" aria-labelledby="h-rozpocet">
+  <div class="obal kalk">
     <div>
-      <p class="nad">Kalkulačka</p>
-      <h2 id="h-rozpocet" class="h2">Kolik metrů za <i>váš rozpočet</i></h2>
-      <label class="rozpocet-label" for="rozpocet"><span>Rozpočet</span> <output id="rozpocet-vystup" for="rozpocet">4,99 mil. Kč</output></label>
-      <input type="range" id="rozpocet" min="2000000" max="10000000" step="100000" value="4990000" data-praha="{{ p.cena_m2_praha }}" data-hradec="{{ p.cena_m2_metelka }}">
-      <div class="rozpocet-meze" aria-hidden="true"><span>2 mil.</span><span>10 mil.</span></div>
+      <span class="stitek">Kalkulačka</span>
+      <h2 id="h-rozpocet" class="h2" style="margin-top:14px">Kolik metrů za <em>váš rozpočet</em>.</h2>
+      <label for="rozpocet"><span>Rozpočet</span><output id="rozpocet-vystup" for="rozpocet">4,99 mil. Kč</output></label>
+      <input type="range" id="rozpocet" min="2000000" max="10000000" step="10000" value="4990000" data-praha="{{ p.cena_m2_praha }}" data-hradec="{{ p.cena_m2_metelka }}">
+      <div class="meze" aria-hidden="true"><span>2 mil.</span><span>10 mil.</span></div>
+      <p class="pozn">Počítáno s&nbsp;průměrnou cenou nového bytu v&nbsp;Praze a&nbsp;s&nbsp;cenou za m² bytu v&nbsp;patře Metelky.</p>
     </div>
-    <div class="rozpocet-vysledek" aria-live="polite">
-      <div class="rv-pole"><div id="ctverec-hradec" class="rv-ctverec rv-hradec"></div><div id="ctverec-praha" class="rv-ctverec"></div></div>
-      <dl>
-        <div class="zlata"><dt>Hradec, Rezidence Metelka</dt><dd id="m2-hradec">47 m²</dd></div>
-        <div><dt>Praha</dt><dd id="m2-praha">27 m²</dd></div>
-      </dl>
+    <div class="kalk-vysl" aria-live="polite" style="--plocha-max:clamp(200px,30vw,400px)">
+      <figure class="ctverec ctverec-h" id="ctverec-hradec" style="--w:calc(var(--plocha-max) * .687)"><div class="plocha"></div><figcaption><b id="m2-hradec">47 m²</b><span>Hradec, Rezidence Metelka</span></figcaption></figure>
+      <figure class="ctverec ctverec-p" id="ctverec-praha" style="--w:calc(var(--plocha-max) * .521)"><div class="plocha"></div><figcaption><b id="m2-praha">27 m²</b><span>Praha</span></figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="sekce tma ph-cisla" aria-labelledby="h-cisla">
+<section class="sekce pisek" aria-labelledby="h-cisla">
   <div class="obal">
-    <div class="hlava-2">
-      <div>
-        <p class="nad">Čísla</p>
-        <h2 id="h-cisla" class="h2">{{ p.nadpis }}</h2>
-      </div>
+    <div class="hlava-sekce">
+      <div><span class="stitek">Čísla</span><h2 id="h-cisla" class="h2">Za 27 pražských metrů <em>celý byt</em>.</h2></div>
       <p class="perex">Rozdíl 3,8 milionu nemusíte brát z&nbsp;hypotéky. A&nbsp;při pronájmu vychází v&nbsp;Hradci vyšší hrubý výnos než v&nbsp;Praze.</p>
     </div>
     <div class="srovnani">
-      <div class="sr-radek sr-hlava" aria-hidden="true"><span></span><span>Praha</span><span>Rezidence Metelka</span></div>
+      <div class="sr-radek sr-hlava" aria-hidden="true"><span class="sr-co"></span><span>Praha</span><span>Rezidence Metelka</span></div>
       {% for r in p.radky %}
-      <div class="sr-radek odhal"><span class="sr-co">{{ r.co }}</span><span class="sr-praha" data-l="Praha">{{ r.praha }}</span><span class="sr-metelka" data-l="Metelka">{{ r.metelka }}</span></div>
+      <div class="sr-radek odhal"><span class="sr-co">{{ r.co }}</span><span class="sr-praha">{{ r.praha }}</span><span class="sr-metelka">{{ r.metelka }}</span></div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="foto-sekce dojezd" aria-labelledby="h-dojezd">
-  <div class="fs-foto">{{ img('teple/hk-prazsky-most-2.jpg', 'Pražský most přes Labe s Bílou věží a katedrálou', sizes='100vw') }}</div>
-  <div class="obal fs-obsah fs-obsah-dole">
-    <div class="fs-text">
-      <p class="nad">Praha nezmizí</p>
-      <h2 id="h-dojezd" class="h2">Hodina na <i>Černý Most</i></h2>
-      <p class="perex">Na D11 najedete za 5,5&nbsp;minuty. Přímý rychlík jezdí každou hodinu, autobusem z&nbsp;Terminálu HD je to 15 přímých spojů ve všední den.</p>
+<section class="sekce" aria-labelledby="h-dojezd">
+  <div class="obal dojezd">
+    <figure class="ram odhal">{{ img('hk-prazsky-most-2.jpg', 'Pražský most přes Labe s Bílou věží a katedrálou', sizes='(min-width: 900px) 52vw, 100vw') }}<span class="ilu ilu-lp sklo">Pražský most, Hradec Králové · Michielverbeek, CC BY-SA 4.0</span></figure>
+    <div>
+      <span class="stitek">Praha nezmizí</span>
+      <h2 id="h-dojezd" class="h2" style="margin:14px 0 26px">Hodina na <em>Černý Most</em>.</h2>
+      <ul class="minuty" style="margin:0">
+        {% for g in data.okoli.jizdni_rad[2].polozky %}<li><b>{{ g.min }}<small>min</small></b><span>{{ g.nazev }}{% if g.pozn is defined %} · {{ g.pozn }}{% endif %}</span></li>{% endfor %}
+      </ul>
     </div>
-    <ol class="minuty-sklo">
-      {% for g in data.okoli.jizdni_rad[2].polozky %}
-      <li class="sklo"><b>{{ g.min }}</b><span>min · {{ g.nazev }}</span></li>
-      {% endfor %}
-    </ol>
   </div>
-  <p class="fs-pozn">Pražský most, Hradec Králové · Michielverbeek, CC BY-SA 4.0</p>
 </section>
 
-<section class="sekce zdroje" aria-labelledby="h-zdroje">
-  <div class="obal uzky">
-    <h2 id="h-zdroje" class="h3">Zdroje</h2>
+<section class="sekce sekce-tesna" aria-labelledby="h-zdroje">
+  <div class="obal">
+    <h2 id="h-zdroje" class="h3" style="margin:0;font-size:24px">Zdroje</h2>
     <p class="pozn">{{ p.zdroje }} {{ data.okoli.jizdni_rad_pozn }}</p>
   </div>
 </section>

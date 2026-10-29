@@ -1,0 +1,82 @@
+/* Rezidence Metelka v6 – společný základ tří variant hero (fáze 1) */
+:root {
+  --krem: #f7f1e7;
+  --krem2: #fbf8f2;
+  --pisek: #ebe0cd;
+  --pisek2: #dccab0;
+  --zlata: #b38b4d;
+  --zlata-t: #8a6630;   /* zlatá pro malý text (kontrast na krému) */
+  --text: #1b1815;
+  --text2: #5a5147;
+  --linka: rgba(27, 24, 21, .14);
+  --sklo: rgba(251, 247, 240, .58);
+  --sklo-hrana: rgba(255, 255, 255, .7);
+  --serif: 'Newsreader', 'Times New Roman', serif;
+  --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --okraj: clamp(16px, 3.4vw, 48px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--krem); color: var(--text); font: 400 16px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+.serif { font-family: var(--serif); font-weight: 200; font-variation-settings: 'opsz' 72; letter-spacing: -.01em; }
+.serif em { font-style: italic; }
+.stitek { font: 500 11.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--zlata-t); }
+.sklo { background: var(--sklo); -webkit-backdrop-filter: blur(16px) saturate(1.25); backdrop-filter: blur(16px) saturate(1.25); border: 1px solid var(--sklo-hrana); }
+
+/* hlavička */
+.hlava { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px var(--okraj); }
+.znak { display: flex; flex-direction: column; line-height: 1; }
+.znak b { font: 300 22px/1 var(--serif); font-variation-settings: 'opsz' 72; letter-spacing: .32em; text-transform: uppercase; padding-left: .02em; }
+.znak small { font: 500 9.5px/1 var(--sans); letter-spacing: .42em; text-transform: uppercase; color: var(--zlata-t); margin-top: 6px; }
+.menu { display: flex; gap: 30px; font-size: 14px; color: var(--text2); }
+.menu a:hover { color: var(--text); }
+.tl { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px; font: 500 14px/1 var(--sans); white-space: nowrap; }
+.tl-z { background: var(--text); color: var(--krem2); }
+.tl-z i { width: 6px; height: 6px; border-radius: 50%; background: var(--zlata); }
+.tl-o { border: 1px solid rgba(27, 24, 21, .28); }
+.burger { display: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--linka); background: transparent; }
+.burger span { display: block; width: 16px; height: 1px; background: var(--text); margin: 4px auto; }
+
+/* prodejní struktura pod hero */
+.vyber { padding: clamp(56px, 7vw, 104px) var(--okraj) clamp(56px, 7vw, 96px); }
+.vyber-hlava { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 36px; }
+.vyber-hlava h2 { margin: 12px 0 0; font-size: clamp(34px, 4.2vw, 58px); line-height: 1.02; }
+.vyber-hlava p { max-width: 36ch; margin: 0; color: var(--text2); }
+.filtr { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; padding: 14px 16px 14px 24px; border-radius: 999px; background: var(--krem2); border: 1px solid var(--linka); margin-bottom: 22px; }
+.filtr label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--text2); }
+.seg { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--pisek); }
+.seg button { border: 0; background: transparent; padding: 9px 16px; border-radius: 999px; font-size: 14px; }
+.seg button[aria-pressed="true"] { background: var(--krem2); box-shadow: 0 1px 2px rgba(60, 40, 10, .12); }
+.filtr .vysl { margin-left: auto; display: flex; align-items: baseline; gap: 12px; }
+.filtr .vysl b { font: 300 26px/1 var(--serif); font-variation-settings: 'opsz' 72; }
+.filtr .vysl span { font-size: 13px; color: var(--text2); }
+.karty { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.karta { position: relative; display: grid; grid-template-columns: 1fr 1.1fr; border-radius: 22px; overflow: hidden; background: var(--krem2); border: 1px solid var(--linka); min-height: 280px; }
+.karta .foto { position: relative; overflow: hidden; background: var(--pisek); }
+.karta .foto img { width: 100%; height: 100%; object-fit: cover; }
+.karta .foto .stitek-f { position: absolute; left: 14px; top: 14px; padding: 7px 12px; border-radius: 999px; font-size: 12px; }
+.karta .tx { padding: 26px 26px 24px; display: flex; flex-direction: column; }
+.karta h3 { margin: 10px 0 14px; font-size: 30px; line-height: 1.05; }
+.karta dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 14px; }
+.karta dt { color: var(--text2); }
+.karta dd { margin: 0; text-align: right; }
+.karta .cena { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--linka); display: flex; align-items: baseline; justify-content: space-between; }
+.karta .cena { gap: 12px; }
+.karta .cena b { font: 300 30px/1 var(--serif); font-variation-settings: 'opsz' 72; white-space: nowrap; }
+.karta .cena small { font-size: 12px; line-height: 1.3; color: var(--text2); max-width: 12ch; }
+.pozn { margin: 16px 0 0; font-size: 12.5px; color: var(--text2); }
+
+@media (max-width: 900px) {
+  .menu, .hlava .tl-o, .hlava .tl-z { display: none; }
+  .burger { display: block; }
+  .vyber-hlava { flex-direction: column; align-items: start; gap: 14px; }
+  .filtr { border-radius: 22px; padding: 16px; gap: 10px 14px; }
+  .filtr .vysl { margin-left: 0; width: 100%; justify-content: space-between; border-top: 1px solid var(--linka); padding-top: 12px; }
+  .karty { grid-template-columns: 1fr; }
+  .karta { grid-template-columns: 1fr; }
+  .karta .foto { aspect-ratio: 16 / 10; }
+}

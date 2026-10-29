@@ -77,6 +77,35 @@ const shc = m.slunce.shadow.camera; shc.left = -60; shc.right = 60; shc.top = 50
 m.renderer.toneMapping = T.NeutralToneMapping; m.renderer.toneMappingExposure = +q.get('ex') || 1.0;
 const pos = (q.get('pos') || '-34,2,34').split(',').map(Number), tgt = (q.get('t') || '0,3,4').split(',').map(Number);
 m.kamera(pos, tgt);
+// bily=1: bílá architektonická maketa (bez barev, krémové pozadí)
+if (q.get('bily') === '1') {
+  const B = (c, r = 0.9) => MS(c, r);
+  const bm = { fasada: B(0xfdfcfa), strecha: B(0xf2efea), sklo: MS(0xb7b2ab, 0.3, 0, { envMapIntensity: 0.5 }), tmave: B(0x8f877d, 0.7), zem: B(0xf6f3ee, 1), zelen: B(0xf3f0ea, 1), dlazba: B(0xf0ece5, 1) };
+  sc.traverse(o => { if (!o.isMesh && !o.isInstancedMesh) return; const mt = o.material;
+    if (mt === mats.sklo) o.material = bm.sklo; else if (mt === mats.strecha) o.material = bm.strecha;
+    else if (mt === mats.kov || mt === mats.dub || mt === mats.sokl) o.material = bm.tmave;
+    else if (mt === mats.travnik || mt === mats.koruna || mt === mats.plot || mt === mats.kmen || mt.color?.getHex() === 0x6f8840) o.material = bm.zelen;
+    else if (mt === mats.dlazba || mt.color?.getHex() === 0x8d877e) o.material = bm.dlazba;
+    else o.material = bm.fasada; });
+  zem.material = bm.zem;
+  const g2 = cv.getContext('2d'), gb = g2.createLinearGradient(0, 0, 0, 512);
+  gb.addColorStop(0, q.get('nebe') || '#f4efe6'); gb.addColorStop(1, '#f7f2ea'); g2.fillStyle = gb; g2.fillRect(0, 0, 4, 512); tex.needsUpdate = true;
+  sc.fog = new T.Fog(0xf6f1e9, 90, 260); hemi.color.set(0xffffff); hemi.groundColor.set(0xd9d2c6); hemi.intensity = 0.7;
+  m.slunce.color.set(0xfff0dc);
+  if (q.get('k') === '1') {   // kontrastní maketa: tmavší skla a zábradlí, písková zem, teplé nízké slunce
+    bm.sklo.color.set(0x6d675f); bm.tmave.color.set(0x4a443e); bm.zem.color.set(0xeee9e1); bm.zelen.color.set(0xe2dbcf); bm.dlazba.color.set(0xe6dfd4);
+    bm.strecha.color.set(0xe9e4dc); hemi.intensity = 0.45; hemi.groundColor.set(0xcbbfac); m.slunce.color.set(0xffefdc);
+    sc.fog = new T.Fog(0xf4efe7, 120, 320);
+  }
+}
+// body=1: obdélníky jižních průčelí bytů v pixelech (pro výběr na fasádě)
+if (q.get('body') === '1') {
+  m.camera.updateMatrixWorld(); const L = 42.856, Wb = L / 8, z = 5.5, out = [];
+  const pr = (x, y) => { const v = new T.Vector3(x, y, z).project(m.camera); return [Math.round((v.x + 1) / 2 * W), Math.round((1 - v.y) / 2 * H)]; };
+  for (let p = 1; p <= 8; p++) { const x0 = -L / 2 + (p - 1) * Wb, x1 = x0 + Wb;
+    out.push({ p, prizemi: [pr(x0, 0), pr(x1, 0), pr(x1, 2.85), pr(x0, 2.85)], patro: [pr(x0, 2.85), pr(x1, 2.85), pr(x1, 5.45), pr(x0, 5.45)] }); }
+  window.__body = out;
+}
 const base = m.slunce.position.clone();
 const comp = new EffectComposer(m.renderer); comp.setSize(W, H);
 comp.addPass(new RenderPass(sc, m.camera));

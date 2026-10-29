@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rezidence Metelka – varianta B</title>
+<link rel="stylesheet" href="../static/fonts/v6/fonts.css">
+<link rel="stylesheet" href="v6.css">
+<style>
+/* B „Řez“: redakční rozvržení, technický řez průchozím bytem jako ozdoba i argument */
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 3vw, 48px); padding: 8px var(--okraj) 0; min-height: min(calc(100svh - 82px - 64px), 900px); }
+.txt { display: flex; flex-direction: column; padding: clamp(12px, 3vh, 40px) 0 28px; }
+.txt .meta { display: flex; justify-content: space-between; font: 500 11px/1.5 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--text2); border-top: 1px solid var(--linka); padding-top: 12px; }
+.txt h1 { margin: clamp(20px, 5vh, 56px) 0 22px; font: 200 clamp(52px, 5vw, 80px)/.98 var(--serif); font-variation-settings: 'opsz' 72; letter-spacing: -.03em; }
+.txt h1 em { font-style: italic; color: var(--zlata-t); }
+.txt p { margin: 0 0 26px; max-width: 40ch; color: var(--text2); font-size: 17px; }
+.txt .cta { display: flex; gap: 10px; flex-wrap: wrap; }
+.rez-blok { margin-top: auto; padding-top: 24px; color: var(--text); }
+.rez-blok svg { width: 100%; max-width: 420px; height: auto; }
+.rez-blok small { display: flex; justify-content: space-between; max-width: 470px; margin-top: 6px; font-size: 12.5px; color: var(--text2); }
+.obr { position: relative; border-radius: 26px 26px 0 0; overflow: hidden; }
+.obr picture, .obr img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 60%; }
+.obr .cena { position: absolute; z-index: 2; right: 20px; bottom: 20px; padding: 18px 22px; border-radius: 18px; display: grid; gap: 4px; min-width: 250px; }
+.obr .cena span { font-size: 12.5px; color: var(--text2); }
+.obr .cena b { font: 300 32px/1 var(--serif); font-variation-settings: 'opsz' 72; }
+.dum { position: absolute; z-index: 2; right: 20px; top: 20px; width: 300px; margin: 0; padding: 6px 6px 8px; border-radius: 16px; }
+.dum img { position: static; display: block; width: 100%; height: auto; border-radius: 11px; aspect-ratio: 900/427; object-fit: cover; }
+.dum figcaption { padding: 7px 6px 0; font-size: 11.5px; color: var(--text2); }
+.obr .ilu { position: absolute; z-index: 2; left: 20px; bottom: 20px; font-size: 11px; color: var(--text2); padding: 7px 11px; border-radius: 999px; }
+.pruh { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 var(--okraj); border-top: 1px solid var(--linka); border-bottom: 1px solid var(--linka); }
+.pruh div { padding: 18px 0 16px; border-left: 1px solid var(--linka); padding-left: 20px; }
+.pruh div:first-child { border-left: 0; padding-left: 0; }
+.pruh b { font: 300 28px/1 var(--serif); font-variation-settings: 'opsz' 72; margin-right: 8px; }
+.pruh span { font-size: 13px; color: var(--text2); }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 0; height: auto; max-height: none; min-height: 0; padding-top: 0; }
+  .txt { display: contents; }
+  .txt .meta { order: 1; } .txt h1 { order: 2; } .txt p { order: 3; } .txt .cta { order: 4; margin-bottom: 20px; } .obr { order: 5; } .rez-blok { order: 6; }
+  .txt h1 { margin: 22px 0 14px; font-size: 46px; }
+  .txt p { font-size: 15.5px; margin-bottom: 18px; }
+  .rez-blok { padding-top: 22px; }
+  .obr { height: 56svh; min-height: 400px; border-radius: 22px; margin: 0 -6px; }
+  .obr picture, .obr img { object-position: 50% 55%; }
+  .obr .cena { left: 12px; right: auto; bottom: 12px; min-width: 0; padding: 14px 16px; }
+  .obr .cena b { font-size: 26px; }
+  .obr .cena span:last-child { display: none; }
+  .dum { display: none; }
+  .obr .ilu { left: auto; right: 12px; top: 12px; bottom: auto; }
+  .pruh { grid-template-columns: 1fr 1fr; margin-top: 18px; }
+  .pruh div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .pruh div:nth-child(n+3) { border-top: 1px solid var(--linka); }
+}
+</style>
+</head>
+<body>
+<header class="hlava">
+  <a class="znak" href="#"><b>Metelka</b><small>Rezidence · Hradec Králové</small></a>
+  <nav class="menu"><a href="#">Byty</a><a href="#">Standardy</a><a href="#">Lokalita</a><a href="#">Praha, nebo Hradec</a><a href="#">Kontakt</a></nav>
+  <a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a>
+  <button class="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+<section class="hero">
+  <div class="txt">
+    <div class="meta"><span>Hradec Králové · K Metelce</span><span>32 bytů 2+kk</span></div>
+    <h1>Průchozí byty.<br><em>Světlo z obou stran.</em></h1>
+    <p>Každý byt prochází celou hloubkou domu, s okny na obě strany. Na jedné pavlač, na druhé balkon nebo vlastní zahrádka. Devět minut od Velkého náměstí.</p>
+    <div class="cta"><a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a><a class="tl tl-o" href="#">Prohlédnout standardy</a></div>
+    <div class="rez-blok"><div data-rez></div><small><span>Řez domem, 11 m od pavlače k balkonu</span><span>47,21 m² · 2+kk</span></small></div>
+  </div>
+  <div class="obr">
+    <picture><source type="image/avif" media="(max-width: 900px)" srcset="img/hero-b-m.avif"><source type="image/webp" media="(max-width: 900px)" srcset="img/hero-b-m.webp"><source type="image/avif" srcset="img/hero-b.avif"><source type="image/webp" srcset="img/hero-b.webp"><img src="img/hero-b.jpg" width="1500" height="1300" alt="Obývací pokoj s křeslem u okna – ilustrační vizualizace interiéru, standard investora" fetchpriority="high"></picture>
+    <figure class="dum sklo"><img src="img/model-jih-t.webp" width="900" height="427" alt="Dům K Metelce ze strany zahrádek, bílá maketa podle projektu"><figcaption>Dům K Metelce · maketa podle projektu</figcaption></figure>
+    <span class="ilu sklo">Ilustrační vizualizace interiéru · standard investora</span>
+    <div class="cena sklo"><span>Byt s balkonem od</span><b>4 990 000 Kč</b><span>se zahrádkou 5 490 000 Kč</span></div>
+  </div>
+</section>
+<div class="pruh">
+  <div><b>5 min</b><span>hlavní nádraží</span></div>
+  <div><b>9 min</b><span>Velké náměstí</span></div>
+  <div><b>3–4 km</b><span>dálnice D11</span></div>
+  <div><b>80 min</b><span>Praha</span></div>
+</div>
+<section class="vyber" id="vyber"></section>
+<script src="vyber.js"></script>
+<script>fetch('rez.svg.html').then(r => r.text()).then(t => document.querySelectorAll('[data-rez]').forEach(e => e.innerHTML = t))</script>
+</body>
+</html>

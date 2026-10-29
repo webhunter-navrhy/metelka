@@ -1,74 +1,73 @@
-{% extends "_v5.html" %}
-{% from "_komponenty.html" import bod %}
+{% extends "_v6.html" %}
+{% from "_v6k.html" import bod, ram, maketa, ceny %}
 {% set titulek = 'Byty a ceník – Rezidence Metelka' %}
 {% set popis = 'Ceník 32 bytů 2+kk v Rezidenci Metelka v Hradci Králové: byty se zahrádkou za 5 490 000 Kč a s balkonem za 4 990 000 Kč, každý se sklepem a parkovacím stáním.' %}
 {% set cesta = 'byty/' %}
 {% set aktivni = 'byty' %}
-{% set prvni = data.byty.domy[0].byty[11] %}
+{% set prvni = data.byty.domy[0].byty[3] %}
 {% block telo %}stranka-byty{% endblock %}
 {% block obsah %}
-<section class="vb tma" aria-labelledby="h1">
-  <div class="obal vb-hlava">
-    <div>
-      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Byty a ceník</span></nav>
-      <h1 id="h1" class="h1">Vyberte si <i>okno</i></h1>
-    </div>
-    <div class="vb-ovladani">
-      <div class="prepinac" role="tablist" aria-label="Dům">
-        {% for dum in data.byty.domy %}<button type="button" role="tab" id="tab-{{ dum.slug }}" aria-controls="body-{{ dum.slug }}" aria-selected="{{ 'true' if loop.first else 'false' }}" data-dum="{{ dum.slug }}">K Metelce <i>{{ dum.rim }}</i></button>{% endfor %}
-      </div>
-      <p class="vb-navod">Najeďte nebo klepněte na číslo bytu. Byt 1 je na vzdáleném konci domu, štít vpředu je u&nbsp;bytu 8.</p>
-    </div>
+<div class="obal byty-hlava">
+  <div>
+    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Byty a ceník</span></nav>
+    <h1 id="h1" class="h1">Vyberte si <em>okno</em>.</h1>
   </div>
-  <div class="vb-fasada" data-fasada>
-    <div class="vb-platno">
-      {{ img('viz-c.jpg', 'Vizualizace domu K Metelce ve večerním slunci ze strany zahrádek: osm bytů v přízemí se zahrádkami a osm bytů v patře s průběžným balkonem. Čísla bytů jsou vyznačená na oknech.', sizes='(min-width: 48rem) 100vw, 800px', eager=true) }}
+  <div>
+    <div class="seg" role="tablist" aria-label="Dům" data-fasada-dum>
+      {% for dum in data.byty.domy %}<button type="button" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-controls="body-{{ dum.slug }}" data-dum="{{ dum.slug }}">{{ dum.nazev }}</button>{% endfor %}
+    </div>
+    <p class="pozn" style="margin-top:12px;max-width:44ch">Klepněte na číslo bytu. Kulatá čísla jsou byty v&nbsp;přízemí se zahrádkou, hranatá byty v&nbsp;patře s&nbsp;balkonem.</p>
+  </div>
+</div>
+
+<div class="fasada-obal" data-fasada>
+  <div class="fasada-posun">
+    <div class="platno">
+      {{ maketa('Bílá maketa domu K Metelce ze strany zahrádek: osm bytů v přízemí se zahrádkami a osm bytů v patře s průběžným balkonem. Čísla bytů jsou vyznačená na průčelí.', eager=true) }}
+      <span class="zvyrazneni" style="{{ ram(prvni) }}" data-zvyr></span>
       {% for dum in data.byty.domy %}
-      <ol class="body" id="body-{{ dum.slug }}" role="tabpanel" aria-labelledby="tab-{{ dum.slug }}" data-dum="{{ dum.slug }}"{% if not loop.first %} hidden{% endif %}>
+      <ol class="body" id="body-{{ dum.slug }}" role="tabpanel" data-dum="{{ dum.slug }}"{% if not loop.first %} hidden{% endif %}>
         {% for b in dum.byty %}
-        <li style="{{ bod(b) }}" data-podlazi="{{ b.podlazi }}"{% if b.kod == prvni.kod %} class="je-vybrany"{% endif %}>
-          <a href="{{ url(b.cesta) }}" data-kod="{{ b.kod }}" data-cena="{{ b.cena_text }}" data-m2="{{ b.cena_m2_text }}" data-venku="{{ b.venku_typ|capitalize }} {{ m2(b.venku) }} m²" data-patro="{{ b.patro_text }}" data-dum-nazev="{{ dum.nazev }}" aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}">{{ '%02d' % b.cislo }}</a>
+        <li style="{{ bod(b) }}" data-podlazi="{{ b.podlazi }}" data-ram="{{ ram(b) }}"{% if b.kod == prvni.kod %} class="je-vybrany"{% endif %}>
+          <a href="{{ url(b.cesta) }}" data-kod="{{ b.kod }}" data-cena="{{ b.cena_text }}" data-venku="{{ b.venku_typ|capitalize }} {{ m2(b.venku) }} m²" data-patro="{{ dum.nazev }} · {{ b.patro_text }}" aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}">{{ b.cislo }}</a>
         </li>
         {% endfor %}
       </ol>
       {% endfor %}
     </div>
-    <a class="vb-karta sklo" href="{{ url(prvni.cesta) }}" data-karta>
-      <span class="vb-karta-nad"><span data-k="patro">{{ prvni.dum_nazev }} · {{ prvni.patro_text }}</span></span>
-      <span class="vb-karta-kod">Byt <b data-k="kod">{{ prvni.kod }}</b></span>
-      <span class="vb-karta-cena" data-k="cena">{{ prvni.cena_text }}</span>
-      <span class="vb-karta-info">2+kk 47,21 m² · <span data-k="venku">{{ prvni.venku_typ|capitalize }} {{ m2(prvni.venku) }} m²</span></span>
-      <span class="sipka sipka-svetla">Karta bytu</span>
-    </a>
   </div>
-  <div class="obal vb-legenda">
-    <p><span class="tecka tecka-pat"></span>Patro s&nbsp;balkonem <b>4 990 000 Kč</b></p>
-    <p><span class="tecka tecka-pri"></span>Přízemí se zahrádkou <b>5 490 000 Kč</b></p>
-    <p class="vb-legenda-pozn">Ke každému bytu sklepní kóje 3&nbsp;m² a&nbsp;parkovací stání</p>
-  </div>
-</section>
+  <span class="ilu sklo">Bílá maketa podle projektové dokumentace · ilustrační</span>
+  <a class="fasada-karta sklo" href="{{ url(prvni.cesta) }}" data-karta>
+    <span class="stitek" data-k="patro">{{ prvni.dum_nazev }} · {{ prvni.patro_text }}</span>
+    <span class="kod">Byt <span data-k="kod">{{ prvni.kod }}</span></span>
+    <span class="cena" data-k="cena">{{ prvni.cena_text }}</span>
+    <span class="info">2+kk 47,21 m² · <span data-k="venku">{{ prvni.venku_typ|capitalize }} {{ m2(prvni.venku) }} m²</span> · sklep · stání</span>
+    <span class="sipka">Karta bytu</span>
+  </a>
+</div>
+<div class="legenda">
+  <span><i></i>Přízemí se zahrádkou <b>5 490 000 Kč</b></span>
+  <span><i class="pat"></i>Patro s&nbsp;balkonem <b>4 990 000 Kč</b></span>
+  <span>Byt 1 a&nbsp;9 je vpravo, štít vlevo je u&nbsp;bytů 8 a&nbsp;16</span>
+</div>
 
-<section class="sekce cenik" id="cenik" aria-labelledby="h-cenik">
+<section class="sekce" id="cenik" aria-labelledby="h-cenik">
   <div class="obal">
-    <div class="hlava-2">
-      <div>
-        <p class="nad">Ceník k 16. 9. 2026</p>
-        <h2 id="h-cenik" class="h2">Všech 32 <i>bytů</i></h2>
-      </div>
-      <div class="filtry">
-        <div class="filtr" role="group" aria-label="Dům">
-          <button type="button" data-f-dum="vse" aria-pressed="true">Oba domy</button>
-          {% for dum in data.byty.domy %}<button type="button" data-f-dum="{{ dum.slug }}" aria-pressed="false">K Metelce {{ dum.rim }}</button>{% endfor %}
-        </div>
-        <div class="filtr" role="group" aria-label="Podlaží">
-          <button type="button" data-f-patro="vse" aria-pressed="true">Vše</button>
-          <button type="button" data-f-patro="prizemi" aria-pressed="false">Se zahrádkou</button>
-          <button type="button" data-f-patro="patro" aria-pressed="false">S balkonem</button>
-        </div>
-      </div>
+    <div class="hlava-sekce">
+      <div><span class="stitek">Ceník k 16. 9. 2026</span><h2 id="h-cenik" class="h2">Všech 32 <em>bytů</em>.</h2></div>
+      <p class="perex">Dvě ceny, jedna dispozice. Ke každému bytu patří sklepní kóje 3&nbsp;m² a&nbsp;parkovací stání.</p>
+    </div>
+    <span id="prizemi"></span><span id="patro"></span>
+    {{ ceny() }}
+    <div class="filtr" role="group" aria-label="Filtr ceníku">
+      <span class="pop">Dům</span>
+      <div class="seg" data-f="dum"><button type="button" data-v="vse" aria-pressed="true">Oba</button>{% for dum in data.byty.domy %}<button type="button" data-v="{{ dum.slug }}" aria-pressed="false">{{ dum.rim }}</button>{% endfor %}</div>
+      <span class="pop">Venku</span>
+      <div class="seg" data-f="podlazi"><button type="button" data-v="vse" aria-pressed="true">Vše</button><button type="button" data-v="prizemi" aria-pressed="false">Zahrádka</button><button type="button" data-v="patro" aria-pressed="false">Balkon</button></div>
+      <div class="vysl"><span><b data-pocet>32</b> bytů</span></div>
     </div>
     <div class="radky" role="list">
-      <div class="radek radek-hlava" aria-hidden="true"><span>Byt</span><span>Dům</span><span>Podlaží</span><span>Plocha</span><span>Venku</span><span>Cena</span></div>
+      <div class="radek radek-hlava" aria-hidden="true"><span>Byt</span><span>Dům</span><span>Podlaží</span><span>Plocha</span><span>Venku</span><span>Cena</span><span></span></div>
       {% for b in data.byty.vsechny %}
       <a class="radek" role="listitem" href="{{ url(b.cesta) }}" data-podlazi="{{ b.podlazi }}" data-dum="{{ b.dum_slug }}">
         <span class="r-kod">{{ b.kod }}</span>
@@ -80,7 +79,7 @@
       </a>
       {% endfor %}
     </div>
-    <p class="pozn">Ke každému bytu patří sklepní kóje 3&nbsp;m² a&nbsp;parkovací stání. Aktuální dostupnost vám potvrdíme.</p>
+    <p class="pozn">Aktuální dostupnost bytů vám potvrdíme. Číslování bytů na maketě podle půdorysu z&nbsp;projektové dokumentace.</p>
   </div>
 </section>
 {% endblock %}

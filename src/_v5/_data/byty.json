@@ -1,0 +1,591 @@
+{
+ "zdroj": "K Metelce - ceník 16. 9. 2026",
+ "domy": [
+  {
+   "nazev": "K Metelce I",
+   "byty": [
+    {
+     "cislo": 1,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 52,
+     "venku_typ": "zahrádka",
+     "celkem": 102.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 2,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 3,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 4,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 5,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 6,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 7,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 8,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 52,
+     "venku_typ": "zahrádka",
+     "celkem": 102.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 9,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 7.8,
+     "venku_typ": "balkon",
+     "celkem": 58.01,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 10,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 11,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 12,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 13,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 14,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 15,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 16,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 7.8,
+     "venku_typ": "balkon",
+     "celkem": 58.01,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    }
+   ]
+  },
+  {
+   "nazev": "K Metelce II",
+   "byty": [
+    {
+     "cislo": 1,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 52,
+     "venku_typ": "zahrádka",
+     "celkem": 102.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 2,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 3,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 4,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 5,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 6,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 7,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 55,
+     "venku_typ": "zahrádka",
+     "celkem": 105.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 8,
+     "podlazi": "prizemi",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 52,
+     "venku_typ": "zahrádka",
+     "celkem": 102.21,
+     "cena": 5490000,
+     "cena_m2": 116289,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 9,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 7.8,
+     "venku_typ": "balkon",
+     "celkem": 58.01,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 10,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 11,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 12,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 13,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 14,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 15,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 8.25,
+     "venku_typ": "balkon",
+     "celkem": 58.46,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    },
+    {
+     "cislo": 16,
+     "podlazi": "patro",
+     "dispozice": "2+kk",
+     "plocha": 47.21,
+     "kobka": 3,
+     "venku": 7.8,
+     "venku_typ": "balkon",
+     "celkem": 58.01,
+     "cena": 4990000,
+     "cena_m2": 105698,
+     "mistnosti": {
+      "chodba": 5.77,
+      "koupelna": 6.99,
+      "loznice": 10.4,
+      "obyvak": 24.05
+     }
+    }
+   ]
+  }
+ ]
+}

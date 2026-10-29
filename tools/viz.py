@@ -11,7 +11,10 @@ async def main(n, qq):
         err = []; pg.on('pageerror', lambda e: err.append(str(e))); pg.on('console', lambda m: err.append(m.text) if m.type == 'error' else None)
         await pg.goto('http://localhost:8792/tools/viz/index.html?' + qq)
         await pg.wait_for_function("document.title=='hotovo'", timeout=600000)
-        cil = os.path.join(ROOT, '_viz', n + '.png')
+        cil = os.path.join(ROOT, os.environ.get('VIZDIR','_viz'), n + '.png')
         await pg.locator('#out').screenshot(path=cil); print(cil, err[:3])
+        body = await pg.evaluate('window.__body || null')
+        if body:
+            import json; open(cil[:-4] + '.json', 'w').write(json.dumps(body))
         await b.close()
 asyncio.run(main(sys.argv[1], sys.argv[2]))

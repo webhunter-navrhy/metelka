@@ -19,3 +19,10 @@ hk-prazsky-most-2.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/
 hk-bila-vez-vecer.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_(Dm205706-424)_IMG_6817_2018-08-05_20.09.jpg
 hk-katedrala-den.jpg	Michielverbeek	CC BY-SA 4.0	https://commons.wikimedia.org/wiki/File:Hradec_Kr%C3%A1lov%C3%A9,_Katedr%C3%A1la_svat%C3%A9ho_Ducha_Dm205706-424_en_de_B%C3%ADl%C3%A1_v%C4%9B%C5%BE_IMG_6831_2018-08-06_09.40.jpg
 pudorys-vzorovy-byt.jpg	podklady klientky (PDF návrhu vzorového bytu)
+# v6 (29. 10. 2026) – materiály investora CFIG SE (Rafael: „Je to jejich firma, použít“), vždy s popiskem „ilustrační vizualizace interiéru, standard investora“
+_v6/img/hero-a*	rezidencekarlovina.cz/wp-content/uploads/2025/11/1.3-1.png (2560×1440)
+_v6/img/hero-b*	rezidencekarlovina.cz/wp-content/uploads/2025/11/4-2.png (originál 3768×2250)
+_v6/img/hero-c*	rezidencekarlovina.cz/wp-content/uploads/2025/11/1-5.png (originál 3250×1828)
+_v6/img/model-*	vlastní bílá maketa domu Metelka z three.js (tools/viz/index.html?bily=1), podle projektové dokumentace
+# fasády Karloviny (Ad0000, finalvizoska, Untitled-design-1x/2x, A0033, Ab0009) NEPOUŽÍVAT – jiný dům (Pardubice)
+# vše stažené: _karlovina/orig (WP originály), _karlovina/vyber (vybrané interiéry), _karlovina/fb (FB stránka), _karlovina/nahl (náhledy celé knihovny)

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rezidence Metelka – varianta A</title>
+<link rel="stylesheet" href="../static/fonts/v6/fonts.css">
+<link rel="stylesheet" href="v6.css">
+<style>
+/* A „Brožura“: obří jméno přes oblohu, vizualizace v rámu, skleněné karty */
+.hero { position: relative; margin: 0 var(--okraj); height: calc(100svh - 92px); min-height: 620px; max-height: 980px; border-radius: 28px; overflow: hidden; }
+.hero picture, .hero picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(247, 241, 231, .5) 0%, rgba(247, 241, 231, 0) 34%); pointer-events: none; }
+.jmeno { position: absolute; z-index: 2; left: 0; right: 0; top: clamp(18px, 2.6vw, 40px); text-align: center; }
+.jmeno .stitek { display: block; margin-bottom: clamp(10px, 1.4vw, 22px); color: var(--text); opacity: .75; }
+.jmeno h1 { margin: 0; font: 200 clamp(96px, 17.2vw, 260px)/.82 var(--serif); font-variation-settings: 'opsz' 72; letter-spacing: -.035em; }
+.jmeno h1 em { font-style: italic; }
+.karta-h { position: absolute; z-index: 2; left: 22px; bottom: 22px; width: min(430px, calc(100% - 44px)); padding: 24px 24px 22px; border-radius: 20px; }
+.karta-h h2 { margin: 10px 0 8px; font-size: 32px; line-height: 1.04; }
+.karta-h p { margin: 0 0 18px; color: var(--text2); font-size: 15px; }
+.karta-h .rad { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.karta-h .od { font-size: 12px; color: var(--text2); }
+.karta-h .od b { display: block; font: 300 28px/1.05 var(--serif); font-variation-settings: 'opsz' 72; color: var(--text); }
+.metriky { position: absolute; z-index: 2; right: 22px; bottom: 22px; display: flex; gap: 10px; }
+.metriky div { padding: 14px 18px 13px; border-radius: 16px; min-width: 132px; }
+.metriky b { display: block; font: 300 30px/1 var(--serif); font-variation-settings: 'opsz' 72; }
+.metriky span { font-size: 12.5px; color: var(--text2); }
+.ilu { position: absolute; z-index: 2; right: 22px; top: 22px; font-size: 11px; letter-spacing: .04em; color: var(--text2); padding: 7px 11px; border-radius: 999px; }
+.rez-chip { position: absolute; z-index: 2; left: 474px; bottom: 22px; width: 330px; padding: 12px 14px 8px; border-radius: 16px; color: var(--text); }
+.rez-chip small { display: block; font-size: 11.5px; color: var(--text2); margin-bottom: 2px; }
+.rez-chip svg { width: 100%; height: auto; }
+@media (max-width: 1180px) { .rez-chip { display: none; } }
+@media (max-width: 900px) {
+  .hero { margin: 0 10px; height: calc(100svh - 86px); min-height: 640px; border-radius: 22px; }
+  .hero picture img { object-position: 50% 50%; }
+  .jmeno h1 { font-size: 25.5vw; }
+  .metriky { left: 12px; right: 12px; bottom: auto; top: calc(25.5vw * .82 + 70px); justify-content: center; gap: 6px; }
+  .metriky div { min-width: 0; flex: 1; padding: 10px 10px 9px; border-radius: 12px; }
+  .metriky b { font-size: 22px; }
+  .metriky span { font-size: 11px; }
+  .karta-h { left: 12px; right: 12px; bottom: 12px; width: auto; padding: 18px; }
+  .karta-h h2 { font-size: 24px; margin: 8px 0 6px; }
+  .karta-h p { display: none; }
+  .karta-h .od b { font-size: 23px; white-space: nowrap; }
+  .ilu { top: auto; bottom: 8px; right: 50%; transform: translateX(50%); display: none; }
+}
+</style>
+</head>
+<body>
+<header class="hlava">
+  <a class="znak" href="#"><b>Metelka</b><small>Rezidence · Hradec Králové</small></a>
+  <nav class="menu"><a href="#">Byty</a><a href="#">Standardy</a><a href="#">Lokalita</a><a href="#">Praha, nebo Hradec</a><a href="#">Kontakt</a></nav>
+  <a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a>
+  <button class="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+<section class="hero">
+  <picture><source type="image/avif" media="(max-width: 900px)" srcset="img/hero-a-m.avif"><source type="image/webp" media="(max-width: 900px)" srcset="img/hero-a-m.webp"><source type="image/avif" srcset="img/hero-a.avif"><source type="image/webp" srcset="img/hero-a.webp"><img src="img/hero-a.jpg" width="1920" height="1080" alt="Obývací pokoj s jídelnou u okna – ilustrační vizualizace interiéru, standard investora" fetchpriority="high"></picture>
+  <div class="jmeno"><span class="stitek">Rezidence v Hradci Králové</span><h1>Metelka</h1></div>
+  <span class="ilu sklo">Ilustrační vizualizace interiéru · standard investora</span>
+  <div class="karta-h sklo">
+    <span class="stitek">Průchozí byty 2+kk · 47,21 m²</span>
+    <h2 class="serif">Okna na obě strany. <em>Zahrádka, nebo balkon.</em></h2>
+    <p>32 bytů ve dvou domech, devět minut od Velkého náměstí.</p>
+    <div class="rad"><span class="od">cena od<b>4 990 000 Kč</b></span><a class="tl tl-z" href="#vyber"><i></i>Vybrat byt</a></div>
+  </div>
+  <div class="rez-chip sklo"><small>Každý byt prochází celou hloubkou domu</small><div data-rez></div></div>
+  <div class="metriky">
+    <div class="sklo"><b>9 min</b><span>Velké náměstí</span></div>
+    <div class="sklo"><b>3–4 km</b><span>dálnice D11</span></div>
+    <div class="sklo"><b>80 min</b><span>Praha</span></div>
+  </div>
+</section>
+<section class="vyber" id="vyber"></section>
+<script src="vyber.js"></script>
+<script>fetch('rez.svg.html').then(r => r.text()).then(t => document.querySelectorAll('[data-rez]').forEach(e => e.innerHTML = t))</script>
+</body>
+</html>
