@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>{{ titulek or site.nazev }}</title>
+<meta name="description" content="{{ popis or site.popis }}">
+{% if site.navrh or noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+<meta name="theme-color" content="#0f0d0b">
+<link rel="canonical" href="{{ site.url }}{{ cesta or '' }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="{{ titulek or site.nazev }}">
+<meta property="og:description" content="{{ popis or site.popis }}">
+<meta property="og:url" content="{{ site.url }}{{ cesta or '' }}">
+{% if og_url %}<meta property="og:image" content="{{ og_url }}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">{% endif %}
+<link rel="preload" href="{{ base }}fonts/v7/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}fonts/v7/garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}fonts/v7/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+{% block preload %}{% endblock %}
+<link rel="stylesheet" href="{{ asset('fonts/v7/fonts.css') }}">
+<link rel="stylesheet" href="{{ asset('css/v7.css') }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f0d0b'/%3E%3Cpath d='M5 16.5 16 12.6M15 10.8l12 3M6.6 16v9.5M25.6 13.4V25.5M4 25.5h24' fill='none' stroke='%23c6a46c' stroke-width='1.6'/%3E%3C/svg%3E">
+{% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
+</head>
+<body class="{% block telo %}{% endblock %}">
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+{% macro znak_svg() %}<svg class="znak-ikona" viewBox="0 0 64 30" aria-hidden="true"><path d="M3 15.2 32.6 6.4M30.2 3 61 11M6.5 14.2V27M57.5 10.1V27M6.5 20.4h51M1 27h62M19 23.4v3.6M31 23.4v3.6M43 23.4v3.6"/></svg>{% endmacro %}
+<header class="hlava">
+  <div class="hlava-in">
+    <div class="hl-l">
+      <a class="tl tl-l" href="{{ "#schuzka" if not bez_cta or aktivni == "kontakt" else url("kontakt") }}">Domluvit schůzku</a>
+      <nav class="menu" aria-label="Hlavní">{% for n in site.nav[:3] %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ n.text }}</a>{% endfor %}</nav>
+    </div>
+    <a class="znak" href="{{ url('') }}" aria-label="Rezidence Metelka – úvod">{{ znak_svg() }}<span><small>Rezidence</small>Metelka</span></a>
+    <div class="hl-p">
+      <nav class="menu" aria-label="Další stránky">{% for n in site.nav[3:] %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ n.text }}</a>{% endfor %}</nav>
+      <a class="hl-cena" href="{{ url('byty') }}#cenik">od <b>4 990 000 Kč</b></a>
+    </div>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="panel" aria-label="Otevřít menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="panel" id="panel" hidden>
+  <nav aria-label="Menu">
+    <a href="{{ url('') }}"{% if not aktivni %} aria-current="page"{% endif %}>Úvod</a>
+    {% for n in site.nav %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ n.text }}</a>{% endfor %}
+  </nav>
+  <a class="tl tl-b" href="{{ "#schuzka" if not bez_cta or aktivni == "kontakt" else url("kontakt") }}">Domluvit schůzku</a>
+  <p>K Metelce, Hradec Králové<br>32 bytů 2+kk od 4 990 000 Kč</p>
+</div>
+<main id="obsah">
+{% block obsah %}{% endblock %}
+{% if not bez_cta %}
+<section class="schuzka" id="schuzka" aria-labelledby="h-schuzka">
+  <div class="obal schuzka-in">
+    <div class="schuzka-txt">
+      <p class="pod">Prohlídka a prodej</p>
+      <h2 id="h-schuzka" class="nad">Domluvit schůzku</h2>
+      <span class="orn orn-l" aria-hidden="true"></span>
+      <p>Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;domluvíme prohlídku <b>přímo v&nbsp;ulici K&nbsp;Metelce</b>.</p>
+      <dl class="schuzka-udaje">
+        <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}</dd></div>
+        <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}</dd></div>
+      </dl>
+    </div>
+    <div class="karta-f">{% include "_formular.html" %}</div>
+  </div>
+</section>
+{% endif %}
+</main>
+<footer class="pata">
+  <div class="obal">
+    <a class="znak znak-pata" href="{{ url('') }}" aria-label="Rezidence Metelka – úvod">{{ znak_svg() }}<span><small>Rezidence</small>Metelka</span></a>
+    <div class="pata-sloupce">
+      <div>
+        <h2>Stránky</h2>
+        <ul><li><a href="{{ url('') }}">Úvod</a></li>{% for n in site.nav %}<li><a href="{{ url(n.href) }}">{{ n.text }}</a></li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h2>Prodej bytů</h2>
+        <p>{{ site.kontakt.jmeno }}<br>{% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a><br>{% endif %}<a class="podtrh" href="{{ url('kontakt') }}">Napsat zprávu</a></p>
+      </div>
+      <div>
+        <h2>Adresa projektu</h2>
+        <p>{{ site.kontakt.adresa.ulice }}, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></p>
+      </div>
+      <div>
+        <h2>Ceník</h2>
+        <p>Přízemí se zahrádkou<br><b>5 490 000 Kč</b><br>Patro s balkonem<br><b>4 990 000 Kč</b></p>
+      </div>
+    </div>
+    <div class="pata-dolni">
+      <p>Exteriér domu je ilustrační vizualizace, bílá maketa na stránce Byty vychází z&nbsp;projektové dokumentace. Fasáda a&nbsp;materiály budou upřesněny. Interiéry jsou ilustrační vizualizace standardu investora ze sesterského projektu, vybavení bytů v&nbsp;Metelce se může lišit.</p>
+      <p>Fotografie Hradce Králové: Wikimedia Commons, licence CC BY-SA 4.0, autoři jsou uvedeni u&nbsp;fotografií. Ceník k&nbsp;16. 9. 2026. Informace na webu nejsou nabídkou ve smyslu občanského zákoníku.</p>
+    </div>
+  </div>
+</footer>
+<script src="{{ asset('js/v7.js') }}" defer></script>
+{% block skripty %}{% endblock %}
+</body>
+</html>

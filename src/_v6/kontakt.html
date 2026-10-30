@@ -1,0 +1,32 @@
+{% extends "_v6.html" %}
+{% from "_v6k.html" import ceny %}
+{% set titulek = 'Kontakt – Rezidence Metelka' %}
+{% set popis = 'Domluvte si prohlídku bytu v Rezidenci Metelka v Hradci Králové. Prodej bytů: Mgr. Anna Krčmová.' %}
+{% set cesta = 'kontakt/' %}
+{% set aktivni = 'kontakt' %}
+{% set bez_cta = true %}
+{% block telo %}stranka-kontakt{% endblock %}
+{% block obsah %}
+<div class="obal kontakt">
+  <div>
+    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
+    <h1 id="h1" class="h1">Domluvte si <em>prohlídku</em>.</h1>
+    <dl class="udaje">
+      <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.telefon %}<br><a href="tel:{{ site.kontakt.telefon|replace(' ','') }}">{{ site.kontakt.telefon }}</a>{% endif %}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}{% if not site.kontakt.telefon and not site.kontakt.email %}<br><span class="doplnime">telefon a e-mail doplníme</span>{% endif %}</dd></div>
+      <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></dd></div>
+    </dl>
+    {% include "_formular.html" %}
+  </div>
+  <figure class="ram">{{ img('v6/jidelna.jpg', 'Jídelní stůl u velkého okna s výhledem do zeleně – ilustrační vizualizace interiéru', sizes='(min-width: 900px) 42vw, 100vw', eager=true) }}<span class="ilu ilu-lp sklo">Ilustrační vizualizace · standard investora</span></figure>
+</div>
+
+<section class="sekce" aria-labelledby="h-pred">
+  <div class="obal">
+    <div class="hlava-sekce">
+      <div><span class="stitek">Než přijedete</span><h2 id="h-pred" class="h2">Vyberte si <em>byt</em>.</h2></div>
+      <p class="perex">Na kartě každého bytu je jeho poloha v&nbsp;domě, půdorys, plochy a&nbsp;cena.</p>
+    </div>
+    {{ ceny() }}
+  </div>
+</section>
+{% endblock %}

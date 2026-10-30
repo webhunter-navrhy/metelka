@@ -1,32 +1,43 @@
-{% extends "_v6.html" %}
-{% from "_v6k.html" import ceny %}
+{% extends "_v7.html" %}
 {% set titulek = 'Kontakt – Rezidence Metelka' %}
-{% set popis = 'Domluvte si prohlídku bytu v Rezidenci Metelka v Hradci Králové. Prodej bytů: Mgr. Anna Krčmová.' %}
+{% set popis = 'Domluvte si schůzku a prohlídku bytu v Rezidenci Metelka v Hradci Králové. Prodej bytů: Mgr. Anna Krčmová.' %}
 {% set cesta = 'kontakt/' %}
 {% set aktivni = 'kontakt' %}
 {% set bez_cta = true %}
 {% block telo %}stranka-kontakt{% endblock %}
 {% block obsah %}
-<div class="obal kontakt">
-  <div>
+<header class="str-hlava">
+  <div class="obal obal-uzky">
     <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
-    <h1 id="h1" class="h1">Domluvte si <em>prohlídku</em>.</h1>
-    <dl class="udaje">
-      <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.telefon %}<br><a href="tel:{{ site.kontakt.telefon|replace(' ','') }}">{{ site.kontakt.telefon }}</a>{% endif %}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}{% if not site.kontakt.telefon and not site.kontakt.email %}<br><span class="doplnime">telefon a e-mail doplníme</span>{% endif %}</dd></div>
-      <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></dd></div>
-    </dl>
-    {% include "_formular.html" %}
+    <h1 id="h1" class="nad nad-1">Domluvit schůzku</h1>
+    <span class="orn" aria-hidden="true"></span>
+    <p class="text-v">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;domluvíme <b>prohlídku přímo v&nbsp;ulici K&nbsp;Metelce</b>.</p>
   </div>
-  <figure class="ram">{{ img('v6/jidelna.jpg', 'Jídelní stůl u velkého okna s výhledem do zeleně – ilustrační vizualizace interiéru', sizes='(min-width: 900px) 42vw, 100vw', eager=true) }}<span class="ilu ilu-lp sklo">Ilustrační vizualizace · standard investora</span></figure>
-</div>
-
-<section class="sekce" aria-labelledby="h-pred">
-  <div class="obal">
-    <div class="hlava-sekce">
-      <div><span class="stitek">Než přijedete</span><h2 id="h-pred" class="h2">Vyberte si <em>byt</em>.</h2></div>
-      <p class="perex">Na kartě každého bytu je jeho poloha v&nbsp;domě, půdorys, plochy a&nbsp;cena.</p>
+</header>
+<section class="sekce" id="schuzka" style="padding-top:0" aria-label="Formulář a kontakt">
+  <div class="obal kontakt">
+    <div>
+      <dl class="udaje">
+        <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}</dd></div>
+        <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></dd></div>
+      </dl>
+      <div class="karta-f">{% include "_formular.html" %}</div>
     </div>
-    {{ ceny() }}
+    <figure class="kontakt-foto">{{ img('v6/jidelna.jpg', 'Jídelní stůl u velkého okna – ilustrační vizualizace interiéru', sizes='(min-width: 900px) 42vw, 100vw', eager=true) }}<figcaption class="ilu">Ilustrační vizualizace · standard investora</figcaption></figure>
+  </div>
+</section>
+<section class="sekce krem2" aria-labelledby="h-ceny">
+  <div class="obal">
+    <header class="hlava-s" style="margin-bottom:40px">
+      <p class="pod">Ceník k 16. 9. 2026</p>
+      <h2 id="h-ceny" class="nad">Dvě ceny, jedna dispozice</h2>
+      <span class="orn" aria-hidden="true"></span>
+    </header>
+    <dl class="srov" style="max-width:760px;margin:0 auto 36px">
+      <div><dt>Přízemí se zahrádkou</dt><dd style="color:var(--zlata)">5 490 000<small> Kč</small></dd></div>
+      <div><dt>Patro s balkonem</dt><dd style="color:var(--zlata)">4 990 000<small> Kč</small></dd></div>
+    </dl>
+    <div class="tlacitka tlacitka-st"><a class="tl tl-b" href="{{ url('byty') }}">Vybrat byt</a></div>
   </div>
 </section>
 {% endblock %}

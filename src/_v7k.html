@@ -1,0 +1,34 @@
+{# Sdílené kusy v7 (převzato z v6). Maketa fasády: img/v6/maketa-fasada.jpg (2000×600, výřez z _viz7/f2.png od y=240), pohled od zahrádek.
+   Pole jsou průčelí bytů zleva doprava v procentech výřezu (tools/viz.py body=1 → _viz7/f2.json): [střed x, střed y, šířka, výška, levá, horní].
+   Pořadí jako ve v5: štít vlevo je u bytu 8 (16), byt 1 (9) je vpravo. Číslování podle půdorysu, ověřit u klientky. #}
+{% set _pri = [[12.71,56.62,12.2,21.17,6.6,46.17],[24.46,55.54,11.7,20.83,18.6,45.17],[35.8,54.46,11.25,20.5,30.15,44.33],[46.74,53.42,10.75,20.0,41.35,43.5],[57.3,52.42,10.45,19.67,52.1,42.67],[67.51,51.46,10.15,19.33,62.45,41.83],[77.38,50.5,9.85,19.17,72.45,41.0],[86.92,49.58,9.6,18.67,82.15,40.33]] %}
+{% set _pat = [[12.47,37.29,12.3,19.33,6.3,27.67],[24.3,36.54,11.75,19.0,18.4,27.17],[35.71,35.79,11.3,18.67,30.05,26.5],[46.71,35.08,10.8,18.33,41.3,26.0],[57.34,34.42,10.5,18.0,52.1,25.5],[67.61,33.75,10.15,17.67,62.55,25.0],[77.53,33.08,9.9,17.33,72.6,24.5],[87.12,32.46,9.65,17.0,82.3,24.0]] %}
+{% macro pole(b) %}{{ (_pat if b.podlazi == 'patro' else _pri)[8 - b.pozice]|tojson }}{% endmacro %}
+{% macro bod(b) %}{% set p = (_pat if b.podlazi == 'patro' else _pri)[8 - b.pozice] %}left:{{ p[0] }}%;top:{{ p[1] }}%{% endmacro %}
+{% macro ram(b) %}{% set p = (_pat if b.podlazi == 'patro' else _pri)[8 - b.pozice] %}left:{{ p[4] }}%;top:{{ p[5] }}%;width:{{ p[2] }}%;height:{{ p[3] }}%{% endmacro %}
+{% macro posun(b) %}{% set p = (_pat if b.podlazi == 'patro' else _pri)[8 - b.pozice] %}--posun:{{ [[50 - p[0] * 1.7, 0]|min, -70]|max|round(2) }}%;--posun-m:{{ [[50 - p[0] * 2.6, 0]|min, -160]|max|round(2) }}%{% endmacro %}
+{% macro znacka(b) %}{% set p = (_pat if b.podlazi == 'patro' else _pri)[8 - b.pozice] %}left:{{ p[0] }}%;top:{{ (p[1] - p[3] / 2 - 7 if b.podlazi == 'patro' else p[1] + p[3] / 2 + 8)|round(2) }}%{% endmacro %}
+{% macro maketa(alt, sizes='100vw', eager=false) %}{{ img('v6/maketa-fasada.jpg', alt, sizes=sizes, eager=eager) }}{% endmacro %}
+
+{# Řez průchozím bytem #}
+{% macro rez() %}{% include "_rez.svg.html" %}{% endmacro %}
+
+{# Půdorys bytu 2+kk s místnostmi. m = plochy místností z ceníku. #}
+{% macro pudorys(m, celkem, sizes='(min-width: 900px) 46vw, 100vw') %}
+<div class="pudorys">
+  <div class="pudorys-obraz">
+    {{ img('pudorys-vzorovy-byt.jpg', 'Půdorys bytu 2+kk: ložnice, koupelna s WC, chodba a obývací pokoj s kuchyní', sizes=sizes) }}
+    <button type="button" class="zona" data-mistnost="loznice" style="left:6%;top:17.7%;width:25.5%;height:52%" aria-label="Ložnice {{ m2(m.loznice) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="koupelna" style="left:31.5%;top:17.7%;width:17.4%;height:52.5%" aria-label="Koupelna s WC {{ m2(m.koupelna) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="chodba" style="left:6%;top:71%;width:56%;height:20.5%" aria-label="Chodba {{ m2(m.chodba) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="obyvak" style="left:51.5%;top:17.7%;width:43%;height:73.8%" aria-label="Obývací pokoj s kuchyní {{ m2(m.obyvak) }} m²"></button>
+  </div>
+  <ul class="mistnosti">
+    <li><button type="button" data-mistnost="obyvak"><span>Obývací pokoj s kuchyní</span><b>{{ cz(m.obyvak) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="loznice"><span>Ložnice</span><b>{{ cz(m.loznice) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="koupelna"><span>Koupelna s WC</span><b>{{ cz(m.koupelna) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="chodba"><span>Chodba</span><b>{{ cz(m.chodba) }} m²</b></button></li>
+    <li class="soucet"><span>Byt celkem</span><b>{{ cz(celkem) }} m²</b></li>
+  </ul>
+</div>
+{% endmacro %}
