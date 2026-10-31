@@ -1,0 +1,54 @@
+{# Sdílené kusy v9 (jazyk varianty A). #}
+
+{# Schéma domu: 8 bytů vedle sebe, nahoře patro s balkony, dole přízemí se zahrádkami. Pohled od zahrádek,
+   orientačně podle čísel zleva doprava, 1 a 9 vlevo. Na mobilu se dům otočí: sloupce = podlaží, řádky = pozice. #}
+{% macro dum(d, vybrany=none, mini=false) %}
+<div class="d{% if mini %} d-mini{% endif %}" data-dum="{{ d.slug }}">
+  <span class="d-lbl" style="--y:1">Patro<small>balkon</small></span>
+  <span class="d-lbl" style="--y:2">Přízemí<small>zahrádka</small></span>
+  {% for b in d.byty %}{% set je = vybrany and b.kod == vybrany.kod %}
+  <a class="d-byt d-{{ b.podlazi }}{% if je %} je{% endif %}" href="{{ url(b.cesta) }}" style="--x:{{ b.pozice }};--r:{{ b.pozice }};--y:{{ 1 if b.podlazi == 'patro' else 2 }}"{% if je %} aria-current="page"{% endif %} aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}">
+    <span class="d-c">{{ b.cislo }}</span>
+    {% if not mini %}<span class="d-v">{{ b.venku_typ|capitalize }} {{ m2(b.venku) }} m²</span>
+    <span class="d-p">{{ b.cena_text }}</span>{% endif %}
+  </a>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# Časy autem jako sloupce: výška čáry podle minut (do 10 min), vzdálenější místa mají čáru přerušenou. #}
+{% macro casy(polozky) %}
+<ol class="casy">
+  {% for p in polozky %}{% set mn = p[0]|replace(',', '.')|float %}
+  <li class="{{ 'daleko' if mn > 15 else '' }}" style="--h:{{ (mn / 10 if mn <= 10 else 1)|round(3) }}">
+    <b>{{ p[0] }}<small>min</small></b>
+    <span class="casy-cara" aria-hidden="true"></span>
+    <span class="casy-co">{{ p[1] }}{% if p[2] %}<small>{{ p[2] }}</small>{% endif %}</span>
+  </li>
+  {% endfor %}
+</ol>
+{% endmacro %}
+
+{# Fotka interiéru s povinným popiskem #}
+{% macro foto(nazev, alt, sizes='(min-width: 1000px) 40vw, 100vw', cls='', eager=none) %}
+<figure class="foto {{ cls }}">{{ img(nazev, alt ~ ' – ilustrační interiér', sizes=sizes, eager=eager) }}<figcaption>Ilustrační interiér</figcaption></figure>
+{% endmacro %}
+
+{# Velký půdorys s plochami místností: značky v místnostech, seznam pod půdorysem #}
+{% macro plan(m, celkem, sizes='(min-width: 1400px) 1328px, 100vw') %}
+{% set mistnosti = [('obyvak', 'Obývací pokoj s kuchyní', m.obyvak, 73, 54.6), ('loznice', 'Ložnice', m.loznice, 18.75, 43.7), ('koupelna', 'Koupelna s WC', m.koupelna, 40.2, 43.9), ('chodba', 'Chodba', m.chodba, 34, 81.2)] %}
+<div class="plan">
+  <div class="plan-obraz">
+    {{ img('pudorys-vzorovy-byt.jpg', 'Půdorys bytu 2+kk se zařízením: ložnice, koupelna s WC, chodba a obývací pokoj s kuchyní', sizes=sizes) }}
+    <span class="plan-z" data-m="obyvak" style="left:51.5%;top:17.7%;width:43%;height:73.8%"></span>
+    <span class="plan-z" data-m="loznice" style="left:6%;top:17.7%;width:25.5%;height:52%"></span>
+    <span class="plan-z" data-m="koupelna" style="left:31.5%;top:17.7%;width:17.4%;height:52.5%"></span>
+    <span class="plan-z" data-m="chodba" style="left:6%;top:71%;width:56%;height:20.5%"></span>
+    {% for k, n, a, x, y in mistnosti %}<span class="plan-st" data-m="{{ k }}" style="left:{{ x }}%;top:{{ y }}%" aria-hidden="true"><i>{{ loop.index }}</i><span>{{ cz(a) }} m²</span></span>{% endfor %}
+  </div>
+  <ol class="plan-seznam">
+    {% for k, n, a, x, y in mistnosti %}<li><button type="button" data-m="{{ k }}"><i aria-hidden="true">{{ loop.index }}</i><span>{{ n }}</span><b>{{ cz(a) }}<small> m²</small></b></button></li>{% endfor %}
+    <li class="plan-soucet"><span>Byt celkem</span><b>{{ cz(celkem) }}<small> m²</small></b></li>
+  </ol>
+</div>
+{% endmacro %}

@@ -95,6 +95,22 @@
     {
       "fakt": "Ceník: cena za m² bez příslušenství 116 289 Kč (přízemí) a 105 698 Kč (patro).",
       "zdroj": "K Metelce - ceník 16.9.2026.xlsx, sloupec Cena m² bez příslušenství"
+    },
+    {
+      "fakt": "Časy autem z K Metelce bez provozu (OSRM, 27. 10. 2026): hlavní nádraží 5 min, OC Aupark 7 min, Velké náměstí 9 min, Univerzita HK 9 min, Fakultní nemocnice 10 min, nájezd D11 směr Praha (exit 90 Kukleny) 5,5 min, D11 směr Jaroměř (exit 95 Plotiště) 4 min, D35 12 min, Pardubice 29 min, Praha-Černý Most 62 min, Václavské náměstí 80 min.",
+      "zdroj": "_research/okoli.md, oddíl 2 (OSRM + Nominatim, 27. 10. 2026)"
+    },
+    {
+      "fakt": "Veřejná doprava (IDOS, všední den 29. 10. 2026): autobus č. 16 DPMHK ze zastávky Svobodné Dvory na hlavní nádraží 8 min a do centra (Adalbertinum) 14 min; přímý autobus z Terminálu HD na Černý Most nejrychleji 1 h 09 min, 15 přímých spojů ve všední den; přímý rychlík HK hl. n. – Praha hl. n. 92 min, každou hodinu, 16 spojů denně.",
+      "zdroj": "_research/okoli.md, oddíl 3 (IDOS, staženo 27. 10. 2026)"
+    },
+    {
+      "fakt": "Sport a rodiny (časy autem, OSRM 27. 10. 2026): Aquacentrum a 50m bazén 7 min, Labská stezka 7,5 min, zimní stadion 8 min, FINEP Arena 9 min, Flošna 9 min, SPORTPARK HIT 10 min, lezecká stěna 11 min, Park Golf Club 13 min; spádová ZŠ a MŠ Svobodné Dvory 3,5 min (vyhláška HK č. 5/2025), MŠ K Dolíkám a K Meteoru 3 min, Muzeum východních Čech 6 min, Divadlo DRAK 8 min, Safari Park Dvůr Králové 31 min.",
+      "zdroj": "_research/okoli.md, oddíly 4–5 (OSRM, weby provozovatelů, 27. 10. 2026)"
+    },
+    {
+      "fakt": "Praha: průměrná prodejní cena nových bytů ve 3. čtvrtletí 2026 186 408 Kč/m² (Central Group, Trigema, Skanska). Průměrné nájemné (Deloitte Rent Index Q2 2026, všechny byty): Praha 462 Kč/m², Hradec Králové 318 Kč/m² měsíčně.",
+      "zdroj": "_research/okoli.md, oddíl 6 (ČTK 21. 10. 2026; Deloitte Rent Index Q2 2026)"
     }
   ],
   "neuvadet": [
