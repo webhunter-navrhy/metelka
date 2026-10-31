@@ -1,0 +1,61 @@
+{# Sdílené kusy v8. Kresba domu: pohled od zahrádek, zjednodušeně podle projektu (8 bytů vedle sebe, přízemí + patro pod nízkou střechou).
+   Pole i = 0..7 zleva, pozice bytu = 8 - i (byt 1 a 9 vpravo, štít vlevo u bytů 8 a 16, jako ve v5–v7; ověřit u klientky). #}
+{% macro kresba(domy, vybrany=none, popis='Kresba domu ze strany zahrádek: osm bytů v přízemí se zahrádkami a osm bytů v patře s balkony') %}
+{% set X0 = 70 %}{% set PW = 132.5 %}
+<svg class="kresba" viewBox="0 0 1200 410" role="group" aria-label="{{ popis }}">
+  <g class="k-dum" aria-hidden="true">
+    <path class="k-teren" d="M14 352H1186"/>
+    <path class="k-strecha" d="M50 112 L1150 98 L1150 106 L50 120Z"/>
+    <rect class="k-zed" x="70" y="118" width="1060" height="234"/>
+    <rect class="k-deska" x="58" y="222" width="1084" height="8"/>
+    {% for i in range(8) %}{% set x = X0 + i * PW %}
+    <rect class="k-okno" x="{{ x + 22 }}" y="138" width="38" height="84"/>
+    <path class="k-ram" d="M{{ x + 41 }} 138V222"/>
+    <rect class="k-okno" x="{{ x + 76 }}" y="142" width="36" height="46"/>
+    <rect class="k-okno" x="{{ x + 18 }}" y="248" width="46" height="104"/>
+    <path class="k-ram" d="M{{ x + 41 }} 248V352"/>
+    <rect class="k-okno" x="{{ x + 78 }}" y="254" width="36" height="56"/>
+    {% if i > 0 %}<rect class="k-predel" x="{{ x - 2 }}" y="160" width="4" height="62"/>
+    <path class="k-plot" d="M{{ x }} 334V352"/>{% endif %}
+    <ellipse class="k-ker" cx="{{ x + 96 }}" cy="342" rx="22" ry="11"/>
+    {% endfor %}
+    <path class="k-zabradli" d="M58 194H1142"/>
+    {% for j in range(0, 109) %}<path class="k-pricka" d="M{{ 62 + j * 10 }} 194V222"/>{% endfor %}
+  </g>
+  {% for dum in domy %}
+  <g class="k-byty" data-dum="{{ dum.slug }}"{% if (vybrany and dum.slug != vybrany.dum_slug) or (not vybrany and not loop.first) %} hidden{% endif %}>
+    {% for b in dum.byty %}{% set i = 8 - b.pozice %}{% set x = X0 + i * PW %}{% set nahore = b.podlazi == 'patro' %}
+    <a class="k-byt{% if vybrany and b.kod == vybrany.kod %} je-vybrany{% endif %}" href="{{ url(b.cesta) }}" data-kod="{{ b.kod }}" data-cena="{{ b.cena_text }}" data-venku="{{ b.venku_typ|capitalize }} {{ m2(b.venku) }} m²" data-patro="{{ dum.nazev }} · {{ b.patro_text }}" data-podlazi="{{ b.podlazi }}" aria-label="Byt {{ b.kod }}, {{ b.patro_text }}, {{ b.venku_typ }} {{ m2(b.venku) }} m², {{ b.cena_text }}">
+      <rect class="k-plocha" x="{{ x + 3 }}" y="{{ 122 if nahore else 232 }}" width="{{ PW - 6 }}" height="{{ 98 if nahore else 118 }}"/>
+      <g class="k-cislo"><circle cx="{{ x + PW / 2 }}" cy="{{ 74 if nahore else 382 }}" r="15"/><text x="{{ x + PW / 2 }}" y="{{ 79 if nahore else 387 }}">{{ b.cislo }}</text></g>
+    </a>
+    {% endfor %}
+  </g>
+  {% endfor %}
+</svg>
+{% endmacro %}
+
+{# Fotka na výšku s decentním popiskem #}
+{% macro foto(nazev, alt, sizes='(min-width: 900px) 40vw, 100vw', popisek='Ilustrační interiér', cls='', eager=none) %}
+<figure class="foto {{ cls }}">{{ img(nazev, alt, sizes=sizes, eager=eager) }}{% if popisek %}<figcaption>{{ popisek }}</figcaption>{% endif %}</figure>
+{% endmacro %}
+
+{# Půdorys bytu 2+kk s místnostmi. m = plochy místností z ceníku. #}
+{% macro pudorys(m, celkem, sizes='(min-width: 900px) 58vw, 100vw') %}
+<div class="pudorys">
+  <div class="pudorys-obraz">
+    {{ img('pudorys-vzorovy-byt.jpg', 'Půdorys bytu 2+kk: ložnice, koupelna s WC, chodba a obývací pokoj s kuchyní', sizes=sizes) }}
+    <button type="button" class="zona" data-mistnost="loznice" style="left:6%;top:17.7%;width:25.5%;height:52%" aria-label="Ložnice {{ m2(m.loznice) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="koupelna" style="left:31.5%;top:17.7%;width:17.4%;height:52.5%" aria-label="Koupelna s WC {{ m2(m.koupelna) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="chodba" style="left:6%;top:71%;width:56%;height:20.5%" aria-label="Chodba {{ m2(m.chodba) }} m²"></button>
+    <button type="button" class="zona" data-mistnost="obyvak" style="left:51.5%;top:17.7%;width:43%;height:73.8%" aria-label="Obývací pokoj s kuchyní {{ m2(m.obyvak) }} m²"></button>
+  </div>
+  <ul class="mistnosti">
+    <li><button type="button" data-mistnost="obyvak"><span>Obývací pokoj s kuchyní</span><b>{{ cz(m.obyvak) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="loznice"><span>Ložnice</span><b>{{ cz(m.loznice) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="koupelna"><span>Koupelna s WC</span><b>{{ cz(m.koupelna) }} m²</b></button></li>
+    <li><button type="button" data-mistnost="chodba"><span>Chodba</span><b>{{ cz(m.chodba) }} m²</b></button></li>
+    <li class="soucet"><span>Byt celkem</span><b>{{ cz(celkem) }} m²</b></li>
+  </ul>
+</div>
+{% endmacro %}

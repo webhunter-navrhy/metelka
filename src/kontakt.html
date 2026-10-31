@@ -1,4 +1,5 @@
-{% extends "_v7.html" %}
+{% extends "_v8.html" %}
+{% from "_v8k.html" import foto %}
 {% set titulek = 'Kontakt – Rezidence Metelka' %}
 {% set popis = 'Domluvte si schůzku a prohlídku bytu v Rezidenci Metelka v Hradci Králové. Prodej bytů: Mgr. Anna Krčmová.' %}
 {% set cesta = 'kontakt/' %}
@@ -6,38 +7,33 @@
 {% set bez_cta = true %}
 {% block telo %}stranka-kontakt{% endblock %}
 {% block obsah %}
-<header class="str-hlava">
-  <div class="obal obal-uzky">
-    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
-    <h1 id="h1" class="nad nad-1">Domluvit schůzku</h1>
-    <span class="orn" aria-hidden="true"></span>
-    <p class="text-v">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;domluvíme <b>prohlídku přímo v&nbsp;ulici K&nbsp;Metelce</b>.</p>
-  </div>
-</header>
-<section class="sekce" id="schuzka" style="padding-top:0" aria-label="Formulář a kontakt">
-  <div class="obal kontakt">
+<section class="str-hlava" id="schuzka" aria-labelledby="h1">
+  <div class="obal kontakt-in">
     <div>
+      <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Kontakt</span></nav>
+      <h1 id="h1" class="h1">Domluvit prohlídku</h1>
+      <p class="perex kontakt-perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;domluvíme prohlídku přímo v&nbsp;ulici K&nbsp;Metelce.</p>
       <dl class="udaje">
-        <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% endif %}</dd></div>
+        <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% else %}<br><span class="doplnime">E-mail a telefon doplníme</span>{% endif %}</dd></div>
         <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></dd></div>
       </dl>
       <div class="karta-f">{% include "_formular.html" %}</div>
     </div>
-    <figure class="kontakt-foto">{{ img('v6/jidelna.jpg', 'Jídelní stůl u velkého okna – ilustrační vizualizace interiéru', sizes='(min-width: 900px) 42vw, 100vw', eager=true) }}<figcaption class="ilu">Ilustrační vizualizace · standard investora</figcaption></figure>
+    {{ foto('fb/obyvak-svetly.jpg', 'Světlý obývací pokoj s kuchyní a jídelním stolem – ilustrační interiér', sizes='(min-width: 900px) 42vw, 100vw', eager=true) }}
   </div>
 </section>
-<section class="sekce krem2" aria-labelledby="h-ceny">
-  <div class="obal">
-    <header class="hlava-s" style="margin-bottom:40px">
-      <p class="pod">Ceník k 16. 9. 2026</p>
-      <h2 id="h-ceny" class="nad">Dvě ceny, jedna dispozice</h2>
-      <span class="orn" aria-hidden="true"></span>
-    </header>
-    <dl class="srov" style="max-width:760px;margin:0 auto 36px">
-      <div><dt>Přízemí se zahrádkou</dt><dd style="color:var(--zlata)">5 490 000<small> Kč</small></dd></div>
-      <div><dt>Patro s balkonem</dt><dd style="color:var(--zlata)">4 990 000<small> Kč</small></dd></div>
+<section class="sekce pisek" aria-labelledby="h-ceny">
+  <div class="obal dvoj">
+    <div>
+      <p class="stitek">Ceník k 16. 9. 2026</p>
+      <h2 id="h-ceny" class="h2">Dvě ceny, jedna dispozice</h2>
+      <p>Všech 32 bytů má 2+kk o&nbsp;47,21&nbsp;m², sklepní kóji 3&nbsp;m² a&nbsp;parkovací stání.</p>
+      <a class="odkaz" href="{{ url('byty') }}">Vybrat byt</a>
+    </div>
+    <dl class="dve-ceny">
+      <div><dt>Přízemí se zahrádkou</dt><dd>5 490 000 Kč</dd></div>
+      <div><dt>Patro s balkonem</dt><dd>4 990 000 Kč</dd></div>
     </dl>
-    <div class="tlacitka tlacitka-st"><a class="tl tl-b" href="{{ url('byty') }}">Vybrat byt</a></div>
   </div>
 </section>
 {% endblock %}

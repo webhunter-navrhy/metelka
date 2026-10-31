@@ -1,0 +1,108 @@
+{% extends "_v7.html" %}
+{% set titulek = 'Lokalita – Rezidence Metelka, Hradec Králové' %}
+{% set popis = 'K Metelce ve Svobodných Dvorech: hlavní nádraží 5 minut, Velké náměstí 9 minut, nájezd na D11 3–4 km. Bazén, zimní stadion, FINEP Arena a Labská stezka do deseti minut.' %}
+{% set cesta = 'lokalita/' %}
+{% set aktivni = 'lokalita' %}
+{% set o = data.okoli %}
+{% block telo %}stranka-lok{% endblock %}
+{% block obsah %}
+<header class="str-hlava">
+  <div class="obal obal-uzky">
+    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Lokalita</span></nav>
+    <h1 id="h1" class="nad nad-1">Lokalita<span>Hradec Králové · Svobodné Dvory</span></h1>
+    <span class="orn" aria-hidden="true"></span>
+    <p class="text-v">Ulice K&nbsp;Metelce leží ve Svobodných Dvorech, klidné části Hradce na jeho severozápadní straně. <b>Hlavní nádraží 5&nbsp;minut</b>, <b>Velké náměstí 9</b>, na <b>dálnici D11</b> necelých šest.</p>
+  </div>
+</header>
+<section class="str-foto" aria-label="Hradec Králové z výšky">
+  {{ img('hk-dron-labe.jpg', 'Hradec Králové z dronu: Labe, most a historické centrum na podzim', sizes='100vw', eager=true) }}
+  <span class="ilu">Hradec Králové z dronu · Vít Luštinec, CC BY-SA 4.0</span>
+</section>
+
+<section class="cisla-pas" aria-label="Časy autem z ulice K Metelce">
+  <dl class="obal cisla">
+    {% for c in [('5', 'min', 'hlavní nádraží'), ('5,5', 'min', 'dálnice D11 směr Praha'), ('9', 'min', 'Velké náměstí'), ('10', 'min', 'Fakultní nemocnice'), ('62', 'min', 'Praha, Černý Most')] %}
+    <div><dt>{{ c[2] }}</dt><dd>{{ c[0] }}<small> {{ c[1] }}</small></dd></div>
+    {% endfor %}
+  </dl>
+</section>
+
+<section class="sekce" aria-labelledby="h-salon">
+  <div class="obal dvoj dvoj-obr">
+    <div>
+      <p class="pod">Gočárův Hradec</p>
+      <h2 id="h-salon" class="nad">Salon republiky</h2>
+      <span class="orn orn-l" aria-hidden="true"></span>
+      <p>Starosta František Ulrich pozval do Hradce Jana Kotěru a&nbsp;Josefa Gočára. <b>Gočárův regulační plán</b> z&nbsp;let 1926–1928 dává městu řád dodnes: široké třídy, okruhy a&nbsp;krátké vzdálenosti.</p>
+      <p>Proto je tu všechno blízko. Fakultní nemocnice, univerzita i&nbsp;obchodní centra jsou <b>do deseti minut</b>. Autobus č.&nbsp;16 jede ze zastávky Svobodné Dvory na nádraží za 8&nbsp;minut a&nbsp;do centra za 14.</p>
+    </div>
+    <figure class="odhal">{{ img('hk-gocarova.jpg', 'Gočárova třída s funkcionalistickými domy z výšky', sizes='(min-width: 900px) 50vw, 100vw') }}<figcaption class="ilu">Gočárova třída · Vít Luštinec, CC BY-SA 4.0</figcaption></figure>
+  </div>
+</section>
+
+<section class="sekce temna" aria-labelledby="h-sport">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod pod-sv">Sport</p>
+      <h2 id="h-sport" class="nad">{{ o.sport.nadpis|replace('.', '') }}</h2>
+      <span class="orn" aria-hidden="true"></span>
+      <p class="text-v" style="color:#cfc3b0">{{ o.sport.text }}</p>
+    </header>
+    <ul class="mista">
+      {% for s in o.sport.mista %}<li class="odhal"><span class="min">{{ s.min }}<small>min</small></span><div><h3>{{ s.nazev }}</h3><p>{{ s.popis }}</p></div></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="h-jizdy">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod">Minuty od dveří</p>
+      <h2 id="h-jizdy" class="nad">Město, dálnice, Praha</h2>
+      <span class="orn" aria-hidden="true"></span>
+    </header>
+    <div class="jizdy">
+      {% for g in o.jizdni_rad %}
+      <div class="odhal">
+        <h3>{{ g.skupina }}</h3>
+        <ul>{% for p in g.polozky %}<li><span>{{ p.nazev }}</span><b>{{ p.min }} min</b>{% if p.pozn is defined %}<small>{{ p.pozn }}</small>{% endif %}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="pozn pozn-st">{{ o.jizdni_rad_pozn }}</p>
+  </div>
+</section>
+
+<section class="sekce krem2" aria-labelledby="h-rodiny">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod">Pro rodiny</p>
+      <h2 id="h-rodiny" class="nad">Škola za rohem</h2>
+      <span class="orn" aria-hidden="true"></span>
+      {% for t in o.rodiny.text %}<p class="text-v"{% if not loop.first %} style="margin-top:14px"{% endif %}>{{ t }}</p>{% endfor %}
+    </header>
+    <div class="rodiny-s">
+      {% for g in o.rodiny.skupiny %}
+      <div class="odhal">
+        <h3>{{ g.nazev }}</h3>
+        <ul>{% for p in g.polozky %}<li><span>{{ p.nazev }}</span>{% if p.min is defined %}<b>{{ p.min }} min</b>{% endif %}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="pozn pozn-st">{{ o.rodiny.pozn }}</p>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="h-centrum">
+  <div class="obal dvoj">
+    <figure class="odhal">{{ img('hk-katedrala-den.jpg', 'Katedrála svatého Ducha a Bílá věž na Velkém náměstí v Hradci Králové', sizes='(min-width: 900px) 50vw, 100vw') }}<figcaption class="ilu">Velké náměstí · Michielverbeek, CC BY-SA 4.0</figcaption></figure>
+    <div>
+      <p class="pod">Historické centrum</p>
+      <h2 id="h-centrum" class="nad">Velké náměstí za devět minut</h2>
+      <span class="orn orn-l" aria-hidden="true"></span>
+      <p>Katedrála svatého Ducha, Bílá věž a&nbsp;Kotěrovo <b>Muzeum východních Čech</b> s&nbsp;volným vstupem do 19 let. Na víkend loutkové Divadlo DRAK, planetárium nebo krytý zábavní park.</p>
+      <a class="odkaz" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat K Metelce na mapě</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,17 +1,17 @@
 {
   "znamka": 8,
   "slabiny": [
-    "3D model na mobilu (výtka z minula, pořád neopravená): v buňce 1 je dům pořád šikmo useknutý vlevo dole a popisek „Zahrádka 52–55 m² u každého bytu v přízemí“ leží přes černá okna, takže se špatně čte. V buňce 3 je vidět jen roh desky se zahrádkami, v buňce 4 nahoře jen špička desky nad šipkami. Do 820 px dát do hero připravený model-hero-mobil.png nebo kameru s celým domem na výšku obrazovky. Popisek posunout do volné plochy a dát mu béžový podklad. Ve výběru bytu dům ve viewportu vycentrovat a oddálit, aby byl vidět celý.",
-    "Rytmus mezer na PC: v buňce 4 zůstává mezi poznámkou „Model podle projektové dokumentace… Dostupnost bytu vám potvrdíme.“ a nadpisem „47,21 m², od okna k oknu“ asi 300 px prázdné béžové plochy. V buňce 5 je pod „Půdorys vzorového bytu se zařízením“ před „Zahrádka, nebo balkon?“ pořád velká mezera. Spodní padding sekce výběru bytu a sekce půdorysu zmenšit zhruba na polovinu (jako už se to povedlo u interiérů v buňce 8).",
-    "Kontakt (PC 9, mobil 10–12): jediná cesta je formulář. U „Prodej bytů má na starosti Mgr. Anna Krčmová“ a v patičce chybí řádek pro e-mail a telefon. Přidat viditelný řádek „E-mail a telefon doplníme“ (z briefu, pole chybi), ať je jasné, že kontakt přibude. Políčka formuláře na mobilu (QA hlásí input vysoký 21 px) zvětšit paddingem aspoň na 44 px."
+    "Kontakt na mobilu (390/360 px): QA pořád hlásí jedno pole formuláře vysoké jen 34 px (183×34). Všem input, select a textarea ve formuláři Kontakt i v případném formuláři v patičce nastavit min-height: 44px a padding aspoň 12px 0, aby žádný dotykový cíl nebyl pod 44 px. Zóna půdorysu Chodba už opravená je.",
+    "Sekce Praha, nebo Hradec (PC 9): nad nadpisem „Za stejné peníze celý byt“ je pořád asi 150 px prázdného pásu (béžový proužek a pod ním světlá plocha). Na mobilu (11) je pod odkazem „Lokalita, sport a školy“ ještě asi 100 px béžového pásu. Spodní padding sekce Lokalita zmenšit ještě o třetinu a horní padding sekce Praha, nebo Hradec stáhnout na stejnou hodnotu jako mají ostatní sekce. Mezery u Standardů a Kontaktu jsou už v pořádku.",
+    "Zdroj pražské ceny (PC 9, mobil 12): poznámka „186 408 Kč za m², 3. čtvrtletí 2026, Central Group, Trigema a Skanska (ČTK, 21. 10. 2026)“ na webu je, ale v brief.json chybí. Fakt doplnit do pole fakta i s odkazem na článek ČTK a zkontrolovat, že 4 990 000 / 186 408 = 26,8, tedy 27 m², sedí. Zároveň ověřit, že řádek „E-mail a telefon doplníme“ je i v tmavé patičce pod „Prodej bytů“ (na koláži mobil 14 je řádek uříznutý, na PC patička vidět není)."
   ],
   "zavazne": [],
   "silne": [
-    "Na mobilu je teď v hlavičce u hamburgeru obrysové tlačítko „Prohlídka“ ve všech buňkách 1–12. Výtka je opravená.",
-    "Mezera pod interiéry se zmenšila: na PC v buňce 8 i na mobilu v buňkách 8–9 obsah plynule navazuje, interiér na mobilu začíná hned pod cenou.",
-    "Má jasný koncept, který jde od 3D modelu domu přes výběr bytu (mřížka 01–16 podle podlaží) po tabulky ploch. Všechna čísla (47,21 m², 5 490 000 / 4 990 000 Kč, 52–55 m², 7,8–8,25 m², Uw 0,84, 5/5,5/9/62 min) mají zdroj v briefu.",
-    "Paleta odpovídá zadání klientky (béžová, zlatá, tenký černý serif), typografie je klidná a háčky jsou v pořádku. Vizualizace jsou označené jako ilustrační a foto HK má uvedený zdroj s licencí."
+    "Výtky z minulého kola jsou skoro všechny opravené. U Mgr. Anny Krčmové je viditelný řádek „E-mail a telefon doplníme“, srovnání s Prahou má pod sebou zdroj s datem a mezery u Standardů a Kontaktu jsou zmenšené.",
+    "Jasný koncept z oboru: interaktivní pohled na dům s očíslovanými byty, karta bytu s cenou a zahrádkou a půdorys s výměrami místností. Všechna čísla (47,21 m², 5 490 000 a 4 990 000 Kč, zahrádka 52–55 m², balkon 7,80–8,25 m²) sedí s ceníkem z briefu.",
+    "Paleta odpovídá zadání klientky: zlatá, béžová a tenké černé písmo. Wordmark „Metelka“ je vlevo, nikde není tmavý luxusní vzhled ani zakázané vzory, vizualizace jsou poctivě označené jako „Ilustrační interiér“ a katedrála má uvedenou licenci.",
+    "Mobil působí jako navržený pro telefon: nic nepřetéká na žádné šířce, CTA tlačítka jsou přes celou šířku a tabulky výměr a vzdáleností jsou čitelné."
   ],
-  "verdikt": "Dvě ze tří výtek jsou opravené (tlačítko v mobilní hlavičce a hlavní díry v rytmu), nová závažná vada se neobjevila, takže známka zůstává 8. Před odesláním je potřeba hlavně dotáhnout kameru 3D modelu na mobilu, která pořád ukazuje useknutý dům.",
-  "_hash": "5a06eb3eeb72e311343cd1564f450b856b2789b2"
+  "verdikt": "Odeslat: web drží úroveň 8/10, kontakt a zdroj pražského srovnání jsou opravené a závažná vada žádná není. Zbývá zvětšit jedno pole formuláře na 44 px a doladit mezeru nad sekcí Praha, nebo Hradec. Před odesláním klientce ještě platí výhrada z briefu ke střeše na vizualizacích domu a k číslování bytů.",
+  "_hash": "0e180b181f6abe81a8c02920c5d86788ffec0d80"
 }

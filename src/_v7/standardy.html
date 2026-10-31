@@ -1,0 +1,141 @@
+{% extends "_v7.html" %}
+{% from "_v7k.html" import pudorys %}
+{% set titulek = 'Standardy bytů a domu – Rezidence Metelka' %}
+{% set popis = 'Byt 2+kk 47,21 m² s okny na obě strany, podlaha z dubu v rybí kosti, trojskla Uw 0,84, teplá koupelna, Porotherm 30 se zateplením 240 mm. Standardy Rezidence Metelka v Hradci Králové.' %}
+{% set cesta = 'standardy/' %}
+{% set aktivni = 'standardy' %}
+{% set m = data.byty.domy[0].byty[0].mistnosti %}
+{% block telo %}stranka-std{% endblock %}
+{% block obsah %}
+<header class="str-hlava">
+  <div class="obal obal-uzky">
+    <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span>Standardy</span></nav>
+    <h1 id="h1" class="nad nad-1">Standardy</h1>
+    <p class="pod" style="margin-top:14px">Dub · kašmír · černá matná</p>
+    <span class="orn" aria-hidden="true"></span>
+    <p class="text-v">Vzorový byt pracuje se čtyřmi materiály. Pod nimi poctivá stavba: <b>Porotherm 30</b>, čtyřiadvacet centimetrů čedičové vlny a&nbsp;<b>trojskla</b>.</p>
+  </div>
+</header>
+<section class="str-foto" aria-label="Kuchyň vzorového interiéru">
+  {{ img('v6/uvod.jpg', 'Obývací pokoj s jídelním stolem u okna a kuchyní v dekoru dubu – ilustrační vizualizace interiéru, standard investora', sizes='100vw', eager=true) }}
+  <span class="ilu">Ilustrační vizualizace interiéru · standard investora</span>
+</section>
+
+<section class="sekce" aria-labelledby="h-mat">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod">Vzorový byt · VDEKOR Interiors</p>
+      <h2 id="h-mat" class="nad">Materiály vzorového bytu</h2>
+      <span class="orn" aria-hidden="true"></span>
+      <p class="text-v">Vzorový byt navrhlo studio VDEKOR Interiors. Co přesně bude ve standardu každého bytu, vám upřesníme.</p>
+    </header>
+    <div class="deska">
+      {% for v in [('dub', 'Dub v rybí kosti', 'podlaha obytných místností'), ('kasmir', 'Egger Kašmír', 'kuchyň a skříně, odstín greige'), ('dlazba', 'Argenta Gravel Cream', 'dlažba a obklad 60 × 60'), ('cerna', 'Hansgrohe Rebris S', 'černé matné baterie')] %}
+      <figure class="odhal">{{ img('vzorek-' ~ v[0] ~ '.jpg', '', sizes='(min-width: 900px) 24vw, 50vw') }}<figcaption><b>{{ v[1] }}</b><span>{{ v[2] }}</span></figcaption></figure>
+      {% endfor %}
+    </div>
+    <p class="pozn pozn-st">Vzorky jsou kreslené podle návrhu vzorového bytu, skutečný odstín se může lišit. Dále tapety Harlequin (vzory Crater a&nbsp;Marble), prosklený předěl mezi koupelnou a&nbsp;ložnicí a&nbsp;vestavěné skříně.</p>
+  </div>
+</section>
+
+<section class="sekce temna" aria-labelledby="h-vybaveni">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod pod-sv">Ve standardu</p>
+      <h2 id="h-vybaveni" class="nad">Okna, koupelna, kuchyň</h2>
+      <span class="orn" aria-hidden="true"></span>
+    </header>
+    <div class="radky-t">
+      <div class="odhal"><h3>Okna</h3><p>Trojskla <em>U<sub>w</sub>&nbsp;0,84 W/m²K</em>, střešní okna 0,86. Rámy v&nbsp;bílé, nebo v&nbsp;dekoru <em>zlatý dub</em>.</p></div>
+      <div class="odhal"><h3>Koupelna</h3><p>Sprchový kout, závěsné WC, místo pro pračku a&nbsp;<em>otopný registr</em>. Ve vzorovém bytě dlažba <em>60 × 60</em> a&nbsp;černé baterie.</p></div>
+      <div class="odhal"><h3>Kuchyň</h3><p>Kuchyňská linka s&nbsp;<em>myčkou, elektrickým sporákem a&nbsp;lednicí</em>, ve vzorovém bytě v&nbsp;dekoru Egger Kašmír.</p></div>
+      <div class="odhal"><h3>Ke každému bytu</h3><p><em>Sklepní kóje 3&nbsp;m²</em> a&nbsp;<em>parkovací stání</em>. V&nbsp;přízemí zahrádka 52–55&nbsp;m², v&nbsp;patře balkon 7,80–8,25&nbsp;m².</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="h-byt">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod">Byt 2+kk · 47,21 m²</p>
+      <h2 id="h-byt" class="nad">Čtyři místnosti, dvě strany</h2>
+      <span class="orn" aria-hidden="true"></span>
+      <p class="text-v">Byt prochází celou hloubkou domu, okna má na pavlač i&nbsp;na balkon nebo zahrádku. Vyberte místnost v&nbsp;půdorysu.</p>
+    </header>
+    <div class="odhal">{{ pudorys(m, 47.21, sizes='(min-width: 900px) 58vw, 100vw') }}</div>
+  </div>
+</section>
+
+<section class="sekce krem2" aria-labelledby="h-int">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod">Interiéry investora</p>
+      <h2 id="h-int" class="nad">Jak to vypadá, když se nastěhujete</h2>
+      <span class="orn" aria-hidden="true"></span>
+      <p class="text-v">Ilustrační vizualizace interiérů ze sesterského projektu investora ve stejném standardu. Vybavení bytů v&nbsp;Metelce se může lišit.</p>
+    </header>
+    <div class="galerie">
+      <figure class="g-siroka odhal">{{ img('v6/obyvak-2.jpg', 'Obývací pokoj se sedačkou a kuchyní v dekoru dubu – ilustrační vizualizace', sizes='(min-width: 900px) 50vw, 100vw') }}<figcaption>Obývací pokoj · ilustrační</figcaption></figure>
+      <figure class="g-siroka odhal">{{ img('v6/jidelna.jpg', 'Jídelní stůl u okna – ilustrační vizualizace', sizes='(min-width: 900px) 50vw, 50vw') }}<figcaption>Jídelna · ilustrační</figcaption></figure>
+      <figure class="odhal">{{ img('v6/predsin.jpg', 'Předsíň s vestavěnou skříní – ilustrační vizualizace', sizes='(min-width: 900px) 33vw, 50vw') }}<figcaption>Předsíň · ilustrační</figcaption></figure>
+      <figure class="odhal">{{ img('v6/loznice-2.jpg', 'Ložnice s postelí a oknem – ilustrační vizualizace', sizes='(min-width: 900px) 33vw, 50vw') }}<figcaption>Ložnice · ilustrační</figcaption></figure>
+      <figure class="odhal">{{ img('v6/pracovna.jpg', 'Pracovní kout u okna – ilustrační vizualizace', sizes='(min-width: 900px) 33vw, 50vw') }}<figcaption>Pracovní kout · ilustrační</figcaption></figure>
+      <figure class="odhal">{{ img('v6/koupelna.jpg', 'Koupelna se sprchovým koutem, umyvadlem a pračkou – ilustrační vizualizace', sizes='(min-width: 900px) 33vw, 50vw') }}<figcaption>Koupelna · ilustrační</figcaption></figure>
+      <figure class="odhal">{{ img('v6/koupelna-2.jpg', 'Sprchový kout a závěsné WC – ilustrační vizualizace', sizes='(min-width: 900px) 33vw, 50vw') }}<figcaption>Sprchový kout · ilustrační</figcaption></figure>
+      <figure class="odhal">{{ img('v6/koupelna-3.jpg', 'Umyvadlo se zrcadlem a černou baterií – ilustrační vizualizace', sizes='(min-width: 900px) 33vw, 50vw') }}<figcaption>Umyvadlo · ilustrační</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="h-dum">
+  <div class="obal">
+    <header class="hlava-s">
+      <p class="pod">Dům</p>
+      <h2 id="h-dum" class="nad">Z čeho je každá stěna</h2>
+      <span class="orn" aria-hidden="true"></span>
+      <p class="text-v">K&nbsp;Metelce I a&nbsp;II jsou dvoupodlažní domy hluboké 11&nbsp;metrů. Osm bytů v&nbsp;přízemí, osm v&nbsp;patře, nízká střecha.</p>
+    </header>
+    <div class="rez-velky odhal">
+      <svg viewBox="30 30 1090 480" role="img" aria-labelledby="rez-t">
+          <title id="rez-t">Řez domem: přízemí se světlou výškou 2,5 m, patro se šikmými stropy 2,11 až 3,22 m, dům hluboký 11 m</title>
+          <line class="l2" x1="40" y1="447" x2="860" y2="447"/>
+          <path class="l2" d="M128 447 V475 M150 447 V475 M410 447 V475 M432 447 V475 M770 447 V475 M792 447 V475"/>
+          <path class="l" d="M128 430 H792"/>
+          <path class="l" d="M128 430 V275 M150 430 V275 M770 430 V275 M792 430 V140 M770 275 V148"/>
+          <path class="l" d="M410 430 V275 M432 430 V275"/>
+          <path class="l" d="M128 275 H792 M128 258 H792"/>
+          <path class="l" d="M128 258 V215 M150 258 V222"/>
+          <path class="l" d="M410 258 V100 M432 258 V96"/>
+          <path class="l" d="M96 222 L446 104 M96 236 L446 118"/>
+          <path class="l" d="M420 72 L812 142 M420 86 L812 156"/>
+          <rect class="l2" x="560" y="330" width="80" height="58"/>
+          <line class="l2" x1="600" y1="330" x2="600" y2="388"/>
+          <path class="l2" d="M128 492 H792 M128 486 V498 M792 486 V498"/>
+          <text x="460" y="490" text-anchor="middle">11 000</text>
+          <path class="l2" d="M60 430 H118 M60 275 H118"/>
+          <text x="60" y="424">±0,00</text>
+          <text x="60" y="352">2,50 m</text>
+          <text x="300" y="200" text-anchor="middle">2,11–3,22 m</text>
+          <text x="430" y="62" text-anchor="middle">+6,46</text>
+          <text class="k-velky" x="290" y="372" text-anchor="middle">přízemí</text>
+          <text class="k-velky" x="620" y="220" text-anchor="middle">patro</text>
+          <g class="popisky">
+            <path class="l2" d="M640 112 L790 60"/><text x="796" y="52">Střecha: Kingspan 180 mm</text><text x="796" y="70">+ čedičová vlna 220 mm</text>
+            <path class="l2" d="M700 266 L840 250"/><text x="846" y="246">Strop: Spirol 200 mm</text>
+            <path class="l2" d="M781 360 L840 352"/><text x="846" y="348">Stěny: Porotherm 30</text><text x="846" y="366">+ čedičová vlna 240 mm</text>
+            <path class="l2" d="M700 432 L840 418"/><text x="846" y="414">Podlaha: EPS 220 mm</text>
+          </g>
+        </svg>
+    </div>
+    <ul class="skladby">
+      <li class="odhal"><b>0,84</b><span>Trojskla U<sub>w</sub> W/m²K, střešní okna 0,86</span></li>
+      <li class="odhal"><b>240 mm</b><span>Čedičová vlna na zdivu Porotherm 30</span></li>
+      <li class="odhal"><b>2,5 m</b><span>Světlá výška v&nbsp;přízemí</span></li>
+      <li class="odhal"><b>2,11–3,22</b><span>Šikmé stropy v&nbsp;patře, metrů</span></li>
+      <li class="odhal"><b>3 v 1</b><span>Linka s&nbsp;myčkou, sporákem a&nbsp;lednicí</span></li>
+      <li class="odhal"><b>3 m²</b><span>Sklepní kóje a&nbsp;parkovací stání ke každému bytu</span></li>
+    </ul>
+    <p class="pozn pozn-st">Řez zjednodušený podle projektové dokumentace: dvě nízké pultové střechy (+5,84 a&nbsp;+6,46&nbsp;m), výšky od podlahy přízemí.</p>
+  </div>
+</section>
+{% endblock %}

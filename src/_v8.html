@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>{{ titulek or site.nazev }}</title>
+<meta name="description" content="{{ popis or site.popis }}">
+{% if site.navrh or noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+<meta name="theme-color" content="#f7f2ea">
+<link rel="canonical" href="{{ site.url }}{{ cesta or '' }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="{{ titulek or site.nazev }}">
+<meta property="og:description" content="{{ popis or site.popis }}">
+<meta property="og:url" content="{{ site.url }}{{ cesta or '' }}">
+{% if og_url %}<meta property="og:image" content="{{ og_url }}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">{% endif %}
+<link rel="preload" href="{{ base }}fonts/v8/NotoSerifDisplay-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}fonts/v8/AlbertSans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+{% block preload %}{% endblock %}
+<link rel="stylesheet" href="{{ asset('fonts/v8/fonts.css') }}">
+<link rel="stylesheet" href="{{ asset('css/v8.css') }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232b241d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' text-anchor='middle' fill='%23e9d9b8'%3EM%3C/text%3E%3C/svg%3E">
+{% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
+</head>
+<body class="{% block telo %}{% endblock %}">
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="hlava">
+  <div class="hlava-in">
+    <a class="znacka" href="{{ url('') }}" aria-label="Rezidence Metelka – úvod"><b>Metelka</b><span>Rezidence · Hradec Králové</span></a>
+    <nav class="menu" aria-label="Hlavní">
+      {% for n in site.nav %}{% if n.href != 'kontakt' %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ 'Byty a ceník' if n.href == 'byty' else n.text }}</a>{% endif %}{% endfor %}
+    </nav>
+    <a class="tl tl-tmave hl-cta" href="{{ url('kontakt') }}"{% if aktivni == 'kontakt' %} aria-current="page"{% endif %}>Domluvit prohlídku</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="panel" aria-label="Otevřít menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="panel" id="panel" hidden>
+  <nav aria-label="Menu">
+    <a href="{{ url('') }}"{% if not aktivni %} aria-current="page"{% endif %}>Úvod</a>
+    {% for n in site.nav %}<a href="{{ url(n.href) }}"{% if aktivni == n.href %} aria-current="page"{% endif %}>{{ 'Byty a ceník' if n.href == 'byty' else n.text }}</a>{% endfor %}
+  </nav>
+  <p>K Metelce, Hradec Králové<br>32 bytů 2+kk od 4 990 000 Kč</p>
+  <a class="tl tl-tmave" href="{{ url('kontakt') }}">Domluvit prohlídku</a>
+</div>
+<main id="obsah">
+{% block obsah %}{% endblock %}
+{% if not bez_cta %}
+<section class="prohlidka" id="schuzka" aria-labelledby="h-schuzka">
+  <div class="obal prohlidka-in">
+    <div class="prohlidka-tx">
+      <h2 id="h-schuzka" class="h2">Domluvte si prohlídku</h2>
+      <p class="perex">Napište, který byt vás zajímá a&nbsp;kdy se vám hodí přijet. Ozveme se a&nbsp;ukážeme vám místo přímo v&nbsp;ulici K&nbsp;Metelce.</p>
+      <dl class="udaje">
+        <div><dt>Prodej bytů</dt><dd>{{ site.kontakt.jmeno }}{% if site.kontakt.email %}<br><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a>{% else %}<br><span class="doplnime">E-mail a telefon doplníme</span>{% endif %}</dd></div>
+        <div><dt>Adresa projektu</dt><dd>K Metelce, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}</dd></div>
+      </dl>
+    </div>
+    <div class="karta-f">{% include "_formular.html" %}</div>
+  </div>
+</section>
+{% endif %}
+</main>
+<footer class="pata">
+  <div class="obal">
+    <div class="pata-horni">
+      <a class="znacka znacka-sv" href="{{ url('') }}" aria-label="Rezidence Metelka – úvod"><b>Metelka</b><span>Rezidence · Hradec Králové</span></a>
+      <p class="pata-veta">32 bytů 2+kk se zahrádkou nebo balkonem v&nbsp;ulici K&nbsp;Metelce.</p>
+    </div>
+    <div class="pata-sloupce">
+      <div>
+        <h2>Stránky</h2>
+        <ul><li><a href="{{ url('') }}">Úvod</a></li>{% for n in site.nav %}<li><a href="{{ url(n.href) }}">{{ 'Byty a ceník' if n.href == 'byty' else n.text }}</a></li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h2>Prodej bytů</h2>
+        <p>{{ site.kontakt.jmeno }}<br>{% if site.kontakt.email %}<a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a><br>{% else %}<span class="doplnime">E-mail a telefon doplníme</span><br>{% endif %}<a class="podtrh" href="{{ url('kontakt') }}">Napsat zprávu</a></p>
+      </div>
+      <div>
+        <h2>Adresa projektu</h2>
+        <p>{{ site.kontakt.adresa.ulice }}, Svobodné Dvory<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}<br><a class="podtrh" href="https://mapy.com/cs/?q=K%20Metelce%2C%20Hradec%20Kr%C3%A1lov%C3%A9" rel="noopener" target="_blank">Ukázat na mapě</a></p>
+      </div>
+      <div>
+        <h2>Ceník k 16. 9. 2026</h2>
+        <p>Přízemí se zahrádkou<br><b>5 490 000 Kč</b></p>
+        <p>Patro s balkonem<br><b>4 990 000 Kč</b></p>
+      </div>
+    </div>
+    <div class="pata-dolni">
+      <p>Interiéry jsou ilustrační vizualizace standardu investora z&nbsp;jeho projektu Rezidence Karlovina, vybavení bytů v&nbsp;Metelce se může lišit. Kresba domu je zjednodušená podle projektové dokumentace, fasáda a&nbsp;materiály budou upřesněny.</p>
+      <p>Fotografie Hradce Králové: Wikimedia Commons, licence CC BY-SA 4.0, autoři jsou uvedeni u&nbsp;fotografií. Informace na webu nejsou nabídkou ve smyslu občanského zákoníku.</p>
+    </div>
+  </div>
+</footer>
+<script src="{{ asset('js/v8.js') }}" defer></script>
+{% block skripty %}{% endblock %}
+</body>
+</html>

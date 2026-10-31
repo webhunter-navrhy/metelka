@@ -1,0 +1,15 @@
+{% extends "_v7.html" %}
+{% set titulek = 'Stránka nenalezena – ' ~ site.nazev %}
+{% set noindex = true %}
+{% set bez_cta = true %}
+{% block obsah %}
+<section class="chyba" aria-labelledby="h1">
+  <div class="obal obal-uzky">
+    <p class="pod">Chyba 404</p>
+    <h1 id="h1" class="nad nad-1">Tuto stránku jsme nenašli</h1>
+    <span class="orn" aria-hidden="true"></span>
+    <p class="text-v">Adresa možná změnila místo.</p>
+    <div class="tlacitka tlacitka-st"><a class="tl tl-b" href="{{ url('byty') }}">Byty a ceník</a><a class="tl tl-o" href="{{ url('') }}">Úvod</a></div>
+  </div>
+</section>
+{% endblock %}
