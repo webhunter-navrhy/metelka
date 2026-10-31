@@ -306,6 +306,18 @@ def main():
         with open(vystup, "w", encoding="utf-8") as fh:
             fh.write(kod)
 
+    # varianty úvodu k výběru: src/koncepty/<x>.html -> koncepty/<x>/ (do sitemapy nejdou)
+    kdir = os.path.join(SRC, "koncepty")
+    if os.path.isdir(kdir):
+        for f in sorted(os.listdir(kdir)):
+            if not f.endswith(".html") or f.startswith("_"):
+                continue
+            obr.reset()
+            kod = nbsp(env.get_template("koncepty/" + f).render(cesta=f"koncepty/{f[:-5]}/"))
+            os.makedirs(os.path.join(DIST, "koncepty", f[:-5]), exist_ok=True)
+            with open(os.path.join(DIST, "koncepty", f[:-5], "index.html"), "w", encoding="utf-8") as fh:
+                fh.write(kod)
+
     # karty bytů: src/_byt.html -> byty/<dum>/byt-NN/
     tpl = env.get_template("_byt.html")
     for dum in data["byty"]["domy"]:

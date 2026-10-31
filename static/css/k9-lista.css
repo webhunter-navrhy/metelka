@@ -1,0 +1,9 @@
+/* přepínač variant úvodu – jen pro výběr, na hotový web nepatří */
+.k9-lista { position: fixed; left: 16px; bottom: 16px; z-index: 90; display: flex; align-items: center; gap: 2px; padding: 4px 4px 4px 12px;
+  background: rgba(24, 20, 16, .88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 999px;
+  font: 500 12px/1 system-ui, -apple-system, sans-serif; color: #cfc4b3; letter-spacing: .02em; }
+.k9-lista span { margin-right: 6px; }
+.k9-lista a { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #f3ece1; text-decoration: none; }
+.k9-lista a:hover { background: rgba(255, 255, 255, .12); }
+.k9-lista a[aria-current] { background: #f3ece1; color: #1a1612; }
+@media print { .k9-lista { display: none; } }

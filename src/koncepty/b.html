@@ -1,0 +1,111 @@
+{% extends "koncepty/_zaklad.html" %}
+{# Varianta B – Architektonický výkres. Úvod je výkresový list: axonometrie domu, ve které se vybírá byt. #}
+{% set domy = data.byty.domy %}
+{% set B = domy[0].byty %}
+{% block titulek %}Rezidence Metelka · varianta B{% endblock %}
+{% block styl %}<link rel="stylesheet" href="{{ asset('css/k9b.css') }}">{% endblock %}
+{% block telo %}kb{% endblock %}
+{% block obsah %}
+<header class="b-hlava">
+  <a class="b-znacka" href="{{ url('') }}">Metelka</a>
+  <p class="b-misto">K&nbsp;Metelce, Hradec Králové</p>
+  <nav class="b-menu" aria-label="Hlavní">
+    <a href="{{ url('byty') }}">Ceník</a><a href="{{ url('standardy') }}">Standardy</a><a href="{{ url('lokalita') }}">Lokalita</a><a href="{{ url('kontakt') }}">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+<section class="b-list" aria-labelledby="b-h1">
+  <div class="b-uvod">
+    <p class="b-mono b-nad"><span>01</span> Výběr bytu</p>
+    <h1 id="b-h1" class="b-h1">Dva nízké domy, 32&nbsp;bytů. Vyberte si ten svůj přímo ve výkresu.</h1>
+    <div class="b-dum" role="group" aria-label="Dům">
+      {% for d in domy %}<button type="button" class="b-dum-tl" data-d="{{ loop.index0 }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ d.nazev }}</button>{% endfor %}
+    </div>
+
+    <div class="b-karta" aria-live="polite">
+      <div class="b-karta-prazdna">
+        <p class="b-mono">Legenda</p>
+        <dl class="b-legenda">
+          <div><dt><i class="b-zn b-zn-z"></i>Přízemí, byty 1–8</dt><dd>zahrádka 52–55&nbsp;m²<b>5 490 000 Kč</b></dd></div>
+          <div><dt><i class="b-zn b-zn-b"></i>Patro, byty 9–16</dt><dd>balkon 7,80–8,25&nbsp;m²<b>4 990 000 Kč</b></dd></div>
+        </dl>
+        <p class="b-tip">Najeďte na byt ve výkresu, nebo vyberte číslo.</p>
+      </div>
+      <div class="b-karta-byt" hidden>
+        <figure class="b-karta-foto">
+          <span data-f="prizemi">{{ img('fb/jidelna.jpg', 'Jídelní stůl u okna – ilustrační interiér', sizes='160px') }}</span>
+          <span data-f="patro" hidden>{{ img('fb/obyvak-sedacka.jpg', 'Obývací pokoj se sedačkou – ilustrační interiér', sizes='160px') }}</span>
+          <figcaption>Ilustrační interiér</figcaption>
+        </figure>
+        <div class="b-karta-tx">
+          <p class="b-mono"><span data-k="dum"></span></p>
+          <p class="b-karta-kod">Byt <span data-k="kod"></span></p>
+          <dl class="b-karta-dl">
+            <div><dt>Podlaží</dt><dd data-k="patro"></dd></div>
+            <div><dt>Byt</dt><dd>2+kk, <span data-k="plocha"></span></dd></div>
+            <div><dt data-k="venku_typ"></dt><dd data-k="venku"></dd></div>
+            <div><dt>Sklep</dt><dd>3 m²</dd></div>
+          </dl>
+          <p class="b-karta-cena" data-k="cena"></p>
+          <p class="b-karta-stav">Stav prodeje doplníme</p>
+          <a class="b-tl" data-k="odkaz" href="#">Karta bytu <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-vykres">
+    <div class="b-plocha">
+      {% include "koncepty/_axo.html" %}
+    </div>
+    <div class="b-cisla" role="group" aria-label="Byty podle čísla">
+      <p class="b-mono">Patro</p>
+      <div>{% for c in range(16, 8, -1) %}<a class="b-c" data-c="{{ c }}" href="{{ url(B[c - 1].cesta) }}">{{ c }}</a>{% endfor %}</div>
+      <p class="b-mono">Přízemí</p>
+      <div>{% for c in range(8, 0, -1) %}<a class="b-c" data-c="{{ c }}" href="{{ url(B[c - 1].cesta) }}">{{ c }}</a>{% endfor %}</div>
+    </div>
+    <dl class="b-razitko">
+      <div><dt>Stavba</dt><dd>Rezidence Metelka, <span data-k="dum-r">{{ domy[0].nazev }}</span></dd></div>
+      <div><dt>Výkres</dt><dd>Axonometrie od zahrádek</dd></div>
+      <div><dt>Byty</dt><dd>16 × 2+kk, 47,21&nbsp;m²</dd></div>
+      <div><dt>Ceník</dt><dd>16. 9. 2026</dd></div>
+    </dl>
+    <p class="b-pozn">Zjednodušená kresba podle projektové dokumentace. Číslování bytů je orientační.</p>
+  </div>
+</section>
+
+<section class="b-rez" aria-labelledby="b-h-rez">
+  <div class="b-rez-hlava">
+    <p class="b-mono b-nad"><span>02</span> Řez domem</p>
+    <h2 id="b-h-rez" class="b-h2">Hloubka 11&nbsp;metrů a&nbsp;okna na obě strany</h2>
+    <p class="b-perex">Každý byt prochází celým domem, od zahrádky nebo balkonu až k&nbsp;pavlači. V&nbsp;přízemí je světlá výška 2,5&nbsp;m, v&nbsp;patře pod nízkou střechou 2,11 až 3,22&nbsp;m.</p>
+  </div>
+  <div class="b-rez-vykres">
+    {% include "koncepty/_rez9.html" %}
+    <ol class="b-vrstvy">
+      <li><span>Střecha: Kingspan 180&nbsp;mm + čedičová vlna 220&nbsp;mm</span></li>
+      <li><span>Zdivo Porotherm 30 P+D, zateplení Isover 240&nbsp;mm</span></li>
+      <li><span>Okna s&nbsp;trojsklem, U<sub>w</sub>&nbsp;=&nbsp;0,84&nbsp;W/m²K</span></li>
+      <li><span>Stropní panely Spirol 200&nbsp;mm</span></li>
+      <li><span>Podlaha na terénu, EPS 220&nbsp;mm</span></li>
+    </ol>
+  </div>
+  <dl class="b-cisla-tech">
+    <div><dt>Okna</dt><dd>trojsklo, U<sub>w</sub>&nbsp;0,84</dd></div>
+    <div><dt>Střešní okna</dt><dd>U<sub>w</sub>&nbsp;0,86</dd></div>
+    <div><dt>Zateplení stěn</dt><dd>Isover 240&nbsp;mm</dd></div>
+    <div><dt>Koupelna</dt><dd>24&nbsp;°C, registr</dd></div>
+  </dl>
+  <div class="b-dal">
+    <a class="b-tl b-tl-plny" href="{{ url('byty') }}">Celý ceník <span aria-hidden="true">→</span></a>
+    <a class="b-tl" href="{{ url('standardy') }}">Standardy bytů</a>
+  </div>
+</section>
+</main>
+
+<script type="application/json" id="b-data">[
+{% for d in domy %}{"nazev": "{{ d.nazev }}", "byty": [{% for b in d.byty %}{"c": {{ b.cislo }}, "kod": "{{ b.kod }}", "p": "{{ b.podlazi }}", "patro": "{{ b.patro_text }}", "plocha": "{{ m2(b.plocha) }} m²", "vt": "{{ b.venku_typ }}", "venku": "{{ cz(b.venku) if b.venku_typ == 'balkon' else m2(b.venku) }} m²", "cena": "{{ b.cena_text }}", "url": "{{ url(b.cesta) }}"}{{ ',' if not loop.last }}{% endfor %}]}{{ ',' if not loop.last }}
+{% endfor %}]</script>
+{% endblock %}
+{% block skripty %}<script src="{{ asset('js/k9b.js') }}" defer></script>{% endblock %}

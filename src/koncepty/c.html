@@ -1,0 +1,107 @@
+{% extends "koncepty/_zaklad.html" %}
+{# Varianta C – Karlovina+. Řeč projektů investora (černá hlavička, kapitálky, krémová a písková), jen o třídu pečlivější. #}
+{% set domy = data.byty.domy %}
+{% set m = domy[0].byty[0].mistnosti %}
+{% block titulek %}Rezidence Metelka · varianta C{% endblock %}
+{% block styl %}<link rel="stylesheet" href="{{ asset('css/k9c.css') }}">{% endblock %}
+{% block telo %}kc{% endblock %}
+{% block obsah %}
+<header class="c-hlava">
+  <nav class="c-menu c-menu-l" aria-label="Hlavní">
+    <a href="#c-cenik">Byty a ceník</a><a href="{{ url('standardy') }}">Standardy</a>
+  </nav>
+  <a class="c-znacka" href="{{ url('') }}" aria-label="Rezidence Metelka, úvod">
+    <span class="c-znacka-m">Rezidence</span>
+    <span class="c-znacka-v">Metelka</span>
+  </a>
+  <nav class="c-menu c-menu-p" aria-label="Další">
+    <a href="{{ url('lokalita') }}">Lokalita</a><a href="{{ url('kontakt') }}">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+<section class="c-hero" aria-labelledby="c-h1">
+  <picture class="c-hero-foto">
+    {{ zdroje('fb/obyvak-svetly.jpg', sizes='100vw') }}
+    {{ img('fb/obyvak-svetly.jpg', 'Obývací pokoj s kuchyní, jídelním stolem a světlou pohovkou – ilustrační interiér', sizes='100vw', eager=true) }}
+  </picture>
+  <p class="c-pozn">Ilustrační interiér</p>
+  <div class="c-panel">
+    <p class="c-nad">K&nbsp;Metelce · Hradec Králové</p>
+    <h1 id="c-h1" class="c-h1">Byty 2+kk se zahrádkou, nebo balkonem</h1>
+    <p class="c-perex">Dva nízké domy, v&nbsp;každém šestnáct bytů. Ke každému bytu sklep a&nbsp;parkovací stání, na hlavní nádraží je to autem pět minut.</p>
+    <div class="c-tlacitka">
+      <a class="c-tl c-tl-pisek" href="#c-cenik">Ceník bytů</a>
+      <a class="c-tl c-tl-linka" href="{{ url('kontakt') }}">Domluvit prohlídku</a>
+    </div>
+  </div>
+</section>
+
+<section class="c-cisla" aria-label="Projekt v číslech">
+  <dl>
+    <div><dt>Bytů 2+kk</dt><dd>32</dd></div>
+    <div><dt>Nízké domy</dt><dd>2</dd></div>
+    <div><dt>Plocha bytu</dt><dd>47,21<small>m²</small></dd></div>
+    <div><dt>Cena od</dt><dd>4,99<small>mil. Kč</small></dd></div>
+  </dl>
+</section>
+
+<section class="c-interier" aria-labelledby="c-h-int">
+  <header class="c-sekce-hlava">
+    <p class="c-nad">Vzorový byt</p>
+    <h2 id="c-h-int" class="c-h2">Interiér</h2>
+    <p class="c-sekce-pod">Všechny byty mají stejnou dispozici. Vzorový byt navrhlo studio VDEKOR Interiors: dubová podlaha do stromečku, nábytek v&nbsp;dekoru Egger Kašmír a&nbsp;černé baterie Hansgrohe.</p>
+  </header>
+  <div class="c-mozaika">
+    <figure class="c-m c-m1">{{ img('fb/kuchyn-jidelna.jpg', 'Kuchyňská linka a jídelní stůl – ilustrační interiér', sizes='(min-width: 900px) 50vw, 100vw') }}<figcaption><b>Obývací pokoj s&nbsp;kuchyní</b><span>{{ cz(m.obyvak) }} m²</span></figcaption></figure>
+    <figure class="c-m c-m2">{{ img('fb/loznice.jpg', 'Ložnice s postelí v dekoru dubu – ilustrační interiér', sizes='(min-width: 900px) 25vw, 50vw') }}<figcaption><b>Ložnice</b><span>{{ cz(m.loznice) }} m²</span></figcaption></figure>
+    <figure class="c-m c-m3">{{ img('fb/koupelna.jpg', 'Koupelna se sprchovým koutem a závěsným WC – ilustrační interiér', sizes='(min-width: 900px) 25vw, 50vw') }}<figcaption><b>Koupelna s&nbsp;WC</b><span>{{ cz(m.koupelna) }} m²</span></figcaption></figure>
+    <figure class="c-m c-m4">{{ img('fb/kreslo.jpg', 'Křeslo u okna s dřevěným obkladem – ilustrační interiér', sizes='(min-width: 900px) 25vw, 50vw') }}<figcaption><b>Detail obývacího pokoje</b></figcaption></figure>
+    <figure class="c-m c-m5">{{ img('fb/kuchyn-svetla.jpg', 'Světlá kuchyňská linka s dekorem dřeva – ilustrační interiér', sizes='(min-width: 900px) 25vw, 50vw') }}<figcaption><b>Kuchyně</b><span>myčka, sporák, lednice</span></figcaption></figure>
+    <p class="c-m-pozn">Ilustrační interiéry, vybavení bytů v&nbsp;Metelce se může lišit.</p>
+  </div>
+</section>
+
+<section class="c-cenik" id="c-cenik" aria-labelledby="c-h-cenik">
+  <header class="c-sekce-hlava">
+    <p class="c-nad">Ceník k&nbsp;16. 9. 2026</p>
+    <h2 id="c-h-cenik" class="c-h2">Byty a ceny</h2>
+  </header>
+  <div class="c-zalozky" role="tablist" aria-label="Dům">
+    {% for d in domy %}<button type="button" role="tab" id="c-z{{ loop.index0 }}" aria-controls="c-t{{ loop.index0 }}" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ d.nazev }}</button>{% endfor %}
+  </div>
+  {% for d in domy %}
+  <div class="c-tab" id="c-t{{ loop.index0 }}" role="tabpanel" aria-labelledby="c-z{{ loop.index0 }}"{% if not loop.first %} data-skryt{% endif %}>
+    <table class="c-tabulka">
+      <caption class="c-sr">{{ d.nazev }}: ceník bytů</caption>
+      <thead><tr><th scope="col">Byt</th><th scope="col">Podlaží</th><th scope="col">Plocha</th><th scope="col">Sklep</th><th scope="col">Zahrádka / balkon</th><th scope="col" class="c-r">Cena</th><th scope="col"><span class="c-sr">Karta bytu</span></th></tr></thead>
+      {% for pod, nadpis in [('prizemi', 'Přízemí se zahrádkou'), ('patro', 'Patro s balkonem')] %}
+      <tbody>
+        <tr class="c-skupina"><th scope="rowgroup" colspan="7">{{ nadpis }}</th></tr>
+        {% for b in d.byty if b.podlazi == pod %}
+        <tr>
+          <th scope="row"><a href="{{ url(b.cesta) }}">{{ b.kod }}</a></th>
+          <td>{{ b.patro_text }}</td>
+          <td>{{ m2(b.plocha) }} m²</td>
+          <td>{{ b.kobka }} m²</td>
+          <td>{{ b.venku_typ }} {{ cz(b.venku) if b.venku_typ == 'balkon' else m2(b.venku) }} m²</td>
+          <td class="c-r c-cena">{{ b.cena_text }}</td>
+          <td class="c-r"><a class="c-detail" href="{{ url(b.cesta) }}" aria-label="Karta bytu {{ b.kod }}">Detail <span aria-hidden="true">→</span></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  {% endfor %}
+  <p class="c-cenik-pozn">Ke každému bytu patří sklepní kóje a&nbsp;parkovací stání. Stav prodeje doplníme.</p>
+</section>
+
+<section class="c-zaver">
+  <p class="c-zaver-m">Prodej</p>
+  <p class="c-zaver-v">Mgr. Anna Krčmová</p>
+  <a class="c-tl c-tl-pisek" href="{{ url('kontakt') }}">Domluvit prohlídku</a>
+</section>
+</main>
+{% endblock %}
+{% block skripty %}<script src="{{ asset('js/k9c.js') }}" defer></script>{% endblock %}

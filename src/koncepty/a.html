@@ -1,0 +1,115 @@
+{% extends "koncepty/_zaklad.html" %}
+{# Varianta A – Filmový průchod bytem. Úvod přes celou obrazovku, pak byt místnost po místnosti podle půdorysu. #}
+{% set m = data.byty.domy[0].byty[0].mistnosti %}
+{% block titulek %}Rezidence Metelka · varianta A{% endblock %}
+{% block styl %}<link rel="stylesheet" href="{{ asset('css/k9a.css') }}">{% endblock %}
+{% block telo %}ka{% endblock %}
+{% block obsah %}
+<header class="a-hlava">
+  <a class="a-znacka" href="{{ url('') }}">Metelka<span>Hradec Králové</span></a>
+  <nav class="a-menu" aria-label="Hlavní">
+    <a href="{{ url('byty') }}">Byty a ceník</a><a href="{{ url('standardy') }}">Standardy</a><a href="{{ url('lokalita') }}">Lokalita</a>
+  </nav>
+  <a class="a-tl a-tl-sv" href="{{ url('kontakt') }}">Domluvit prohlídku</a>
+</header>
+
+<main>
+<section class="a-hero" aria-labelledby="a-h1">
+  <picture class="a-hero-foto">
+    {{ zdroje('fb/obyvak-jidelna.jpg', sizes='100vw') }}
+    {{ img('fb/obyvak-jidelna.jpg', 'Světlý obývací pokoj s jídelním stolem a kuchyní v dekoru dubu – ilustrační interiér', sizes='100vw', eager=true) }}
+  </picture>
+  <p class="a-pozn">Ilustrační interiér</p>
+  <div class="a-hero-tx">
+    <p class="a-nad">K Metelce · Hradec Králové</p>
+    <h1 id="a-h1" class="a-h1">Světlo<br>z&nbsp;obou stran</h1>
+    <div class="a-hero-pata">
+      <p class="a-perex">32 bytů 2+kk ve dvou nízkých domech. Každý byt prochází celou hloubkou domu, okna má na obě strany a&nbsp;k&nbsp;němu zahrádku, nebo balkon.</p>
+      <dl class="a-cena">
+        <div><dt>Byt s&nbsp;balkonem</dt><dd>4 990 000 Kč</dd></div>
+        <div><dt>Byt se zahrádkou</dt><dd>5 490 000 Kč</dd></div>
+      </dl>
+      <a class="a-dolu" href="#a-pruchod">Projít byt <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="a-pruchod" id="a-pruchod" aria-labelledby="a-h-pruchod">
+  <div class="a-pruchod-in">
+    <aside class="a-mapa">
+      <h2 id="a-h-pruchod" class="a-h2">Projděte si byt</h2>
+      <p class="a-mapa-pod">Všech 32 bytů má stejnou dispozici 2+kk o&nbsp;47,21&nbsp;m².</p>
+      <div class="a-plan">
+        {{ img('pudorys-vzorovy-byt.jpg', 'Půdorys bytu 2+kk: ložnice, koupelna s WC, chodba a obývací pokoj s kuchyní', sizes='(min-width: 1000px) 40vw, 100vw') }}
+        <span class="a-zona" data-z="obyvak" style="left:51.5%;top:17.7%;width:43%;height:73.8%"></span>
+        <span class="a-zona" data-z="loznice" style="left:6%;top:17.7%;width:25.5%;height:52%"></span>
+        <span class="a-zona" data-z="koupelna" style="left:31.5%;top:17.7%;width:17.4%;height:52.5%"></span>
+        <span class="a-zona" data-z="chodba" style="left:6%;top:71%;width:56%;height:20.5%"></span>
+      </div>
+      <ol class="a-seznam">
+        <li data-z="obyvak"><a href="#s-obyvak"><span>Obývací pokoj s&nbsp;kuchyní</span><b>{{ cz(m.obyvak) }} m²</b></a></li>
+        <li data-z="loznice"><a href="#s-loznice"><span>Ložnice</span><b>{{ cz(m.loznice) }} m²</b></a></li>
+        <li data-z="koupelna"><a href="#s-koupelna"><span>Koupelna s&nbsp;WC</span><b>{{ cz(m.koupelna) }} m²</b></a></li>
+        <li data-z="chodba"><a href="#s-chodba"><span>Chodba</span><b>{{ cz(m.chodba) }} m²</b></a></li>
+        <li data-z="venku"><a href="#s-venku"><span>Zahrádka, nebo balkon</span><b>venku</b></a></li>
+      </ol>
+    </aside>
+
+    <div class="a-sceny">
+      <article class="a-scena" id="s-obyvak" data-z="obyvak">
+        <figure>{{ img('fb/obyvak-svetly.jpg', 'Obývací pokoj s kuchyňskou linkou, jídelním stolem a světlou pohovkou – ilustrační interiér', sizes='(min-width: 1000px) 46vw, 100vw') }}<figcaption>Ilustrační interiér</figcaption></figure>
+        <p class="a-plocha">{{ cz(m.obyvak) }}<small>m²</small></p>
+        <h3 class="a-h3">Obývací pokoj s&nbsp;kuchyní</h3>
+        <p>Největší místnost bytu s&nbsp;oknem do zahrádky, nebo na balkon. V&nbsp;kuchyni je myčka, elektrický sporák a&nbsp;lednice.</p>
+      </article>
+      <article class="a-scena" id="s-loznice" data-z="loznice">
+        <figure>{{ img('fb/loznice.jpg', 'Ložnice s postelí v dekoru dubu a kruhovým světlem – ilustrační interiér', sizes='(min-width: 1000px) 46vw, 100vw') }}<figcaption>Ilustrační interiér</figcaption></figure>
+        <p class="a-plocha">{{ cz(m.loznice) }}<small>m²</small></p>
+        <h3 class="a-h3">Ložnice</h3>
+        <p>Ložnice je v&nbsp;klidné části bytu. Ve vzorovém bytě od studia VDEKOR Interiors ji od koupelny dělí prosklený předěl.</p>
+      </article>
+      <article class="a-scena" id="s-koupelna" data-z="koupelna">
+        <figure>{{ img('fb/koupelna.jpg', 'Světlá koupelna se sprchovým koutem, umyvadlem a závěsným WC – ilustrační interiér', sizes='(min-width: 1000px) 46vw, 100vw') }}<figcaption>Ilustrační interiér</figcaption></figure>
+        <p class="a-plocha">{{ cz(m.koupelna) }}<small>m²</small></p>
+        <h3 class="a-h3">Koupelna s&nbsp;WC</h3>
+        <p>Otopný registr 450 × 1200&nbsp;mm a&nbsp;teplota 24&nbsp;°C. Ve vzorovém bytě dlažba Argenta Gravel Cream 60 × 60 a&nbsp;černé baterie Hansgrohe.</p>
+      </article>
+      <article class="a-scena a-scena-tx" id="s-chodba" data-z="chodba">
+        <p class="a-plocha">{{ cz(m.chodba) }}<small>m²</small></p>
+        <h3 class="a-h3">Chodba</h3>
+        <p>Chodba spojuje všechny místnosti, takže ložnice ani koupelna nejsou průchozí. Ve vzorovém bytě v&nbsp;ní stojí vestavěné skříně.</p>
+        <p class="a-k-sklep">Ke každému bytu navíc <b>sklepní kóje 3&nbsp;m²</b> a&nbsp;<b>parkovací stání</b>.</p>
+      </article>
+      <article class="a-scena a-scena-tx" id="s-venku" data-z="venku">
+        <div class="a-venku">
+          <div><p class="a-plocha">52–55<small>m²</small></p><h3 class="a-h3">Zahrádka v&nbsp;přízemí</h3><p>Byty 1–8 v&nbsp;každém domě. Z&nbsp;obývacího pokoje vyjdete rovnou ven.</p></div>
+          <div><p class="a-plocha">7,80–8,25<small>m²</small></p><h3 class="a-h3">Balkon v&nbsp;patře</h3><p>Byty 9–16 pod nízkou střechou se šikmými stropy, světlá výška 2,11–3,22&nbsp;m.</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="a-vyber" aria-labelledby="a-h-vyber">
+  <h2 id="a-h-vyber" class="a-h2 a-h2-st">Jedna dispozice, dvě podlaží</h2>
+  <div class="a-typy">
+    <a class="a-typ" href="{{ url('byty') }}">
+      <span class="a-typ-nad">Přízemí · 16 bytů</span>
+      <b class="a-typ-h">Se zahrádkou</b>
+      <span class="a-typ-cena">5 490 000 Kč</span>
+      <span class="a-typ-info">47,21 m² · zahrádka 52–55 m² · sklep · parkování</span>
+      <span class="a-typ-odk">Byty v&nbsp;přízemí <span aria-hidden="true">→</span></span>
+    </a>
+    <a class="a-typ" href="{{ url('byty') }}">
+      <span class="a-typ-nad">Patro · 16 bytů</span>
+      <b class="a-typ-h">S&nbsp;balkonem</b>
+      <span class="a-typ-cena">4 990 000 Kč</span>
+      <span class="a-typ-info">47,21 m² · balkon 7,80–8,25 m² · sklep · parkování</span>
+      <span class="a-typ-odk">Byty v&nbsp;patře <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+  <p class="a-pozn-pata">Ceník k&nbsp;16. 9. 2026. Interiéry jsou ilustrační vizualizace standardu investora z&nbsp;projektu Rezidence Karlovina, vybavení bytů v&nbsp;Metelce se může lišit.</p>
+</section>
+</main>
+{% endblock %}
+{% block skripty %}<script src="{{ asset('js/k9a.js') }}" defer></script>{% endblock %}

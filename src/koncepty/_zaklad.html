@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('js')</script>
+<title>{% block titulek %}Rezidence Metelka{% endblock %}</title>
+<meta name="description" content="Rezidence Metelka: 32 nových bytů 2+kk v Hradci Králové, ulice K Metelce. Se zahrádkou nebo balkonem, sklepem a parkováním, od 4 990 000 Kč.">
+<meta name="robots" content="noindex, nofollow">
+{% if og_url %}<meta property="og:image" content="{{ og_url }}">{% endif %}
+<link rel="stylesheet" href="{{ asset('fonts/v9/fonts.css') }}">
+{% block styl %}{% endblock %}
+<link rel="stylesheet" href="{{ asset('css/k9-lista.css') }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232b241d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' text-anchor='middle' fill='%23e9d9b8'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body class="{% block telo %}{% endblock %}">
+{% block obsah %}{% endblock %}
+<nav class="k9-lista" aria-label="Varianty úvodu k výběru">
+  <span>Varianta</span>
+  {% for x in ['a', 'b', 'c'] %}<a href="{{ url('koncepty/' ~ x) }}"{% if cesta == 'koncepty/' ~ x ~ '/' %} aria-current="page"{% endif %}>{{ x|upper }}</a>{% endfor %}
+</nav>
+{% block skripty %}{% endblock %}
+</body>
+</html>
