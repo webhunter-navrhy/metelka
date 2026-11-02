@@ -1,0 +1,115 @@
+/* Metelka – varianta A „Filmový průchod bytem“. Inter Tight, jedna rodina: obří lehký řez proti malému textu. */
+:root {
+  --krem: #f4efe7; --papir: #fbf8f3; --tma: #17130f; --tma-2: #221c16; --text: #2a231c; --sedy: #7d7366;
+  --linka: rgba(42, 35, 28, .14); --zlato: #c7a46a; --sv: #f6f1e9;
+  --f: "Inter Tight", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--tma); color: var(--text); font: 400 17px/1.6 var(--f); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--zlato); outline-offset: 3px; }
+h1, h2, h3, p, dl, dd, ol, figure { margin: 0; }
+
+/* hlavička přes fotku */
+.a-hlava { position: absolute; inset: 0 0 auto; z-index: 5; display: flex; align-items: center; gap: 40px; padding: 26px clamp(20px, 4vw, 56px); color: var(--sv); }
+.a-znacka { display: flex; align-items: baseline; gap: 12px; text-decoration: none; font-size: 22px; font-weight: 400; letter-spacing: -.01em; }
+.a-znacka span { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .72; }
+.a-menu { margin-left: auto; display: flex; gap: 32px; font-size: 15px; }
+.a-menu a { text-decoration: none; opacity: .9; }
+.a-menu a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.a-tl { display: inline-flex; align-items: center; min-height: 46px; padding: 0 22px; font-size: 15px; text-decoration: none; border: 1px solid currentColor; transition: background .25s, color .25s; }
+.a-tl-sv:hover { background: var(--sv); color: var(--tma); }
+
+/* úvod */
+.a-hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--sv); overflow: hidden; isolation: isolate; }
+.a-hero-foto, .a-hero-foto img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.a-hero-foto img { object-fit: cover; object-position: 50% 58%; z-index: -2; }
+.a-hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(20, 15, 10, .5) 0%, rgba(20, 15, 10, 0) 22%, rgba(20, 15, 10, 0) 38%, rgba(20, 15, 10, .62) 74%, rgba(20, 15, 10, .86) 100%); }
+.a-pozn { position: absolute; top: 96px; right: clamp(20px, 4vw, 56px); font-size: 12px; letter-spacing: .08em; opacity: .75; }
+.a-hero-tx { width: 100%; padding: 0 clamp(20px, 4vw, 56px) clamp(28px, 4.5vw, 56px); }
+.a-nad { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; opacity: .85; margin-bottom: 18px; }
+.a-h1 { font-weight: 200; font-size: clamp(64px, 11.2vw, 200px); line-height: .9; letter-spacing: -.045em; }
+.a-hero-pata { display: grid; grid-template-columns: minmax(0, 1.1fr) auto auto; gap: clamp(24px, 4vw, 72px); align-items: end;
+  margin-top: clamp(28px, 3.4vw, 48px); padding-top: 22px; border-top: 1px solid rgba(246, 241, 233, .3); }
+.a-perex { max-width: 34em; font-size: 17px; line-height: 1.6; opacity: .92; }
+.a-cena { display: flex; gap: clamp(24px, 3vw, 48px); }
+.a-cena dt { font-size: 13px; opacity: .72; }
+.a-cena dd { font-size: clamp(22px, 2vw, 30px); font-weight: 300; letter-spacing: -.02em; white-space: nowrap; }
+.a-dolu { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; background: var(--sv); color: var(--tma); text-decoration: none; font-size: 15px; font-weight: 500; transition: background .25s; }
+.a-dolu:hover { background: #fff; }
+
+/* průchod bytem */
+.a-pruchod { background: var(--krem); }
+.a-pruchod-in { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 110px); max-width: 1440px; margin: 0 auto; padding: clamp(80px, 10vw, 150px) clamp(20px, 4vw, 56px); }
+.a-mapa { position: sticky; top: 48px; align-self: start; }
+.a-h2 { font-weight: 300; font-size: clamp(40px, 4.6vw, 72px); line-height: 1; letter-spacing: -.035em; color: var(--tma); }
+.a-mapa-pod { margin: 16px 0 34px; color: var(--sedy); }
+.a-plan { position: relative; background: #fff; padding: 0; border: 1px solid var(--linka); }
+.a-zona { position: absolute; background: rgba(199, 164, 106, .34); box-shadow: inset 0 0 0 2px #b38c4c; opacity: 0; transition: opacity .45s; pointer-events: none; }
+.a-zona.je { opacity: 1; }
+.a-seznam { list-style: none; margin: 26px 0 0; padding: 0; border-top: 1px solid var(--linka); }
+.a-seznam li { border-bottom: 1px solid var(--linka); }
+.a-seznam a { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; text-decoration: none; color: var(--sedy); transition: color .3s, padding .3s; }
+.a-seznam b { font-weight: 400; font-variant-numeric: tabular-nums; }
+.a-seznam li.je a { color: var(--tma); padding-left: 14px; box-shadow: inset 2px 0 0 #b38c4c; }
+
+.a-sceny { display: grid; gap: clamp(90px, 12vw, 180px); }
+.a-scena figure { position: relative; }
+.a-scena figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.a-scena figcaption { position: absolute; left: 14px; bottom: 12px; font-size: 11px; letter-spacing: .08em; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .5); }
+.a-plocha { margin-top: 30px; font-weight: 200; font-size: clamp(64px, 7vw, 112px); line-height: .9; letter-spacing: -.05em; color: var(--tma); }
+.a-plocha small { font-size: .32em; font-weight: 300; letter-spacing: 0; margin-left: .2em; vertical-align: .9em; }
+.a-h3 { margin: 16px 0 10px; font-size: 22px; font-weight: 500; letter-spacing: -.01em; color: var(--tma); }
+.a-scena > p:not(.a-plocha), .a-venku p:not(.a-plocha) { max-width: 30em; color: #4b4237; }
+.a-scena-tx { padding-top: 10px; border-top: 1px solid var(--linka); }
+.a-k-sklep { margin-top: 22px !important; padding: 18px 20px; background: var(--papir); border: 1px solid var(--linka); }
+.a-venku { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.a-venku .a-plocha { font-size: clamp(48px, 4.6vw, 76px); }
+
+/* výběr */
+.a-vyber { background: var(--tma); color: var(--sv); padding: clamp(80px, 10vw, 140px) clamp(20px, 4vw, 56px) clamp(90px, 10vw, 140px); }
+.a-vyber > * { max-width: 1328px; margin-left: auto; margin-right: auto; }
+.a-h2-st { color: var(--sv); margin-bottom: clamp(36px, 4vw, 60px); }
+.a-typy { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(246, 241, 233, .22); }
+.a-typ { display: grid; gap: 10px; padding: 40px clamp(0px, 3vw, 48px) 44px 0; text-decoration: none; border-bottom: 1px solid rgba(246, 241, 233, .22); transition: background .3s; }
+.a-typ + .a-typ { padding-left: clamp(24px, 3vw, 48px); border-left: 1px solid rgba(246, 241, 233, .22); }
+.a-typ-nad { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; opacity: .65; }
+.a-typ-h { font-weight: 300; font-size: clamp(34px, 3.4vw, 52px); letter-spacing: -.03em; line-height: 1.05; }
+.a-typ-cena { font-weight: 200; font-size: clamp(44px, 5vw, 80px); letter-spacing: -.045em; line-height: 1; color: var(--zlato); }
+.a-typ-info { opacity: .75; }
+.a-typ-odk { margin-top: 14px; font-weight: 500; }
+.a-typ:hover .a-typ-odk { text-decoration: underline; text-underline-offset: 6px; }
+.a-pozn-pata { margin-top: 36px; font-size: 13px; opacity: .55; max-width: 60em; }
+
+/* reveal */
+.a-scena figure { overflow: hidden; }
+.js .a-scena figure img { transition: transform 1.4s cubic-bezier(.2, .7, .2, 1); }
+.js .a-scena:not(.vid) figure img { transform: scale(1.06); }
+
+@media (max-width: 1000px) {
+  .a-pruchod-in { grid-template-columns: 1fr; }
+  .a-mapa { position: static; }
+  .a-hero-pata { grid-template-columns: 1fr; align-items: start; }
+  .a-menu { display: none; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .a-hlava { padding: 18px 20px; gap: 12px; }
+  .a-znacka span { display: none; }
+  .a-tl { margin-left: auto; min-height: 42px; padding: 0 14px; font-size: 14px; }
+  .a-pozn { top: 82px; }
+  .a-hero-foto img { object-position: 42% 50%; }
+  .a-h1 { font-size: clamp(56px, 18vw, 84px); }
+  .a-cena { gap: 20px; }
+  .a-cena dd { font-size: 21px; }
+  .a-dolu { width: 100%; justify-content: center; }
+  .a-venku { grid-template-columns: 1fr; }
+  .a-typy { grid-template-columns: 1fr; }
+  .a-typ { padding-right: 0; }
+  .a-typ + .a-typ { padding-left: 0; border-left: 0; }
+  .a-seznam { display: none; }
+}
